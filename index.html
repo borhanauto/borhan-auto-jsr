@@ -23,11 +23,11 @@
     .logo .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--brand),#60a5fa)}
     .brand-pill{padding:8px 12px;border:1px solid #1f2937;border-radius:999px;background:#0f1620}
     .search-wrap{display:flex;gap:8px;align-items:center;margin-left:auto}
-    .input{background:#0e1620;border:1px solid #1f2937;color:var(--text);padding:10px 12px;border-radius:10px;outline:none;min-width:240px}
-    .btn{cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:none;border-radius:10px;font-weight:600}
-    .btn.primary{background:var(--brand);color:#00121d}
-    .btn.outline{background:transparent;border:1px solid #1f2937;color:var(--text)}
-    .btn.success{background:var(--accent);color:#00250f}
+    .input{background:#0e1620;border:1px solid #1f2937;color:var(--text);padding:10px 12px;border-radius:12px;outline:none;min-width:220px}
+    .btn{cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;font-weight:700;letter-spacing:.2px}
+    .btn.primary{background:var(--accent);color:#00120a}
+    .btn.outline{background:transparent;border:1px solid #26404f;color:#d3e2ef}
+    .btn.success{background:var(--accent);color:#00120a}
     .btn.warn{background:var(--warn);color:#231900}
     .btn.danger{background:var(--danger);color:#300}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
@@ -44,11 +44,11 @@
     .chip.active{background:var(--brand);color:#00121d;border-color:transparent}
 
     .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-    .product{background:var(--card);border:1px solid #1f2937;border-radius:16px;display:flex;flex-direction:column}
-    .product .img{aspect-ratio:4/3;background:#0d141d;border-bottom:1px solid #1f2937;border-top-left-radius:16px;border-top-right-radius:16px;background-size:cover;background-position:center}
+    .product{background:var(--card);border:1px solid #1f2937;border-radius:16px;display:flex;flex-direction:column;overflow:hidden}
+    .product .img{aspect-ratio:4/3;background:#0d141d;border-bottom:1px solid #1f2937;background-size:cover;background-position:center}
     .product .meta{padding:12px}
     .sku{font-size:12px;color:#94a3b8}
-    .price{font-weight:700;margin:6px 0}
+    .price{font-weight:800;margin:6px 0}
     .compat{font-size:12px;color:#a5b4c3}
     .actions{margin-top:auto;display:flex;gap:8px;padding:12px}
 
@@ -66,11 +66,21 @@
 
     .footer{margin:40px 0 60px;color:#9fb0c5;text-align:center}
 
+    /* Mobile-first improvements */
+    .filters-toggle{display:none}
+    details.filter-collapse{display:none}
     @media (max-width: 960px){
-      .sidebar{grid-column:span 12;position:static}
+      .sidebar{display:none}
       .content{grid-column:span 12}
       .search-wrap{flex-wrap:wrap}
+      .filters-toggle{display:inline-flex}
+      details.filter-collapse{display:block;background:var(--card);border:1px solid #1f2937;border-radius:16px;margin:12px 0}
+      details.filter-collapse>summary{cursor:pointer;padding:12px 16px;font-weight:700;border-bottom:1px solid #1f2937;list-style:none}
+      details.filter-collapse[open] .bd{padding-top:0}
     }
+
+    /* Floating WhatsApp button */
+    #waFloating{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 18px;font-weight:800;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:16px;z-index:999;display:flex;align-items:center;gap:8px}
   </style>
 </head>
 <body>
@@ -90,13 +100,15 @@
         </select>
         <button id="openCart" class="btn outline" title="Open cart">🛒 Cart <span id="cartCount">0</span></button>
         <a class="btn primary" href="tel:+8801707659954">Call Now</a>
+        <button class="btn outline filters-toggle" id="filtersToggle">Filters ▾</button>
       </div>
     </div>
   </header>
 
   <main class="container" id="app">
     <div class="grid">
-      <aside class="sidebar">
+      <!-- Desktop filters sidebar -->
+      <aside class="sidebar" aria-label="Filters">
         <div class="card">
           <div class="hd"><strong>Quick Filters</strong><button id="clearFilters" class="btn outline" style="padding:6px 10px;font-weight:600">Clear</button></div>
           <div class="bd">
@@ -119,6 +131,27 @@
           </div>
         </div>
       </aside>
+
+      <!-- Mobile filters collapsible -->
+      <details class="filter-collapse" id="filtersMobile">
+        <summary>Filters & Advance Payment</summary>
+        <div class="bd">
+          <div class="section-title">Brands</div>
+          <div class="chips" id="brandChipsM"></div>
+          <div class="section-title">Categories</div>
+          <div class="chips" id="catChipsM"></div>
+          <div class="section-title">Models</div>
+          <input id="modelFilterM" class="input" placeholder="Type a model… (e.g., FZS V3)" />
+          <div class="section-title">Advance Payment</div>
+          <div class="chips" style="gap:12px">
+            <label><input type="radio" name="advM" value="0" checked> No advance</label>
+            <label><input type="radio" name="advM" value="0.2"> 20%</label>
+            <label><input type="radio" name="advM" value="0.3"> 30%</label>
+            <label><input type="radio" name="advM" value="0.5"> 50%</label>
+          </div>
+          <button id="clearFiltersM" class="btn outline" style="margin-top:10px">Clear</button>
+        </div>
+      </details>
 
       <section class="content">
         <div class="card">
@@ -156,13 +189,16 @@
     </div>
   </aside>
 
+  <!-- Floating WhatsApp CTA -->
+  <a id="waFloating" href="https://wa.me/8801707659954" target="_blank" rel="noopener" aria-label="Order on WhatsApp">🛍️ Order Now</a>
+
   <footer class="footer">
     © <span id="yr"></span> Borhan Auto Parts Centre • 100% Genuine & Brand New • WhatsApp/Call: 01707659954
   </footer>
 
   <template id="productTmpl">
     <article class="product">
-      <div class="img"></div>
+      <div class="img" aria-hidden="true"></div>
       <div class="meta">
         <div class="sku"></div>
         <h3 class="name" style="font-size:16px;margin:6px 0"></h3>
@@ -170,8 +206,8 @@
         <div class="price"></div>
       </div>
       <div class="actions">
-        <button class="btn outline add">Add</button>
-        <button class="btn primary buy">Buy Now</button>
+        <button class="btn outline add">Add to Cart</button>
+        <button class="btn primary buy">Buy on WhatsApp</button>
       </div>
     </article>
   </template>
@@ -202,31 +238,41 @@
     const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
     const money = n => `৳${Number(n).toLocaleString('en-IN')}`;
 
-    // ---- Filters UI Build ----
+    // ---- Filters UI Build (desktop) ----
     const brandSet = [...new Set(CATALOG.map(p=>p.brand))];
     const catSet = [...new Set(CATALOG.map(p=>p.category))];
 
+    function buildChips(container, items, clickFn){
+      container.innerHTML = '';
+      items.forEach(txt=>{
+        const c=document.createElement('button');
+        c.className='chip';
+        c.textContent=txt;
+        c.onclick=()=>clickFn(txt);
+        container.appendChild(c);
+      });
+    }
+
     const brandChips = $('#brandChips');
-    brandSet.forEach(b=>{
-      const c=document.createElement('button');c.className='chip';c.textContent=b;c.onclick=()=>toggleBrand(b);brandChips.appendChild(c)
-    });
-
     const catChips = $('#catChips');
-    catSet.forEach(ca=>{
-      const c=document.createElement('button');c.className='chip';c.textContent=ca;c.onclick=()=>toggleCat(ca);catChips.appendChild(c)
-    });
+    buildChips(brandChips, brandSet, toggleBrand);
+    buildChips(catChips, catSet, toggleCat);
 
-    function toggleBrand(b){
-      state.brand = state.brand===b?"":b; syncFilters(); render();
-    }
-    function toggleCat(c){
-      const i=state.cats.indexOf(c); if(i>-1) state.cats.splice(i,1); else state.cats.push(c); render(); syncFilters();
-    }
+    // ---- Filters UI Build (mobile) ----
+    const brandChipsM = $('#brandChipsM');
+    const catChipsM = $('#catChipsM');
+    buildChips(brandChipsM, brandSet, toggleBrand);
+    buildChips(catChipsM, catSet, toggleCat);
+
+    function toggleBrand(b){ state.brand = state.brand===b?"":b; syncFilters(); render(); }
+    function toggleCat(c){ const i=state.cats.indexOf(c); if(i>-1) state.cats.splice(i,1); else state.cats.push(c); render(); syncFilters(); }
+
     function syncFilters(){
-      $$('#brandChips .chip').forEach(ch=>ch.classList.toggle('active', ch.textContent===state.brand));
-      $$('#catChips .chip').forEach(ch=>ch.classList.toggle('active', state.cats.includes(ch.textContent)));
+      $$('#brandChips .chip, #brandChipsM .chip').forEach(ch=>ch.classList.toggle('active', ch.textContent===state.brand));
+      $$('#catChips .chip, #catChipsM .chip').forEach(ch=>ch.classList.toggle('active', state.cats.includes(ch.textContent)));
       $('#brandFilter').value = state.brand;
       $('#modelFilter').value = state.model;
+      $('#modelFilterM').value = state.model;
       $('#q').value = state.q;
       updateResultCount();
     }
@@ -235,7 +281,17 @@
     $('#q').addEventListener('input', e=>{state.q=e.target.value.trim().toLowerCase(); render()});
     $('#brandFilter').addEventListener('change', e=>{state.brand=e.target.value; render(); syncFilters();});
     $('#modelFilter').addEventListener('input', e=>{state.model=e.target.value.trim(); render()});
+    $('#modelFilterM').addEventListener('input', e=>{state.model=e.target.value.trim(); render()});
+
     $('#clearFilters').onclick=()=>{state.q="";state.brand="";state.model="";state.cats=[];render();syncFilters()}
+    $('#clearFiltersM').onclick=()=>{state.q="";state.brand="";state.model="";state.cats=[];render();syncFilters()}
+
+    // Mobile filters toggle button
+    $('#filtersToggle').addEventListener('click',()=>{
+      const det = $('#filtersMobile');
+      det.open = !det.open;
+      det.scrollIntoView({behavior:'smooth', block:'start'});
+    });
 
     // ---- Render Products ----
     const list = $('#products');
@@ -254,14 +310,14 @@
       const items = CATALOG.filter(productVisible);
       items.forEach(p=>{
         const node = tmpl.content.cloneNode(true);
-        const art = node.querySelector('.product');
         node.querySelector('.img').style.backgroundImage=`url(${p.img})`;
         node.querySelector('.sku').textContent = p.sku + ' • ' + p.brand + ' • ' + p.category;
         node.querySelector('.name').textContent = p.name;
         node.querySelector('.compat').textContent = 'Compatible: ' + p.models.join(', ');
         node.querySelector('.price').textContent = money(p.price);
         node.querySelector('.add').onclick = ()=> addToCart(p.sku,1);
-        node.querySelector('.buy').onclick = ()=> { addToCart(p.sku,1); openCart(); };
+        // One-click Buy on WhatsApp (skip cart)
+        node.querySelector('.buy').onclick = ()=> buySingleOnWA(p);
         list.appendChild(node);
       });
       updateResultCount(items.length);
@@ -304,11 +360,10 @@
       listEl.innerHTML='';
       state.cart.forEach(i=>{
         const wrap=document.createElement('div'); wrap.className='cart-item';
-        const p = CATALOG.find(p=>p.sku===i.sku);
         wrap.innerHTML = `
           <div style="background:#091016;border-radius:8px"></div>
           <div>
-            <div style="font-weight:600">${i.name}</div>
+            <div style="font-weight:700">${i.name}</div>
             <div class="notice">${i.sku} • ${i.brand}</div>
             <div class="price">${money(i.price)}</div>
             <div class="qty">
@@ -328,12 +383,11 @@
         listEl.appendChild(wrap);
       });
 
-      // update WA link
-      const { text, url } = buildWhatsAppMessage();
-      const wa = $('#waBtn');
-      wa.href = url;
-      // Update bKash link to generic send money site (manual amount entry by customer)
+      // update WA links
+      const { url } = buildWhatsAppMessage();
+      $('#waBtn').href = url;
       $('#bkashBtn').href = 'https://www.bkash.com/';
+      updateFloatingWA();
     }
 
     function buildWhatsAppMessage(){
@@ -360,6 +414,20 @@
       return {text, url};
     }
 
+    // One-click single product WhatsApp
+    function buySingleOnWA(p){
+      const subtotal = p.price;
+      const adv = Math.round(subtotal * state.advRate);
+      const text = `*Borhan Auto Parts Centre – WhatsApp Order*\n\n` +
+                   `1. ${p.name} (${p.sku}) x1 — ${money(p.price)}\n\n` +
+                   `Subtotal: ${money(subtotal)}\n` +
+                   `Advance (${Math.round(state.advRate*100)}%): ${money(adv)}\n` +
+                   `Pay advance to bKash: 01707659954\n\n` +
+                   `Customer details:\nName:\nAddress:\nBike model/year:\n\n` +
+                   `Please confirm stock & delivery charge.`;
+      window.open(`https://wa.me/8801707659954?text=${encodeURIComponent(text)}`,'_blank');
+    }
+
     // ---- Cart Drawer open/close ----
     const drawer = $('#cartDrawer');
     function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
@@ -367,12 +435,22 @@
     $('#openCart').onclick = openCart;
     $('#closeCart').onclick = closeCart;
 
-    // ---- Advance radio ----
+    // ---- Advance radio (desktop + mobile) ----
     $$('input[name="adv"]').forEach(r=>r.addEventListener('change', e=>{ state.advRate = parseFloat(e.target.value || 0); updateCartUI(); }));
+    $$('input[name="advM"]').forEach(r=>r.addEventListener('change', e=>{ state.advRate = parseFloat(e.target.value || 0); updateCartUI(); }));
+
+    // ---- Floating WA handling ----
+    function updateFloatingWA(){
+      const { url } = buildWhatsAppMessage();
+      const a = $('#waFloating');
+      a.href = state.cart.length ? url : 'https://wa.me/8801707659954';
+      a.textContent = state.cart.length ? '🛍️ WhatsApp Checkout' : '🛍️ Order Now';
+    }
 
     // ---- Init ----
     $('#yr').textContent = new Date().getFullYear();
     render();
+    updateFloatingWA();
   </script>
 
   <!-- JSON-LD (enhanced SEO) -->
