@@ -7,54 +7,46 @@
 <meta name="description" content="Borhan Auto Parts Centre — Browse by brand, choose bike model and view product details with WhatsApp ordering and bKash advance." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0b0f14;
-  --card:#0f1620;
-  --muted:#93a3b5;
-  --text:#ecf2f8;
-  --accent:#0ea5e9;
-  --accent-2:#22c55e;
-  --transition:.2s;
-}
+:root{--bg:#0b0f14;--card:#0f1620;--muted:#93a3b5;--text:#ecf2f8;--accent:#0ea5e9;--accent-2:#22c55e}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1200px;margin:0 auto;padding:16px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-.logo{font-weight:800;display:flex;align-items:center;gap:10px;font-size:1.3rem}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.logo{font-weight:800;display:flex;align-items:center;gap:10px}
 .logo .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(45deg,var(--accent),#60a5fa)}
-.pill{background:var(--card);border:1px solid #1f2937;padding:6px 10px;border-radius:999px;font-weight:600;font-size:0.9rem}
+.pill{background:var(--card);border:1px solid #1f2937;padding:6px 10px;border-radius:999px;font-weight:600}
 nav{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.input{background:var(--card);border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);min-width:180px}
-.btn{background:transparent;border:1px solid #1f2937;padding:8px 12px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:700;transition:all var(--transition)}
-.btn:hover{transform:translateY(-2px);background:var(--accent-2);border-color:transparent;color:#00120a}
+.input{background:var(--card);border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);flex:1;min-width:180px}
+.btn{background:transparent;border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:700}
 .btn.primary{background:var(--accent-2);border-color:transparent;color:#00120a}
 
 /* layout */
 .hero{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
-.brands-grid,.models-grid,.product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-.brand-card,.model-card,.product-card{background:var(--card);border:1px solid #1f2937;padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform var(--transition), box-shadow var(--transition)}
-.brand-card:hover,.model-card:hover,.product-card:hover{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.brand-logo{height:60px;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat}
-.brand-name{font-weight:700;text-align:center}
-.model-card div{font-weight:700;text-align:center}
-.thumb{height:140px;background-size:cover;background-position:center;border-radius:8px}
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.brand-card{background:var(--card);border:1px solid #1f2937;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.brand-card:hover{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.brand-logo{height:44px;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat}
+.brand-name{font-weight:700}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+.model-card{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:10px;cursor:pointer;transition:transform .12s}
+.model-card:hover{transform:translateY(-3px);box-shadow:0 3px 10px rgba(0,0,0,0.2)}
+
+.product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.product-card{background:var(--card);border:1px solid #1f2937;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,0.25)}
+.thumb{height:140px;background-size:cover;background-position:center}
 .meta{padding:10px;display:flex;flex-direction:column;gap:6px}
-.price{font-weight:800;font-size:1rem}
+.price{font-weight:800}
 
 /* product detail */
 .detail{display:grid;grid-template-columns:360px 1fr;gap:16px}
-.gallery{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:12px;display:flex;flex-direction:column}
+.gallery{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:12px}
 .main-img{height:300px;background-size:cover;background-position:center;border-radius:8px}
 .thumbs{display:flex;gap:8px;margin-top:8px}
 .thumb-s{width:64px;height:48px;background-size:cover;background-position:center;border-radius:6px;border:1px solid #1f2937;cursor:pointer}
 .detail-meta{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:12px}
-.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.actions{display:flex;gap:8px;margin-top:12px}
 .notice{color:var(--muted);font-size:13px}
-.related-card{background:var(--card);border:1px solid #1f2937;padding:8px;border-radius:8px;cursor:pointer;transition:transform var(--transition)}
-.related-card:hover{transform:translateY(-2px);box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.related-card img{width:100%;height:80px;object-fit:cover;border-radius:6px}
-.related-card .pname{margin-top:4px;font-weight:700;font-size:0.9rem}
-.related-card .price{font-size:0.85rem;color:var(--accent-2)}
 
 footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 
@@ -158,7 +150,6 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
             <button id="buyNowBtn" class="btn primary">Buy Now (WhatsApp)</button>
             <a id="bkashLink" class="btn" href="https://www.bkash.com/" target="_blank">Send Money (bKash)</a>
           </div>
-
         </div>
 
         <div style="margin-top:12px" id="relatedWrap"></div>
@@ -168,7 +159,7 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 </main>
 
 <footer>
-© <span id="yr"></span> Borhan Auto Parts Centre • WhatsApp/Call: 01707659954
+  © <span id="yr"></span> Borhan Auto Parts Centre • WhatsApp/Call: 01707659954
 </footer>
 </div>
 
@@ -183,7 +174,7 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 
 <template id="modelT">
   <div class="model-card">
-    <div class="mname"></div>
+    <div style="font-weight:700" class="mname"></div>
     <div class="notice">Click to view parts</div>
   </div>
 </template>
@@ -200,12 +191,13 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 </template>
 
 <script>
-// ---------------- DATA (demo) ----------------
+// ---------------- DATA ----------------
 const PHONE = '8801707659954';
 const BKASH = '01707659954';
+
 const DATA = {
-  "Yamaha": { models: { "FZS V3": [{sku:'YAM-FZ-ABR-001', name:'Front Brake Shoe', price:650, imgs:['https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60'], desc:'Brake shoe for Yamaha FZS V3', stock:true}, {sku:'YAM-FZ-CL-002', name:'Clutch Lever', price:420, imgs:['https://images.unsplash.com/photo-1600156324354-3a6d9d1efc86?auto=format&fit=crop&w=800&q=60'], desc:'Durable clutch lever OEM fit', stock:true}], 'R15 V4': [{sku:'YAM-R15-CL-021', name:'Clutch Cable', price:520, imgs:['https://images.unsplash.com/photo-1611765083444-c620f97f8d7b?auto=format&fit=crop&w=800&q=60'], desc:'Clutch cable for R15 V4', stock:true}]}},
-  "Suzuki": { models: { 'Gixxer': [{sku:'SUZ-GXS-AF-004', name:'Air Filter', price:580, imgs:['https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=800&q=60'], desc:'Air filter for Gixxer series', stock:true}], 'GSX-S': [] } },
+  "Yamaha": { models: { "FZS V3": [{sku:'YAM-FZ-ABR-001', name:'Front Brake Shoe', price:650, imgs:['https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60'], desc:'Brake shoe for Yamaha FZS V3', stock:true}] } },
+  "Suzuki": { models: { 'Gixxer': [{sku:'SUZ-GXS-AF-004', name:'Air Filter', price:580, imgs:['https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=800&q=60'], desc:'Air filter for Gixxer series', stock:true}] } },
   "Honda": { models: { 'CB Hornet': [{sku:'HON-CB-PL-101', name:'Spark Plug', price:300, imgs:['https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?auto=format&fit=crop&w=800&q=60'], desc:'Plug for CB Hornet', stock:true}] } },
   "TVS": { models: { 'Apache RTR': [{sku:'TVS-AP-CL-014', name:'Clutch Plate Set', price:1650, imgs:['https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=60'], desc:'Clutch plate set for Apache RTR', stock:true}] } },
   "Bajaj": { models: { 'Pulsar NS160': [{sku:'BAJ-PUL-FT-077', name:'Fuel Tank Cap', price:900, imgs:['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=60'], desc:'Fuel tank cap for Pulsar', stock:true}] } }
@@ -221,45 +213,109 @@ const brandsGrid = $('#brandsGrid');
 const modelsGrid = $('#modelsGrid');
 const productsList = $('#productsList');
 
-let currentBrand=null, currentModel=null, currentProduct=null;
+let currentBrand=null,currentModel=null,currentProduct=null;
 
-function renderBrands(){ brandsGrid.innerHTML=''; const tpl=$('#brandT'); Object.keys(DATA).forEach(brand=>{
-  const node=tpl.content.cloneNode(true);
-  node.querySelector('.brand-logo').style.backgroundImage=`url(https://dummyimage.com/320x80/17202a/fff&text=${encodeURIComponent(brand)})`;
-  node.querySelector('.brand-name').textContent=brand;
-  const count=Object.values(DATA[brand].models).reduce((s,a)=>s+a.length,0);
-  node.querySelector('.brand-count').textContent=`${count} part${count!==1?'s':''}`;
-  node.querySelector('.brand-card').onclick=()=> openModels(brand);
-  brandsGrid.appendChild(node);
-});}
+function renderBrands(){
+  brandsGrid.innerHTML='';
+  const tpl = $('#brandT');
+  Object.keys(DATA).forEach(brand=>{
+    const node = tpl.content.cloneNode(true);
+    node.querySelector('.brand-logo').style.backgroundImage=`url(https://dummyimage.com/320x80/17202a/fff&text=${encodeURIComponent(brand)})`;
+    node.querySelector('.brand-name').textContent=brand;
+    const count = Object.values(DATA[brand].models).reduce((s,a)=>s+a.length,0);
+    node.querySelector('.brand-count').textContent=`${count} part${count!==1?'s':''}`;
+    node.querySelector('.brand-card').onclick=()=>openModels(brand);
+    brandsGrid.appendChild(node);
+  });
+}
 
 function openModels(brand){ currentBrand=brand; $('#brandsView').style.display='none'; $('#modelsView').style.display='block'; $('#brandTitle').textContent=brand; renderModels(brand); window.scrollTo({top:0,behavior:'smooth'}); }
 
-function renderModels(brand){ modelsGrid.innerHTML=''; const tpl=$('#modelT'); const models=Object.keys(DATA[brand].models||{}); 
-  if(models.length===0){ modelsGrid.innerHTML='<div class="notice">No models available yet.</div>'; return }
-  models.forEach(m=>{ const node=tpl.content.cloneNode(true); node.querySelector('.mname').textContent=m; node.querySelector('.model-card').onclick=()=> openProducts(brand,m); modelsGrid.appendChild(node); }); 
+function renderModels(brand){
+  modelsGrid.innerHTML='';
+  const tpl = $('#modelT');
+  const models = Object.keys(DATA[brand].models||{});
+  if(models.length===0){ modelsGrid.innerHTML='<div class="notice">No models available yet.</div>'; return; }
+  models.forEach(m=>{
+    const node = tpl.content.cloneNode(true);
+    node.querySelector('.mname').textContent=m;
+    node.querySelector('.model-card').onclick=()=>openProducts(brand,m);
+    modelsGrid.appendChild(node);
+  });
 }
 
 function openProducts(brand,model){ currentModel=model; $('#modelsView').style.display='none'; $('#productsView').style.display='block'; $('#modelTitle').textContent=`${brand} — ${model}`; renderProducts(brand,model); window.scrollTo({top:0,behavior:'smooth'}); }
 
-function renderProducts(brand,model){ productsList.innerHTML=''; const tpl=$('#productT'); const arr=(DATA[brand].models[model]||[]); 
-  if(!arr.length){ productsList.innerHTML='<div class="notice">No parts found for this model.</div>'; $('#productCount').textContent='0 parts'; return }
-  arr.forEach(p=>{ const node=tpl.content.cloneNode(true);
+function renderProducts(brand,model){
+  productsList.innerHTML='';
+  const tpl = $('#productT');
+  const arr = DATA[brand].models[model]||[];
+  if(!arr.length){ productsList.innerHTML='<div class="notice">No parts found for this model.</div>'; $('#productCount').textContent='0 parts'; return; }
+  arr.forEach(p=>{
+    const node = tpl.content.cloneNode(true);
+    const card = node.querySelector('.product-card');
+    card.onclick=()=>openProductDetail(brand,model,p.sku);
     node.querySelector('.thumb').style.backgroundImage=`url(${p.imgs[0]})`;
     node.querySelector('.sku').textContent=p.sku+' • '+brand;
     node.querySelector('.pname').textContent=p.name;
     node.querySelector('.price').textContent=money(p.price);
-    // make whole card clickable
-    node.querySelector('.product-card').onclick = ()=> openProductDetail(brand,model,p.sku);
     productsList.appendChild(node);
-  }); $('#productCount').textContent=`${arr.length} part${arr.length!==1?'s':''}`;
+  });
+  $('#productCount').textContent=`${arr.length} part${arr.length!==1?'s':''}`;
 }
 
-// ... Keep remaining product detail, related, quickBuy, WA integration same as original ...
-// You can reuse your JS from the previous version here with minor adjustments: only remove [data-act="view"] button code.
+function openProductDetail(brand,model,sku){
+  const arr = DATA[brand].models[model]||[];
+  const p = arr.find(x=>x.sku===sku); if(!p) return; currentProduct=p;
+  $('#productsView').style.display='none'; $('#productDetailView').style.display='block';
+  $('#productTitle').textContent=p.name; $('#skuLabel').textContent=p.sku;
+  $('#prodBrand').textContent=brand; $('#prodName').textContent=p.name; $('#prodCompat').textContent='Compatible: '+model;
+  $('#prodPrice').textContent=money(p.price); $('#prodDesc').textContent=p.desc||'';
+  $('#mainImg').style.backgroundImage=`url(${p.imgs[0]})`;
+  const thumbs = $('#thumbs'); thumbs.innerHTML='';
+  p.imgs.forEach(img=>{ const d=document.createElement('div'); d.className='thumb-s'; d.style.backgroundImage=`url(${img})`; d.onclick=()=>$('#mainImg').style.backgroundImage=`url(${img})`; thumbs.appendChild(d); });
+  $('#stockStatus').textContent = p.stock? 'In stock' : 'Out of stock';
+  renderRelated(brand,model,sku);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-$('#yr').textContent=new Date().getFullYear(); renderBrands(); showHome();
+function renderRelated(brand,model,sku){
+  const wrap = $('#relatedWrap'); wrap.innerHTML='';
+  const arr = (DATA[brand].models[model]||[]).filter(p=>p.sku!==sku);
+  if(arr.length===0) return;
+  const h = document.createElement('h4'); h.textContent='Other parts for '+model; wrap.appendChild(h);
+  const div = document.createElement('div'); div.className='product-list';
+  arr.forEach(p=>{
+    const node = $('#productT').content.cloneNode(true);
+    node.querySelector('.product-card').onclick=()=>openProductDetail(brand,model,p.sku);
+    node.querySelector('.thumb').style.backgroundImage=`url(${p.imgs[0]})`;
+    node.querySelector('.sku').textContent=p.sku+' • '+brand;
+    node.querySelector('.pname').textContent=p.name;
+    node.querySelector('.price').textContent=money(p.price);
+    div.appendChild(node);
+  });
+  wrap.appendChild(div);
+}
 
+// ---------- Event listeners ----------
+$('#homeBtn').onclick=()=>{ $('#brandsView').style.display='block'; $('#modelsView').style.display='none'; $('#productsView').style.display='none'; $('#productDetailView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
+
+$('#backToBrands').onclick=()=>{ $('#brandsView').style.display='block'; $('#modelsView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
+$('#backToModels').onclick=()=>{ $('#modelsView').style.display='block'; $('#productsView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
+$('#backToProducts').onclick=()=>{ $('#productsView').style.display='block'; $('#productDetailView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
+
+$('#buyNowBtn').onclick=()=>{
+  if(!currentProduct) return;
+  const adv = parseFloat($('input[name="advDetail"]:checked').value)||0;
+  const amt = Math.round(currentProduct.price*adv);
+  const msg = `Hello, I want to buy ${currentProduct.name} (${currentProduct.sku}) from Borhan Auto Parts Centre. Advance: ৳${amt}. Please confirm.`;
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// ---------- Init ----------
+renderBrands();
 </script>
 </body>
 </html>
