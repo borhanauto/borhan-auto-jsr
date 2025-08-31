@@ -4,36 +4,34 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Borhan Auto Parts Centre — Brands, Models & Product Details</title>
-<meta name="description" content="Borhan Auto Parts Centre — Browse by brand, choose bike model and view product details with WhatsApp ordering and bKash advance." />
+<meta name="description" content="Borhan Auto Parts Centre — Browse by brand, choose bike model and view product details with WhatsApp ordering and fixed advance payments." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0f14;--card:#0f1620;--muted:#93a3b5;--text:#ecf2f8;--accent:#0ea5e9;--accent-2:#22c55e}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 .wrap{max-width:1100px;margin:0 auto;padding:16px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .logo{font-weight:800;display:flex;align-items:center;gap:10px}
 .logo .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(45deg,var(--accent),#60a5fa)}
 .pill{background:var(--card);border:1px solid #1f2937;padding:6px 10px;border-radius:999px;font-weight:600}
-nav{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.input{background:var(--card);border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);flex:1;min-width:180px}
+nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+.input{background:var(--card);border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text)}
 .btn{background:transparent;border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:700}
 .btn.primary{background:var(--accent-2);border-color:transparent;color:#00120a}
 
 /* layout */
 .hero{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
 .brands-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-.brand-card{background:var(--card);border:1px solid #1f2937;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.brand-card:hover{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.brand-card{background:var(--card);border:1px solid #1f2937;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .12s}
+.brand-card:hover{transform:translateY(-4px)}
 .brand-logo{height:44px;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat}
 .brand-name{font-weight:700}
 .models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
-.model-card{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:10px;cursor:pointer;transition:transform .12s}
-.model-card:hover{transform:translateY(-3px);box-shadow:0 3px 10px rgba(0,0,0,0.2)}
+.model-card{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:10px;cursor:pointer}
 
 .product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.product-card{background:var(--card);border:1px solid #1f2937;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.product-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,0.25)}
+.product-card{background:var(--card);border:1px solid #1f2937;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
 .thumb{height:140px;background-size:cover;background-position:center}
 .meta{padding:10px;display:flex;flex-direction:column;gap:6px}
 .price{font-weight:800}
@@ -66,96 +64,98 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 </header>
 
 <main id="app">
-  <!-- Brands landing -->
-  <section id="brandsView">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <h2 style="margin:0">Shop by Brand</h2>
-      <div class="notice">Choose a brand to see bike models</div>
-    </div>
-    <div class="brands-grid" id="brandsGrid"></div>
-  </section>
+<!-- Brands view -->
+<section id="brandsView">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h2 style="margin:0">Shop by Brand</h2>
+    <div class="notice">Choose a brand to see bike models</div>
+  </div>
+  <div class="brands-grid" id="brandsGrid"></div>
+</section>
 
-  <!-- Models view -->
-  <section id="modelsView" style="display:none">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <button id="backToBrands" class="btn">← Back</button>
-        <h2 id="brandTitle" style="display:inline-block;margin-left:12px"></h2>
+<!-- Models view -->
+<section id="modelsView" style="display:none">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <button id="backToBrands" class="btn">← Back</button>
+      <h2 id="brandTitle" style="display:inline-block;margin-left:12px"></h2>
+    </div>
+    <div class="notice">Select model to view parts</div>
+  </div>
+  <div class="models-grid" id="modelsGrid"></div>
+</section>
+
+<!-- Products for model -->
+<section id="productsView" style="display:none;margin-top:12px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <button id="backToModels" class="btn">← Back</button>
+      <h3 id="modelTitle" style="display:inline-block;margin-left:12px"></h3>
+    </div>
+    <div class="notice" id="productCount"></div>
+  </div>
+  <div style="margin-top:12px" id="productsList" class="product-list"></div>
+</section>
+
+<!-- Product detail -->
+<section id="productDetailView" style="display:none;margin-top:12px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <button id="backToProducts" class="btn">← Back</button>
+      <h3 id="productTitle" style="display:inline-block;margin-left:12px"></h3>
+    </div>
+    <div class="notice" id="skuLabel"></div>
+  </div>
+  <div class="detail" style="margin-top:12px">
+    <div>
+      <div class="gallery">
+        <div id="mainImg" class="main-img"></div>
+        <div id="thumbs" class="thumbs"></div>
       </div>
-      <div class="notice">Select model to view parts</div>
     </div>
-    <div class="models-grid" id="modelsGrid"></div>
-  </section>
-
-  <!-- Products for model -->
-  <section id="productsView" style="display:none;margin-top:12px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <button id="backToModels" class="btn">← Back</button>
-        <h3 id="modelTitle" style="display:inline-block;margin-left:12px"></h3>
-      </div>
-      <div class="notice" id="productCount"></div>
-    </div>
-    <div style="margin-top:12px" id="productsList" class="product-list"></div>
-  </section>
-
-  <!-- Product detail -->
-  <section id="productDetailView" style="display:none;margin-top:12px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <button id="backToProducts" class="btn">← Back</button>
-        <h3 id="productTitle" style="display:inline-block;margin-left:12px"></h3>
-      </div>
-      <div class="notice" id="skuLabel"></div>
-    </div>
-
-    <div class="detail" style="margin-top:12px">
-      <div>
-        <div class="gallery">
-          <div id="mainImg" class="main-img"></div>
-          <div id="thumbs" class="thumbs"></div>
+    <div>
+      <div class="detail-meta">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:12px">
+          <div>
+            <div id="prodBrand" class="notice"></div>
+            <h2 id="prodName" style="margin:6px 0"></h2>
+            <div id="prodCompat" class="notice"></div>
+          </div>
+          <div style="text-align:right">
+            <div class="price" id="prodPrice"></div>
+            <div class="notice" id="stockStatus"></div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="detail-meta">
-          <div style="display:flex;justify-content:space-between;align-items:start;gap:12px">
-            <div>
-              <div id="prodBrand" class="notice"></div>
-              <h2 id="prodName" style="margin:6px 0"></h2>
-              <div id="prodCompat" class="notice"></div>
-            </div>
-            <div style="text-align:right">
-              <div class="price" id="prodPrice"></div>
-              <div class="notice" id="stockStatus"></div>
-            </div>
-          </div>
 
-          <div style="margin-top:12px">
-            <strong>Description</strong>
-            <p id="prodDesc" class="notice" style="margin-top:6px">A genuine spare part for your bike. Replace with original OEM-quality parts.</p>
-          </div>
+        <div style="margin-top:12px">
+          <strong>Description</strong>
+          <p id="prodDesc" class="notice" style="margin-top:6px">A genuine spare part for your bike. Replace with original OEM-quality parts.</p>
+        </div>
 
-          <div style="margin-top:12px">
-            <strong>Advance Payment</strong>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <label><input type="radio" name="advDetail" value="0" checked> No</label>
-              <label><input type="radio" name="advDetail" value="0.2"> 20%</label>
-              <label><input type="radio" name="advDetail" value="0.3"> 30%</label>
-              <label><input type="radio" name="advDetail" value="0.5"> 50%</label>
-            </div>
-            <div class="notice" style="margin-top:8px">Pay advance to bKash: 01707659954</div>
+        <!-- Fixed Advance & Payment Method -->
+        <div style="margin-top:12px">
+          <strong>Payment</strong>
+          <div class="notice" style="margin-top:6px" id="advNotice"></div>
+          <div style="margin-top:8px">
+            <label for="payMethod"><strong>Choose payment method:</strong></label>
+            <select id="payMethod" style="padding:6px 10px;border-radius:6px;border:1px solid #1f2937;background:var(--card);color:var(--text)">
+              <option value="bKash" selected>bKash</option>
+              <option value="Nagad">Nagad</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Rocket">Rocket</option>
+            </select>
           </div>
+        </div>
 
-          <div class="actions" style="margin-top:14px">
-            <button id="buyNowBtn" class="btn primary">Buy Now (WhatsApp)</button>
-            <a id="bkashLink" class="btn" href="https://www.bkash.com/" target="_blank">Send Money (bKash)</a>
-          </div>
+        <div class="actions" style="margin-top:14px">
+          <button id="buyNowBtn" class="btn primary">Buy Now (WhatsApp)</button>
         </div>
 
         <div style="margin-top:12px" id="relatedWrap"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -193,8 +193,6 @@ footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 <script>
 // ---------------- DATA ----------------
 const PHONE = '8801707659954';
-const BKASH = '01707659954';
-
 const DATA = {
   "Yamaha": { models: { "FZS V3": [{sku:'YAM-FZ-ABR-001', name:'Front Brake Shoe', price:650, imgs:['https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60'], desc:'Brake shoe for Yamaha FZS V3', stock:true}] } },
   "Suzuki": { models: { 'Gixxer': [{sku:'SUZ-GXS-AF-004', name:'Air Filter', price:580, imgs:['https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=800&q=60'], desc:'Air filter for Gixxer series', stock:true}] } },
@@ -203,119 +201,144 @@ const DATA = {
   "Bajaj": { models: { 'Pulsar NS160': [{sku:'BAJ-PUL-FT-077', name:'Fuel Tank Cap', price:900, imgs:['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=60'], desc:'Fuel tank cap for Pulsar', stock:true}] } }
 };
 
-// --------- Helpers ---------
+const PAY_DEFAULTS = {
+  "bKash": "01707659954",
+  "Nagad": "017XXXXXXXX",
+  "Bank Transfer": "Bank Info: ABC Bank A/C 12345678",
+  "Rocket": "017XXXXXXXX"
+};
+
+// ---------- Helpers ----------
 const $ = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
 const money = n=>`৳${Number(n).toLocaleString('en-IN')}`;
 
-// --------- Views ---------
-const brandsGrid = $('#brandsGrid');
-const modelsGrid = $('#modelsGrid');
-const productsList = $('#productsList');
+let currentBrand=null, currentModel=null, currentProduct=null;
 
-let currentBrand=null,currentModel=null,currentProduct=null;
-
+// ---------- Render Functions ----------
 function renderBrands(){
-  brandsGrid.innerHTML='';
-  const tpl = $('#brandT');
+  brandsGrid.innerHTML=''; const tpl=$('#brandT');
   Object.keys(DATA).forEach(brand=>{
-    const node = tpl.content.cloneNode(true);
+    const node=tpl.content.cloneNode(true);
     node.querySelector('.brand-logo').style.backgroundImage=`url(https://dummyimage.com/320x80/17202a/fff&text=${encodeURIComponent(brand)})`;
     node.querySelector('.brand-name').textContent=brand;
     const count = Object.values(DATA[brand].models).reduce((s,a)=>s+a.length,0);
     node.querySelector('.brand-count').textContent=`${count} part${count!==1?'s':''}`;
-    node.querySelector('.brand-card').onclick=()=>openModels(brand);
+    node.querySelector('.brand-card').onclick=()=> openModels(brand);
     brandsGrid.appendChild(node);
   });
 }
 
-function openModels(brand){ currentBrand=brand; $('#brandsView').style.display='none'; $('#modelsView').style.display='block'; $('#brandTitle').textContent=brand; renderModels(brand); window.scrollTo({top:0,behavior:'smooth'}); }
+function openModels(brand){
+  currentBrand=brand;
+  $('#brandsView').style.display='none';
+  $('#modelsView').style.display='block';
+  $('#brandTitle').textContent=brand;
+  renderModels(brand);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
 function renderModels(brand){
-  modelsGrid.innerHTML='';
-  const tpl = $('#modelT');
+  modelsGrid.innerHTML=''; const tpl=$('#modelT');
   const models = Object.keys(DATA[brand].models||{});
   if(models.length===0){ modelsGrid.innerHTML='<div class="notice">No models available yet.</div>'; return; }
   models.forEach(m=>{
-    const node = tpl.content.cloneNode(true);
+    const node=tpl.content.cloneNode(true);
     node.querySelector('.mname').textContent=m;
-    node.querySelector('.model-card').onclick=()=>openProducts(brand,m);
+    node.querySelector('.model-card').onclick=()=> openProducts(brand,m);
     modelsGrid.appendChild(node);
   });
 }
 
-function openProducts(brand,model){ currentModel=model; $('#modelsView').style.display='none'; $('#productsView').style.display='block'; $('#modelTitle').textContent=`${brand} — ${model}`; renderProducts(brand,model); window.scrollTo({top:0,behavior:'smooth'}); }
+function openProducts(brand,model){
+  currentModel=model;
+  $('#modelsView').style.display='none';
+  $('#productsView').style.display='block';
+  $('#modelTitle').textContent=`${brand} — ${model}`;
+  renderProducts(brand,model);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
 function renderProducts(brand,model){
-  productsList.innerHTML='';
-  const tpl = $('#productT');
-  const arr = DATA[brand].models[model]||[];
+  productsList.innerHTML=''; const tpl=$('#productT');
+  const arr=(DATA[brand].models[model]||[]);
   if(!arr.length){ productsList.innerHTML='<div class="notice">No parts found for this model.</div>'; $('#productCount').textContent='0 parts'; return; }
   arr.forEach(p=>{
-    const node = tpl.content.cloneNode(true);
-    const card = node.querySelector('.product-card');
-    card.onclick=()=>openProductDetail(brand,model,p.sku);
+    const node=tpl.content.cloneNode(true);
     node.querySelector('.thumb').style.backgroundImage=`url(${p.imgs[0]})`;
     node.querySelector('.sku').textContent=p.sku+' • '+brand;
     node.querySelector('.pname').textContent=p.name;
     node.querySelector('.price').textContent=money(p.price);
+    node.querySelector('.product-card').onclick=()=>openProductDetail(brand,model,p.sku);
     productsList.appendChild(node);
   });
   $('#productCount').textContent=`${arr.length} part${arr.length!==1?'s':''}`;
 }
 
+// ---------- Product Detail ----------
+function updateAdvNotice(price){
+  const advNotice=$('#advNotice');
+  if(price>1000) advNotice.textContent='Fixed advance: ৳500 (Pay via selected method)';
+  else advNotice.textContent='Full payment required (Pay via selected method)';
+}
+
 function openProductDetail(brand,model,sku){
   const arr = DATA[brand].models[model]||[];
   const p = arr.find(x=>x.sku===sku); if(!p) return; currentProduct=p;
-  $('#productsView').style.display='none'; $('#productDetailView').style.display='block';
-  $('#productTitle').textContent=p.name; $('#skuLabel').textContent=p.sku;
-  $('#prodBrand').textContent=brand; $('#prodName').textContent=p.name; $('#prodCompat').textContent='Compatible: '+model;
-  $('#prodPrice').textContent=money(p.price); $('#prodDesc').textContent=p.desc||'';
+  $('#productsView').style.display='none';
+  $('#productDetailView').style.display='block';
+  $('#productTitle').textContent=p.name;
+  $('#skuLabel').textContent=p.sku;
+  $('#prodBrand').textContent=brand;
+  $('#prodName').textContent=p.name;
+  $('#prodCompat').textContent='Compatible: '+model;
+  $('#prodPrice').textContent=money(p.price);
+  $('#prodDesc').textContent=p.desc||'';
   $('#mainImg').style.backgroundImage=`url(${p.imgs[0]})`;
-  const thumbs = $('#thumbs'); thumbs.innerHTML='';
-  p.imgs.forEach(img=>{ const d=document.createElement('div'); d.className='thumb-s'; d.style.backgroundImage=`url(${img})`; d.onclick=()=>$('#mainImg').style.backgroundImage=`url(${img})`; thumbs.appendChild(d); });
-  $('#stockStatus').textContent = p.stock? 'In stock' : 'Out of stock';
-  renderRelated(brand,model,sku);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function renderRelated(brand,model,sku){
-  const wrap = $('#relatedWrap'); wrap.innerHTML='';
-  const arr = (DATA[brand].models[model]||[]).filter(p=>p.sku!==sku);
-  if(arr.length===0) return;
-  const h = document.createElement('h4'); h.textContent='Other parts for '+model; wrap.appendChild(h);
-  const div = document.createElement('div'); div.className='product-list';
-  arr.forEach(p=>{
-    const node = $('#productT').content.cloneNode(true);
-    node.querySelector('.product-card').onclick=()=>openProductDetail(brand,model,p.sku);
-    node.querySelector('.thumb').style.backgroundImage=`url(${p.imgs[0]})`;
-    node.querySelector('.sku').textContent=p.sku+' • '+brand;
-    node.querySelector('.pname').textContent=p.name;
-    node.querySelector('.price').textContent=money(p.price);
-    div.appendChild(node);
+  const thumbs=$('#thumbs'); thumbs.innerHTML=''; p.imgs.forEach(img=>{
+    const d=document.createElement('div'); d.className='thumb-s'; d.style.backgroundImage=`url(${img})`;
+    d.onclick=()=>$('#mainImg').style.backgroundImage=`url(${img})`; thumbs.appendChild(d);
   });
-  wrap.appendChild(div);
+  $('#stockStatus').textContent = p.stock?'In stock':'Out of stock';
+  updateAdvNotice(p.price);
+  renderRelated(brand,model,sku);
 }
 
-// ---------- Event listeners ----------
-$('#homeBtn').onclick=()=>{ $('#brandsView').style.display='block'; $('#modelsView').style.display='none'; $('#productsView').style.display='none'; $('#productDetailView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
+// Related products
+function renderRelated(brand,model,sku){
+  const wrap=$('#relatedWrap'); wrap.innerHTML='';
+  const arr=(DATA[brand].models[model]||[]).filter(x=>x.sku!==sku).slice(0,4);
+  if(!arr.length) return;
+  const div=document.createElement('div'); div.innerHTML='<strong>Other parts for this model:</strong>'; div.style.marginTop='12px';
+  const grid=document.createElement('div'); grid.style.display='grid'; grid.style.gridTemplateColumns='repeat(auto-fit,minmax(160px,1fr))'; grid.style.gap='10px'; arr.forEach(p=>{
+    const c=document.createElement('div'); c.className='product-card'; c.style.cursor='pointer';
+    c.innerHTML=`<div class="thumb" style="background-image:url(${p.imgs[0]})"></div>
+    <div class="meta"><div class="sku">${p.sku}</div><h4 class="pname" style="margin:0">${p.name}</h4><div class="price">${money(p.price)}</div></div>`;
+    c.onclick=()=>openProductDetail(brand,model,p.sku); grid.appendChild(c);
+  });
+  wrap.appendChild(div); wrap.appendChild(grid);
+}
 
-$('#backToBrands').onclick=()=>{ $('#brandsView').style.display='block'; $('#modelsView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
-$('#backToModels').onclick=()=>{ $('#modelsView').style.display='block'; $('#productsView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
-$('#backToProducts').onclick=()=>{ $('#productsView').style.display='block'; $('#productDetailView').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); }
-
+// ---------- Buy Now ----------
 $('#buyNowBtn').onclick=()=>{
   if(!currentProduct) return;
-  const adv = parseFloat($('input[name="advDetail"]:checked').value)||0;
-  const amt = Math.round(currentProduct.price*adv);
-  const msg = `Hello, I want to buy ${currentProduct.name} (${currentProduct.sku}) from Borhan Auto Parts Centre. Advance: ৳${amt}. Please confirm.`;
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-}
+  const price=currentProduct.price;
+  const method=$('#payMethod').value;
+  let amt = price>1000?500:price;
+  let info=PAY_DEFAULTS[method]||'';
+  const msg=`Hello, I want to buy ${currentProduct.name} (${currentProduct.sku}) from Borhan Auto Parts Centre.\nPayment method: ${method}\nPay: ৳${amt}\nInfo: ${info}\nPlease confirm.`;
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`,'_blank');
+};
 
-document.getElementById('yr').textContent=new Date().getFullYear();
+// ---------- Navigation ----------
+$('#backToBrands').onclick=()=>{$('#modelsView').style.display='none'; $('#brandsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
+$('#backToModels').onclick=()=>{$('#productsView').style.display='none'; $('#modelsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
+$('#backToProducts').onclick=()=>{$('#productDetailView').style.display='none'; $('#productsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
+$('#homeBtn').onclick=()=>{$('#modelsView').style.display='none'; $('#productsView').style.display='none'; $('#productDetailView').style.display='none'; $('#brandsView').style.display='block';}
 
 // ---------- Init ----------
 renderBrands();
+$('#yr').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
