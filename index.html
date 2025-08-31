@@ -1,219 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Borhan Auto Parts Centre – Genuine Motorcycle Spare Parts in Bangladesh</title>
-  <meta name="description" content="Buy genuine motorcycle spare parts for Yamaha, Suzuki, Honda, TVS, Bajaj & more. Fast delivery from Borhan Auto Parts Centre, Jessore. WhatsApp ordering & advance payment via bKash 01707659954." />
-  <meta name="keywords" content="motorcycle spare parts Bangladesh, Borhan Auto Parts Centre, Yamaha parts, Suzuki parts, Honda parts, TVS parts, Bajaj parts, Jessore" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Borhan Auto Parts Centre — Order via WhatsApp</title>
+  <meta name="description" content="Buy genuine motorcycle spare parts. Fast WhatsApp ordering & advance payment via bKash 01707659954" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14;--card:#121821;--muted:#8697a8;--text:#ecf2f8;--brand:#0ea5e9;--accent:#22c55e;--danger:#ef4444;--warn:#f59e0b;
-    }
+    :root{--bg:#0b0f14;--card:#0f1620;--muted:#8b9aa6;--text:#ecf2f8;--brand:#0ea5e9;--accent:#22c55e;--glass:rgba(255,255,255,0.03)}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:16px}
-    .nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.8);backdrop-filter:blur(10px);border-bottom:1px solid #1f2937}
-    .nav-inner{display:flex;align-items:center;gap:12px;padding:12px 16px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    .topbar{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #1f2937;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
+    .logo{font-weight:700;display:flex;align-items:center;gap:8px}
     .logo .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--brand),#60a5fa)}
-    .brand-pill{padding:8px 12px;border:1px solid #1f2937;border-radius:999px;background:#0f1620}
-    .search-wrap{display:flex;gap:8px;align-items:center;margin-left:auto}
-    .input{background:#0e1620;border:1px solid #1f2937;color:var(--text);padding:10px 12px;border-radius:12px;outline:none;min-width:220px}
-    .btn{cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:12px;font-weight:700;letter-spacing:.2px}
+    .pill{padding:6px 10px;border-radius:999px;background:var(--card);border:1px solid #1f2937;font-weight:600}
+
+    .controls{display:flex;gap:8px;align-items:center;margin-left:auto}
+    .input, select{background:var(--card);border:1px solid #1f2937;color:var(--text);padding:10px 12px;border-radius:10px;outline:none}
+    .btn{cursor:pointer;padding:10px 12px;border-radius:10px;border:none;font-weight:700}
     .btn.primary{background:var(--accent);color:#00120a}
-    .btn.outline{background:transparent;border:1px solid #26404f;color:#d3e2ef}
-    .btn.success{background:var(--accent);color:#00120a}
-    .btn.warn{background:var(--warn);color:#231900}
-    .btn.danger{background:var(--danger);color:#300}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .btn.wa{background:#25D366;color:#042012}
+    .grid{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:18px}
 
-    .sidebar{grid-column:span 3;background:var(--card);border:1px solid #1f2937;border-radius:16px;padding:14px;position:sticky;top:76px;height:fit-content}
-    .content{grid-column:span 9}
-
-    .card{background:var(--card);border:1px solid #1f2937;border-radius:16px}
-    .card .hd{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f2937;padding:12px 14px}
-    .card .bd{padding:14px}
-
+    .card{background:var(--card);border:1px solid #1f2937;border-radius:12px;padding:12px}
+    .filters .section{margin-bottom:12px}
     .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{padding:8px 12px;border-radius:999px;border:1px solid #1f2937;background:#0f1620;color:#cbd5e1;cursor:pointer}
+    .chip{padding:8px 12px;border-radius:999px;border:1px solid #1f2937;background:transparent;color:var(--muted);cursor:pointer}
     .chip.active{background:var(--brand);color:#00121d;border-color:transparent}
 
-    .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-    .product{background:var(--card);border:1px solid #1f2937;border-radius:16px;display:flex;flex-direction:column;overflow:hidden}
-    .product .img{aspect-ratio:4/3;background:#0d141d;border-bottom:1px solid #1f2937;background-size:cover;background-position:center}
-    .product .meta{padding:12px}
-    .sku{font-size:12px;color:#94a3b8}
-    .price{font-weight:800;margin:6px 0}
-    .compat{font-size:12px;color:#a5b4c3}
-    .actions{margin-top:auto;display:flex;gap:8px;padding:12px}
+    .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .product{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid #1f2937;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .thumb{height:140px;background-size:cover;background-position:center}
+    .meta{padding:10px;display:flex;flex-direction:column;gap:6px}
+    .sku{font-size:12px;color:var(--muted)}
+    .price{font-weight:800}
+    .actions{display:flex;gap:8px;margin-top:8px}
+    .buy-now{flex:1}
 
-    .section-title{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-weight:700}
+    .advance{display:flex;gap:8px;align-items:center}
+    .notice{font-size:13px;color:var(--muted)}
 
-    .cart-drawer{position:fixed;right:0;top:0;bottom:0;width:380px;max-width:100%;background:#0e1620;border-left:1px solid #1f2937;transform:translateX(100%);transition:.3s ease;z-index:100}
-    .cart-drawer.open{transform:translateX(0)}
-    .cart-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #1f2937}
-    .cart-list{max-height:55vh;overflow:auto;padding:10px}
-    .cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;border:1px solid #1f2937;border-radius:12px;padding:8px;margin-bottom:10px;background:#0b121a}
-    .qty{display:flex;align-items:center;gap:6px}
-    .cart-ft{position:absolute;left:0;right:0;bottom:0;padding:12px;border-top:1px solid #1f2937;background:linear-gradient(180deg,rgba(14,22,32,.8),#0e1620)}
+    footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
 
-    .notice{font-size:12px;color:#93a3b5}
-
-    .footer{margin:40px 0 60px;color:#9fb0c5;text-align:center}
-
-    /* Mobile-first improvements */
-    .filters-toggle{display:none}
-    details.filter-collapse{display:none}
-    @media (max-width: 960px){
-      .sidebar{display:none}
-      .content{grid-column:span 12}
-      .search-wrap{flex-wrap:wrap}
-      .filters-toggle{display:inline-flex}
-      details.filter-collapse{display:block;background:var(--card);border:1px solid #1f2937;border-radius:16px;margin:12px 0}
-      details.filter-collapse>summary{cursor:pointer;padding:12px 16px;font-weight:700;border-bottom:1px solid #1f2937;list-style:none}
-      details.filter-collapse[open] .bd{padding-top:0}
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .controls{flex-wrap:wrap}
     }
-
-    /* Floating WhatsApp button */
-    #waFloating{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 18px;font-weight:800;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:16px;z-index:999;display:flex;align-items:center;gap:8px}
   </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner container">
-      <div class="logo"><span class="dot"></span> Borhan Auto Parts Centre</div>
-      <span class="brand-pill">Jessore • 01707659954</span>
-      <div class="search-wrap">
-        <input id="q" class="input" type="search" placeholder="Search parts, SKU, model… (e.g., FZ brake shoe)" />
-        <select id="brandFilter" class="input">
-          <option value="">All Brands</option>
-          <option>Yamaha</option>
-          <option>Suzuki</option>
-          <option>Honda</option>
-          <option>TVS</option>
-          <option>Bajaj</option>
-        </select>
-        <button id="openCart" class="btn outline" title="Open cart">🛒 Cart <span id="cartCount">0</span></button>
-        <a class="btn primary" href="tel:+8801707659954">Call Now</a>
-        <button class="btn outline filters-toggle" id="filtersToggle">Filters ▾</button>
-      </div>
+  <header class="topbar container">
+    <div class="logo"><span class="dot"></span> Borhan Auto Parts Centre</div>
+    <div class="pill">Jessore • 01707659954</div>
+    <div class="controls">
+      <input id="q" class="input" type="search" placeholder="Search parts, SKU, model…" />
+      <select id="brandFilter" class="input"><option value="">All Brands</option></select>
+      <button id="clear" class="btn">Clear</button>
+      <a id="waTop" class="btn wa" href="https://wa.me/8801707659954" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </header>
 
-  <main class="container" id="app">
+  <main class="container">
     <div class="grid">
-      <!-- Desktop filters sidebar -->
-      <aside class="sidebar" aria-label="Filters">
-        <div class="card">
-          <div class="hd"><strong>Quick Filters</strong><button id="clearFilters" class="btn outline" style="padding:6px 10px;font-weight:600">Clear</button></div>
-          <div class="bd">
-            <div class="section-title">Brands</div>
-            <div class="chips" id="brandChips"></div>
-            <div class="section-title">Categories</div>
-            <div class="chips" id="catChips"></div>
-            <div class="section-title">Models</div>
-            <input id="modelFilter" class="input" placeholder="Type a model… (e.g., FZS V3)" />
-          </div>
+      <aside class="card filters" aria-label="Filters">
+        <div class="section">
+          <strong>Brands</strong>
+          <div id="brandChips" class="chips" style="margin-top:8px"></div>
         </div>
-        <div class="card" style="margin-top:14px">
-          <div class="hd"><strong>Advance Payment</strong><span class="notice">Bkash: 01707659954</span></div>
-          <div class="bd">
-            <label><input type="radio" name="adv" value="0" checked> No advance</label><br>
-            <label><input type="radio" name="adv" value="0.2"> 20% advance</label><br>
-            <label><input type="radio" name="adv" value="0.3"> 30% advance</label><br>
-            <label><input type="radio" name="adv" value="0.5"> 50% advance</label>
-            <p class="notice">Advance applies at checkout & WhatsApp summary.</p>
+        <div class="section">
+          <strong>Categories</strong>
+          <div id="catChips" class="chips" style="margin-top:8px"></div>
+        </div>
+        <div class="section">
+          <strong>Model</strong>
+          <input id="modelFilter" class="input" placeholder="Type (e.g., FZS V3)" />
+        </div>
+        <div class="section">
+          <strong>Advance Payment</strong>
+          <div class="advance" style="margin-top:8px">
+            <label><input type="radio" name="adv" value="0" checked> No</label>
+            <label><input type="radio" name="adv" value="0.2"> 20%</label>
+            <label><input type="radio" name="adv" value="0.3"> 30%</label>
+            <label><input type="radio" name="adv" value="0.5"> 50%</label>
           </div>
+          <p class="notice" style="margin-top:8px">Advance via bKash: 01707659954. Included automatically in message.</p>
         </div>
       </aside>
 
-      <!-- Mobile filters collapsible -->
-      <details class="filter-collapse" id="filtersMobile">
-        <summary>Filters & Advance Payment</summary>
-        <div class="bd">
-          <div class="section-title">Brands</div>
-          <div class="chips" id="brandChipsM"></div>
-          <div class="section-title">Categories</div>
-          <div class="chips" id="catChipsM"></div>
-          <div class="section-title">Models</div>
-          <input id="modelFilterM" class="input" placeholder="Type a model… (e.g., FZS V3)" />
-          <div class="section-title">Advance Payment</div>
-          <div class="chips" style="gap:12px">
-            <label><input type="radio" name="advM" value="0" checked> No advance</label>
-            <label><input type="radio" name="advM" value="0.2"> 20%</label>
-            <label><input type="radio" name="advM" value="0.3"> 30%</label>
-            <label><input type="radio" name="advM" value="0.5"> 50%</label>
-          </div>
-          <button id="clearFiltersM" class="btn outline" style="margin-top:10px">Clear</button>
+      <section>
+        <div class="card" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+          <strong>All Parts</strong>
+          <div class="notice" id="resultCount"></div>
         </div>
-      </details>
 
-      <section class="content">
-        <div class="card">
-          <div class="hd"><strong>All Parts</strong><span id="resultCount" class="notice"></span></div>
-          <div class="bd">
-            <div class="products" id="products"></div>
-          </div>
-        </div>
+        <div id="products" class="products" aria-live="polite"></div>
       </section>
     </div>
+
+    <footer>
+      © <span id="yr"></span> Borhan Auto Parts Centre • WhatsApp/Call: 01707659954
+    </footer>
   </main>
-
-  <!-- Cart Drawer -->
-  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
-    <div class="cart-hd">
-      <strong>WhatsApp Cart</strong>
-      <button class="btn outline" id="closeCart">✕</button>
-    </div>
-    <div class="cart-list" id="cartList"></div>
-    <div class="cart-ft">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div>
-          <div>Subtotal: <strong id="subtotal">৳0</strong></div>
-          <div class="notice">Advance (<span id="advRate">0%</span>): <strong id="advAmt">৳0</strong></div>
-        </div>
-        <div style="text-align:right">
-          <div>Total Items: <span id="itemCount">0</span></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <a id="bkashBtn" class="btn warn" href="https://www.bkash.com/" target="_blank" rel="noopener">Send Money Only (bKash)</a>
-        <a id="waBtn" class="btn success" target="_blank" rel="noopener">WhatsApp Order</a>
-      </div>
-      <p class="notice" style="margin-top:8px">We will confirm stock & shipping on WhatsApp after advance payment (if any) and send the remaining payment details.</p>
-    </div>
-  </aside>
-
-  <!-- Floating WhatsApp CTA -->
-  <a id="waFloating" href="https://wa.me/8801707659954" target="_blank" rel="noopener" aria-label="Order on WhatsApp">🛍️ Order Now</a>
-
-  <footer class="footer">
-    © <span id="yr"></span> Borhan Auto Parts Centre • 100% Genuine & Brand New • WhatsApp/Call: 01707659954
-  </footer>
 
   <template id="productTmpl">
     <article class="product">
-      <div class="img" aria-hidden="true"></div>
+      <div class="thumb" aria-hidden="true"></div>
       <div class="meta">
         <div class="sku"></div>
-        <h3 class="name" style="font-size:16px;margin:6px 0"></h3>
-        <div class="compat"></div>
+        <h3 class="name" style="margin:0"></h3>
+        <div class="compat notice"></div>
         <div class="price"></div>
-      </div>
-      <div class="actions">
-        <button class="btn outline add">Add to Cart</button>
-        <button class="btn primary buy">Buy on WhatsApp</button>
+        <div class="actions">
+          <button class="btn outline buy-now">Order on WhatsApp</button>
+          <button class="btn primary quick-info">Info</button>
+        </div>
       </div>
     </article>
   </template>
 
   <script>
-    // ---- Demo Catalog (expandable) ----
+    // ------------------ DATA ------------------
+    const PHONE = '8801707659954'; // update if needed
+    const BKASH = '01707659954';
     const CATALOG = [
       {sku:"YAM-FZ-ABR-001", name:"Front Brake Shoe", price:650, brand:"Yamaha", category:"Brakes", models:["FZ","FZS V3","Fazer"], img:"https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60"},
       {sku:"YAM-R15-CL-021", name:"Clutch Cable", price:520, brand:"Yamaha", category:"Cables", models:["R15 V3","R15 V4"], img:"https://images.unsplash.com/photo-1611765083444-c620f97f8d7b?auto=format&fit=crop&w=800&q=60"},
@@ -223,256 +134,62 @@
       {sku:"BAJ-PUL-FT-077", name:"Fuel Tank Cap", price:900, brand:"Bajaj", category:"Body", models:["Pulsar 150","Pulsar NS160"], img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=60"}
     ];
 
-    // ---- State ----
-    const state = {
-      q: "",
-      brand: "",
-      model: "",
-      cats: [],
-      advRate: 0,
-      cart: JSON.parse(localStorage.getItem("bapc_cart") || "[]"),
-    };
+    // ------------------ STATE ------------------
+    const state = { q:'', brand:'', model:'', cats:[], advRate:0 };
 
-    // ---- Helpers ----
-    const $ = (sel,root=document)=>root.querySelector(sel);
-    const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
-    const money = n => `৳${Number(n).toLocaleString('en-IN')}`;
+    // ------------------ HELPERS ------------------
+    const $ = (s, r=document)=> r.querySelector(s);
+    const $$ = (s, r=document)=> Array.from(r.querySelectorAll(s));
+    const money = n=>`৳${Number(n).toLocaleString('en-IN')}`;
 
-    // ---- Filters UI Build (desktop) ----
+    // ------------------ UI BUILD ------------------
     const brandSet = [...new Set(CATALOG.map(p=>p.brand))];
     const catSet = [...new Set(CATALOG.map(p=>p.category))];
 
-    function buildChips(container, items, clickFn){
-      container.innerHTML = '';
-      items.forEach(txt=>{
-        const c=document.createElement('button');
-        c.className='chip';
-        c.textContent=txt;
-        c.onclick=()=>clickFn(txt);
-        container.appendChild(c);
-      });
-    }
+    function buildChips(el, items, click){ el.innerHTML=''; items.forEach(it=>{ const b=document.createElement('button'); b.className='chip'; b.textContent=it; b.onclick=()=>{ click(it); render(); syncFilters(); }; el.appendChild(b); }); }
 
-    const brandChips = $('#brandChips');
-    const catChips = $('#catChips');
-    buildChips(brandChips, brandSet, toggleBrand);
-    buildChips(catChips, catSet, toggleCat);
+    buildChips($('#brandChips'), brandSet, b=> state.brand = state.brand===b? '': b);
+    buildChips($('#catChips'), catSet, c=>{ const i = state.cats.indexOf(c); if(i>-1) state.cats.splice(i,1); else state.cats.push(c); });
 
-    // ---- Filters UI Build (mobile) ----
-    const brandChipsM = $('#brandChipsM');
-    const catChipsM = $('#catChipsM');
-    buildChips(brandChipsM, brandSet, toggleBrand);
-    buildChips(catChipsM, catSet, toggleCat);
+    // fill top brand select
+    const sel = $('#brandFilter'); brandSet.forEach(b=>{ const o = document.createElement('option'); o.value=b; o.textContent=b; sel.appendChild(o); });
 
-    function toggleBrand(b){ state.brand = state.brand===b?"":b; syncFilters(); render(); }
-    function toggleCat(c){ const i=state.cats.indexOf(c); if(i>-1) state.cats.splice(i,1); else state.cats.push(c); render(); syncFilters(); }
+    function syncFilters(){ $$('#brandChips .chip').forEach(ch=>ch.classList.toggle('active', ch.textContent===state.brand)); $$('#catChips .chip').forEach(ch=>ch.classList.toggle('active', state.cats.includes(ch.textContent)));
+      $('#brandFilter').value = state.brand; $('#modelFilter').value = state.model; $('#q').value = state.q; updateResultCount(); }
 
-    function syncFilters(){
-      $$('#brandChips .chip, #brandChipsM .chip').forEach(ch=>ch.classList.toggle('active', ch.textContent===state.brand));
-      $$('#catChips .chip, #catChipsM .chip').forEach(ch=>ch.classList.toggle('active', state.cats.includes(ch.textContent)));
-      $('#brandFilter').value = state.brand;
-      $('#modelFilter').value = state.model;
-      $('#modelFilterM').value = state.model;
-      $('#q').value = state.q;
-      updateResultCount();
-    }
+    // inputs
+    $('#q').addEventListener('input', e=>{ state.q = e.target.value.trim().toLowerCase(); render(); });
+    $('#brandFilter').addEventListener('change', e=>{ state.brand = e.target.value; render(); syncFilters(); });
+    $('#modelFilter').addEventListener('input', e=>{ state.model = e.target.value.trim(); render(); });
+    $('#clear').addEventListener('click', ()=>{ state.q=''; state.brand=''; state.model=''; state.cats=[]; render(); syncFilters(); });
 
-    // ---- Search & Filter events ----
-    $('#q').addEventListener('input', e=>{state.q=e.target.value.trim().toLowerCase(); render()});
-    $('#brandFilter').addEventListener('change', e=>{state.brand=e.target.value; render(); syncFilters();});
-    $('#modelFilter').addEventListener('input', e=>{state.model=e.target.value.trim(); render()});
-    $('#modelFilterM').addEventListener('input', e=>{state.model=e.target.value.trim(); render()});
+    // advance radios
+    $$('input[name="adv"]').forEach(r=> r.addEventListener('change', e=>{ state.advRate = parseFloat(e.target.value||0); }));
 
-    $('#clearFilters').onclick=()=>{state.q="";state.brand="";state.model="";state.cats=[];render();syncFilters()}
-    $('#clearFiltersM').onclick=()=>{state.q="";state.brand="";state.model="";state.cats=[];render();syncFilters()}
+    // filtering
+    function visible(p){ const qOk = !state.q || (p.name+' '+p.sku+' '+p.models.join(' ')).toLowerCase().includes(state.q); const bOk = !state.brand || p.brand===state.brand; const mOk = !state.model || p.models.join(' ').toLowerCase().includes(state.model.toLowerCase()); const cOk = !state.cats.length || state.cats.includes(p.category); return qOk && bOk && mOk && cOk; }
 
-    // Mobile filters toggle button
-    $('#filtersToggle').addEventListener('click',()=>{
-      const det = $('#filtersMobile');
-      det.open = !det.open;
-      det.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    // render
+    const productsEl = $('#products'); const tmpl = $('#productTmpl');
+    function render(){ productsEl.innerHTML=''; const items = CATALOG.filter(visible); items.forEach(p=>{ const node = tmpl.content.cloneNode(true); node.querySelector('.thumb').style.backgroundImage = `url(${p.img})`; node.querySelector('.sku').textContent = `${p.sku} • ${p.brand} • ${p.category}`; node.querySelector('.name').textContent = p.name; node.querySelector('.compat').textContent = 'Compatible: '+p.models.join(', '); node.querySelector('.price').textContent = money(p.price);
+      node.querySelector('.buy-now').onclick = ()=> orderNow(p);
+      node.querySelector('.quick-info').onclick = ()=> quickInfo(p);
+      productsEl.appendChild(node);
+    }); updateResultCount(items.length); }
 
-    // ---- Render Products ----
-    const list = $('#products');
-    const tmpl = $('#productTmpl');
+    function updateResultCount(n){ const total = n ?? CATALOG.filter(visible).length; $('#resultCount').textContent = `${total} item${total!==1?'s':''}`; }
 
-    function productVisible(p){
-      const qOk = !state.q || (p.name+" "+p.sku+" "+p.models.join(' ')).toLowerCase().includes(state.q);
-      const bOk = !state.brand || p.brand===state.brand;
-      const mOk = !state.model || p.models.join(' ').toLowerCase().includes(state.model.toLowerCase());
-      const cOk = !state.cats.length || state.cats.includes(p.category);
-      return qOk && bOk && mOk && cOk;
-    }
+    function quickInfo(p){ alert(`${p.name}\n${p.sku} • ${p.brand} • ${p.category}\nPrice: ${money(p.price)}\nCompatible: ${p.models.join(', ')}`); }
 
-    function render(){
-      list.innerHTML='';
-      const items = CATALOG.filter(productVisible);
-      items.forEach(p=>{
-        const node = tmpl.content.cloneNode(true);
-        node.querySelector('.img').style.backgroundImage=`url(${p.img})`;
-        node.querySelector('.sku').textContent = p.sku + ' • ' + p.brand + ' • ' + p.category;
-        node.querySelector('.name').textContent = p.name;
-        node.querySelector('.compat').textContent = 'Compatible: ' + p.models.join(', ');
-        node.querySelector('.price').textContent = money(p.price);
-        node.querySelector('.add').onclick = ()=> addToCart(p.sku,1);
-        // One-click Buy on WhatsApp (skip cart)
-        node.querySelector('.buy').onclick = ()=> buySingleOnWA(p);
-        list.appendChild(node);
-      });
-      updateResultCount(items.length);
-      updateCartUI();
-    }
+    // Build WhatsApp message for single product (no cart)
+    function orderNow(p){ const adv = Math.round(p.price * state.advRate); const lines = [];
+      lines.push('*Borhan Auto Parts Centre – WhatsApp Order*'); lines.push(''); lines.push(`Product: ${p.name}`); lines.push(`SKU: ${p.sku}`); lines.push(`Brand: ${p.brand}`); lines.push(`Qty: 1`); lines.push(`Price: ${money(p.price)}`); lines.push(''); lines.push(`Subtotal: ${money(p.price)}`); lines.push(`Advance (${Math.round(state.advRate*100)}%): ${money(adv)}`); lines.push(`Pay advance to bKash: ${BKASH}`); lines.push(''); lines.push('Customer details:'); lines.push('Name:'); lines.push('Address:'); lines.push('Bike model/year:'); lines.push(''); lines.push('Please confirm stock & delivery charge.');
+      const text = lines.join('\n'); window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`,'_blank'); }
 
-    function updateResultCount(n){
-      const total = n ?? CATALOG.filter(productVisible).length;
-      $('#resultCount').textContent = `${total} item${total!==1?'s':''}`;
-    }
+    // init
+    $('#yr').textContent = new Date().getFullYear(); render(); syncFilters();
 
-    // ---- Cart ----
-    function saveCart(){ localStorage.setItem('bapc_cart', JSON.stringify(state.cart)); }
-    function addToCart(sku, qty){
-      const item = CATALOG.find(p=>p.sku===sku);
-      if(!item) return;
-      const existing = state.cart.find(i=>i.sku===sku);
-      if(existing) existing.qty += qty; else state.cart.push({sku: item.sku, name:item.name, price:item.price, qty:qty, brand:item.brand});
-      saveCart(); updateCartUI();
-    }
-    function removeFromCart(sku){ state.cart = state.cart.filter(i=>i.sku!==sku); saveCart(); updateCartUI(); }
-    function setQty(sku, qty){ const it = state.cart.find(i=>i.sku===sku); if(!it) return; it.qty = Math.max(1, qty); saveCart(); updateCartUI(); }
-
-    function totals(){
-      const subtotal = state.cart.reduce((s,i)=>s + i.price*i.qty, 0);
-      const adv = Math.round(subtotal * state.advRate);
-      return {subtotal, adv};
-    }
-
-    function updateCartUI(){
-      $('#cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
-      $('#itemCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
-      const {subtotal, adv} = totals();
-      $('#subtotal').textContent = money(subtotal);
-      $('#advAmt').textContent = money(adv);
-      $('#advRate').textContent = Math.round(state.advRate*100)+"%";
-
-      // list
-      const listEl = $('#cartList');
-      listEl.innerHTML='';
-      state.cart.forEach(i=>{
-        const wrap=document.createElement('div'); wrap.className='cart-item';
-        wrap.innerHTML = `
-          <div style="background:#091016;border-radius:8px"></div>
-          <div>
-            <div style="font-weight:700">${i.name}</div>
-            <div class="notice">${i.sku} • ${i.brand}</div>
-            <div class="price">${money(i.price)}</div>
-            <div class="qty">
-              <button class="btn outline" data-act="minus">−</button>
-              <input value="${i.qty}" size="2" class="input" style="width:64px" />
-              <button class="btn outline" data-act="plus">+</button>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn danger" data-act="del">Delete</button>
-          </div>
-        `;
-        wrap.querySelector('[data-act="minus"]').onclick=()=>setQty(i.sku, i.qty-1);
-        wrap.querySelector('[data-act="plus"]').onclick=()=>setQty(i.sku, i.qty+1);
-        wrap.querySelector('input').onchange=(e)=>setQty(i.sku, parseInt(e.target.value||1,10));
-        wrap.querySelector('[data-act="del"]').onclick=()=>removeFromCart(i.sku);
-        listEl.appendChild(wrap);
-      });
-
-      // update WA links
-      const { url } = buildWhatsAppMessage();
-      $('#waBtn').href = url;
-      $('#bkashBtn').href = 'https://www.bkash.com/';
-      updateFloatingWA();
-    }
-
-    function buildWhatsAppMessage(){
-      const {subtotal, adv} = totals();
-      const lines = [
-        '*Borhan Auto Parts Centre – WhatsApp Order*',
-        '',
-        ...state.cart.map((i,idx)=>`${idx+1}. ${i.name} (${i.sku}) x${i.qty} — ${money(i.price*i.qty)}`),
-        '',
-        `Subtotal: ${money(subtotal)}`,
-        `Advance (${Math.round(state.advRate*100)}%): ${money(adv)}`,
-        `Pay advance to bKash: 01707659954`,
-        '',
-        'Customer details:',
-        'Name:',
-        'Address:',
-        'Bike model/year:',
-        '',
-        'Please confirm stock & delivery charge. Thank you!'
-      ];
-      const text = lines.join('\n');
-      const phone = '8801707659954';
-      const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-      return {text, url};
-    }
-
-    // One-click single product WhatsApp
-    function buySingleOnWA(p){
-      const subtotal = p.price;
-      const adv = Math.round(subtotal * state.advRate);
-      const text = `*Borhan Auto Parts Centre – WhatsApp Order*\n\n` +
-                   `1. ${p.name} (${p.sku}) x1 — ${money(p.price)}\n\n` +
-                   `Subtotal: ${money(subtotal)}\n` +
-                   `Advance (${Math.round(state.advRate*100)}%): ${money(adv)}\n` +
-                   `Pay advance to bKash: 01707659954\n\n` +
-                   `Customer details:\nName:\nAddress:\nBike model/year:\n\n` +
-                   `Please confirm stock & delivery charge.`;
-      window.open(`https://wa.me/8801707659954?text=${encodeURIComponent(text)}`,'_blank');
-    }
-
-    // ---- Cart Drawer open/close ----
-    const drawer = $('#cartDrawer');
-    function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
-    function closeCart(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
-    $('#openCart').onclick = openCart;
-    $('#closeCart').onclick = closeCart;
-
-    // ---- Advance radio (desktop + mobile) ----
-    $$('input[name="adv"]').forEach(r=>r.addEventListener('change', e=>{ state.advRate = parseFloat(e.target.value || 0); updateCartUI(); }));
-    $$('input[name="advM"]').forEach(r=>r.addEventListener('change', e=>{ state.advRate = parseFloat(e.target.value || 0); updateCartUI(); }));
-
-    // ---- Floating WA handling ----
-    function updateFloatingWA(){
-      const { url } = buildWhatsAppMessage();
-      const a = $('#waFloating');
-      a.href = state.cart.length ? url : 'https://wa.me/8801707659954';
-      a.textContent = state.cart.length ? '🛍️ WhatsApp Checkout' : '🛍️ Order Now';
-    }
-
-    // ---- Init ----
-    $('#yr').textContent = new Date().getFullYear();
-    render();
-    updateFloatingWA();
   </script>
 
-  <!-- JSON-LD (enhanced SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    "name": "Borhan Auto Parts Centre",
-    "image": "https://borhanauto.github.io/borhan-auto-parts/assets/logo.png",
-    "telephone": "+8801707659954",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "BD",
-      "addressLocality": "Jessore",
-      "streetAddress": "Borhan AUTO PARTS CENTRE"
-    },
-    "url": "https://borhanauto.github.io/borhan-auto-parts/",
-    "department": ["Yamaha","Suzuki","Honda","TVS","Bajaj"],
-    "sameAs": [
-      "https://wa.me/8801707659954"
-    ]
-  }
-  </script>
 </body>
 </html>
