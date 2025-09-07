@@ -1,344 +1,269 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Borhan Auto Parts Centre — Brands, Models & Product Details</title>
-<meta name="description" content="Borhan Auto Parts Centre — Browse by brand, choose bike model and view product details with WhatsApp ordering and fixed advance payments." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borhan Auto Parts Centre - Motorcycle Spare Parts Jessore</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0f14;--card:#0f1620;--muted:#93a3b5;--text:#ecf2f8;--accent:#0ea5e9;--accent-2:#22c55e}
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1100px;margin:0 auto;padding:16px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.logo{font-weight:800;display:flex;align-items:center;gap:10px}
-.logo .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(45deg,var(--accent),#60a5fa)}
-.pill{background:var(--card);border:1px solid #1f2937;padding:6px 10px;border-radius:999px;font-weight:600}
-nav{margin-left:auto;display:flex;gap:8px;align-items:center}
-.input{background:var(--card);border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text)}
-.btn{background:transparent;border:1px solid #1f2937;padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:700}
-.btn.primary{background:var(--accent-2);border-color:transparent;color:#00120a}
-
-/* layout */
-.hero{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
-.brands-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-.brand-card{background:var(--card);border:1px solid #1f2937;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .12s}
-.brand-card:hover{transform:translateY(-4px)}
-.brand-logo{height:44px;width:100%;background-size:contain;background-position:center;background-repeat:no-repeat}
-.brand-name{font-weight:700}
-.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
-.model-card{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:10px;cursor:pointer}
-
-.product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.product-card{background:var(--card);border:1px solid #1f2937;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
-.thumb{height:140px;background-size:cover;background-position:center}
-.meta{padding:10px;display:flex;flex-direction:column;gap:6px}
-.price{font-weight:800}
-
-/* product detail */
-.detail{display:grid;grid-template-columns:360px 1fr;gap:16px}
-.gallery{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:12px}
-.main-img{height:300px;background-size:cover;background-position:center;border-radius:8px}
-.thumbs{display:flex;gap:8px;margin-top:8px}
-.thumb-s{width:64px;height:48px;background-size:cover;background-position:center;border-radius:6px;border:1px solid #1f2937;cursor:pointer}
-.detail-meta{background:var(--card);border:1px solid #1f2937;padding:12px;border-radius:12px}
-.actions{display:flex;gap:8px;margin-top:12px}
-.notice{color:var(--muted);font-size:13px}
-
-footer{margin:30px 0 60px;text-align:center;color:var(--muted)}
-
-@media (max-width:980px){ .hero{grid-template-columns:1fr} .detail{grid-template-columns:1fr} }
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
+body { background: #f0f8ff; color:#111; min-height:100vh; transition:0.3s; }
+.container { max-width:1300px; margin:0 auto; padding:2rem; }
+h1,h2,h3 { margin-bottom:1rem; }
+h1 { font-size:3rem; text-align:center; color:#1e3a8a; margin-bottom:2rem; animation:fadeIn 1s ease; }
+#searchBar { width:100%; max-width:400px; padding:0.5rem 1rem; border-radius:10px; border:1px solid #ccc; margin:1rem auto 2rem; display:block; transition:0.3s; }
+.brands, .models, .categories, .products { display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; }
+.card { background:white; border-radius:16px; padding:1.5rem; flex:1 1 220px; max-width:250px; text-align:center; box-shadow:0 8px 25px rgba(0,0,0,0.1); transition:0.4s; cursor:pointer; position:relative; overflow:hidden; animation:fadeIn 0.5s ease; }
+.card::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(45deg,#2563eb,#4f46e5); opacity:0; transition:0.4s; border-radius:16px; }
+.card:hover::before { opacity:0.1; }
+.card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 15px 35px rgba(0,0,0,0.15); }
+.card img { width:100%; height:150px; object-fit:contain; margin-bottom:0.5rem; }
+.card p { font-weight:600; margin-top:0.5rem; color:#1f2937; }
+button, .whatsapp-btn { padding:0.75rem 1.5rem; border:none; border-radius:10px; cursor:pointer; font-weight:600; transition:0.3s; text-decoration:none; display:inline-block; font-size:1rem; }
+button:hover, .whatsapp-btn:hover { opacity:0.9; }
+button { background:#2563eb; color:white; }
+.whatsapp-btn { background:#25D366; color:white; }
+.hidden { display:none; }
+.back-btn { position:fixed; top:20px; left:20px; z-index:9999; background:#f3f4f6; color:#111; padding:0.5rem 1rem; border-radius:10px; border:none; cursor:pointer; transition:0.3s; display:none; }
+.back-btn:hover { background:#e5e7eb; }
+#productDetail { background:white; padding:2rem; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.1); text-align:center; animation:fadeIn 0.5s ease; }
+#productDetail h2 { color:#2563eb; font-size:2rem; margin-bottom:1rem; }
+#productDetail p { margin-bottom:1rem; font-size:1rem; line-height:1.5; }
+.contact { text-align:center; margin-top:3rem; font-size:0.95rem; color:#333; }
+.contact a { color:#2563eb; text-decoration:none; margin:0 0.5rem; }
+.hero { text-align:center; margin-bottom:3rem; animation:fadeIn 1s ease; }
+.hero img { width:100%; max-width:600px; border-radius:16px; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+@media(max-width:768px){.card{flex:1 1 45%;}.hero img{max-width:100%;}}
+@media(max-width:480px){.card{flex:1 1 100%;}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="logo"><span class="dot"></span> Borhan Auto Parts Centre</div>
-  <div class="pill">Jessore • 01707659954</div>
-  <nav>
-    <input id="q" class="input" placeholder="Search parts, SKU, model…" />
-    <button id="homeBtn" class="btn">Home</button>
-    <a id="waTop" class="btn primary" href="https://wa.me/8801707659954" target="_blank">WhatsApp</a>
-  </nav>
-</header>
 
-<main id="app">
-<!-- Brands view -->
-<section id="brandsView">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <h2 style="margin:0">Shop by Brand</h2>
-    <div class="notice">Choose a brand to see bike models</div>
+<div class="container">
+  <div class="hero">
+    <img src="https://via.placeholder.com/600x200?text=Borhan+Auto+Parts+Centre" alt="Borhan Auto Parts Centre">
+    <h1>Borhan Auto Parts Centre</h1>
+    <p>Genuine motorcycle spare parts - RN Road, Jessore</p>
   </div>
-  <div class="brands-grid" id="brandsGrid"></div>
-</section>
 
-<!-- Models view -->
-<section id="modelsView" style="display:none">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div>
-      <button id="backToBrands" class="btn">← Back</button>
-      <h2 id="brandTitle" style="display:inline-block;margin-left:12px"></h2>
-    </div>
-    <div class="notice">Select model to view parts</div>
+  <input type="text" id="searchBar" placeholder="Search brands, models, categories, or products..." oninput="searchItems()">
+  <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
+
+  <!-- Pages -->
+  <div id="homePage">
+    <h2 style="text-align:center; margin-bottom:1.5rem;">Select Your Brand</h2>
+    <div class="brands" id="brandList"></div>
   </div>
-  <div class="models-grid" id="modelsGrid"></div>
-</section>
 
-<!-- Products for model -->
-<section id="productsView" style="display:none;margin-top:12px">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div>
-      <button id="backToModels" class="btn">← Back</button>
-      <h3 id="modelTitle" style="display:inline-block;margin-left:12px"></h3>
-    </div>
-    <div class="notice" id="productCount"></div>
+  <div id="modelPage" class="hidden">
+    <h2 id="brandTitle" style="text-align:center; margin-bottom:1.5rem;"></h2>
+    <div class="models" id="modelList"></div>
   </div>
-  <div style="margin-top:12px" id="productsList" class="product-list"></div>
-</section>
 
-<!-- Product detail -->
-<section id="productDetailView" style="display:none;margin-top:12px">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div>
-      <button id="backToProducts" class="btn">← Back</button>
-      <h3 id="productTitle" style="display:inline-block;margin-left:12px"></h3>
-    </div>
-    <div class="notice" id="skuLabel"></div>
+  <div id="categoryPage" class="hidden">
+    <h2 id="modelTitle" style="text-align:center; margin-bottom:1.5rem;"></h2>
+    <div class="categories" id="categoryList"></div>
   </div>
-  <div class="detail" style="margin-top:12px">
-    <div>
-      <div class="gallery">
-        <div id="mainImg" class="main-img"></div>
-        <div id="thumbs" class="thumbs"></div>
-      </div>
-    </div>
-    <div>
-      <div class="detail-meta">
-        <div style="display:flex;justify-content:space-between;align-items:start;gap:12px">
-          <div>
-            <div id="prodBrand" class="notice"></div>
-            <h2 id="prodName" style="margin:6px 0"></h2>
-            <div id="prodCompat" class="notice"></div>
-          </div>
-          <div style="text-align:right">
-            <div class="price" id="prodPrice"></div>
-            <div class="notice" id="stockStatus"></div>
-          </div>
-        </div>
 
-        <div style="margin-top:12px">
-          <strong>Description</strong>
-          <p id="prodDesc" class="notice" style="margin-top:6px">A genuine spare part for your bike. Replace with original OEM-quality parts.</p>
-        </div>
-
-        <!-- Fixed Advance & Payment Method -->
-        <div style="margin-top:12px">
-          <strong>Payment</strong>
-          <div class="notice" style="margin-top:6px" id="advNotice"></div>
-          <div style="margin-top:8px">
-            <label for="payMethod"><strong>Choose payment method:</strong></label>
-            <select id="payMethod" style="padding:6px 10px;border-radius:6px;border:1px solid #1f2937;background:var(--card);color:var(--text)">
-              <option value="bKash" selected>bKash</option>
-              <option value="Nagad">Nagad</option>
-              <option value="Bank Transfer">Bank Transfer</option>
-              <option value="Rocket">Rocket</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="actions" style="margin-top:14px">
-          <button id="buyNowBtn" class="btn primary">Buy Now (WhatsApp)</button>
-        </div>
-
-        <div style="margin-top:12px" id="relatedWrap"></div>
-      </div>
-    </div>
+  <div id="productPage" class="hidden">
+    <div id="productDetail"></div>
   </div>
-</section>
-</main>
 
-<footer>
-  © <span id="yr"></span> Borhan Auto Parts Centre • WhatsApp/Call: 01707659954
-</footer>
+  <div class="contact">
+    <p>Contact: <a href="tel:+8801983498274">01983498274</a> | Email: <a href="mailto:borhanautoparts@gmail.com">borhanautoparts@gmail.com</a></p>
+    <p>Address: RN Road, Jessore, Bangladesh</p>
+  </div>
 </div>
 
-<!-- TEMPLATES -->
-<template id="brandT">
-  <div class="brand-card">
-    <div class="brand-logo"></div>
-    <div class="brand-name"></div>
-    <div class="notice brand-count"></div>
-  </div>
-</template>
-
-<template id="modelT">
-  <div class="model-card">
-    <div style="font-weight:700" class="mname"></div>
-    <div class="notice">Click to view parts</div>
-  </div>
-</template>
-
-<template id="productT">
-  <article class="product-card">
-    <div class="thumb"></div>
-    <div class="meta">
-      <div class="sku"></div>
-      <h4 class="pname" style="margin:0"></h4>
-      <div class="price"></div>
-    </div>
-  </article>
-</template>
-
+<!-- Replace this part in your existing script -->
 <script>
-// ---------------- DATA ----------------
-const PHONE = '8801707659954';
-const DATA = {
-  "Yamaha": { models: { "FZS V3": [{sku:'YAM-FZ-ABR-001', name:'Front Brake Shoe', price:650, imgs:['https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60'], desc:'Brake shoe for Yamaha FZS V3', stock:true}] } },
-  "Suzuki": { models: { 'Gixxer': [{sku:'SUZ-GXS-AF-004', name:'Air Filter', price:580, imgs:['https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=800&q=60'], desc:'Air filter for Gixxer series', stock:true}] } },
-  "Honda": { models: { 'CB Hornet': [{sku:'HON-CB-PL-101', name:'Spark Plug', price:300, imgs:['https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?auto=format&fit=crop&w=800&q=60'], desc:'Plug for CB Hornet', stock:true}] } },
-  "TVS": { models: { 'Apache RTR': [{sku:'TVS-AP-CL-014', name:'Clutch Plate Set', price:1650, imgs:['https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=60'], desc:'Clutch plate set for Apache RTR', stock:true}] } },
-  "Bajaj": { models: { 'Pulsar NS160': [{sku:'BAJ-PUL-FT-077', name:'Fuel Tank Cap', price:900, imgs:['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=60'], desc:'Fuel tank cap for Pulsar', stock:true}] } }
+const phone = "8801983498274";
+let selectedBrand = "";
+let selectedModel = "";
+let currentPage = "home";
+
+// ✅ Updated brand logos with real image URLs
+const brands = [
+  {name:"Bajaj", logo:"https://upload.wikimedia.org/wikipedia/en/9/9e/Bajaj_Auto_logo.png"},
+  {name:"Yamaha", logo:"https://github.com/borhanauto/borhan-auto-jsr/blob/main/yamaha.png"},
+  {name:"Suzuki", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Suzuki_logo_2.svg/512px-Suzuki_logo_2.svg.png"},
+  {name:"Honda", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Honda_logo.svg/512px-Honda_logo.svg.png"},
+  {name:"TVS", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/TVS_Motor_Company_logo.svg/512px-TVS_Motor_Company_logo.svg.png"},
+  {name:"Hero", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Hero_MotoCorp_logo.svg/512px-Hero_MotoCorp_logo.svg.png"},
+  {name:"Pricol", logo:"https://via.placeholder.com/150?text=Pricol"},
+  {name:"Varroc", logo:"https://via.placeholder.com/150?text=Varroc"},
+  {name:"Lumax", logo:"https://via.placeholder.com/150?text=Lumax"},
+  {name:"Fiemme", logo:"https://via.placeholder.com/150?text=Fiemme"},
+  {name:"Karol", logo:"https://via.placeholder.com/150?text=Karol"}
+];
+
+const modelsByBrand = {
+  Bajaj:["Pulsar 150","Dominar 400","CT100"],
+  Yamaha:["FZS","R15","MT15"],
+  Suzuki:["Gixxer","Hayate","Access 125"],
+  Honda:["CBR150R","CB Shine","Activa"],
+  TVS:["Apache","Jupiter","NTORQ"],
+  Hero:["Splendor","Xtreme","HF Deluxe"],
+  Pricol:["Model A","Model B"],
+  Varroc:["Model X","Model Y"],
+  Lumax:["Model L1","Model L2"],
+  Fiemme:["Model F1","Model F2"],
+  Karol:["Model K1","Model K2"]
 };
 
-const PAY_DEFAULTS = {
-  "bKash": "01707659954",
-  "Nagad": "017XXXXXXXX",
-  "Bank Transfer": "Bank Info: ABC Bank A/C 12345678",
-  "Rocket": "017XXXXXXXX"
+const categories = ["Fuel","Clutch","Engine","Throttle","Chain Kits"];
+
+const products = {
+  "Pulsar 150_Fuel": {name:"Pulsar 150 Fuel Tank", description:"High-quality fuel tank.", price:"৳3,500", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Pulsar 150_Clutch": {name:"Pulsar 150 Clutch Cable", description:"Durable clutch cable.", price:"৳1,200", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Dominar 400_Fuel": {name:"Dominar 400 Fuel Tank", description:"High-quality fuel tank.", price:"৳3,800", img:"https://via.placeholder.com/250x150?text=Fuel"}
 };
 
-// ---------- Helpers ----------
-const $ = (s,r=document)=>r.querySelector(s);
-const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
-const money = n=>`৳${Number(n).toLocaleString('en-IN')}`;
+const backBtn = document.getElementById("backBtn");
 
-let currentBrand=null, currentModel=null, currentProduct=null;
-
-// ---------- Render Functions ----------
-function renderBrands(){
-  brandsGrid.innerHTML=''; const tpl=$('#brandT');
-  Object.keys(DATA).forEach(brand=>{
-    const node=tpl.content.cloneNode(true);
-    node.querySelector('.brand-logo').style.backgroundImage=`url(https://dummyimage.com/320x80/17202a/fff&text=${encodeURIComponent(brand)})`;
-    node.querySelector('.brand-name').textContent=brand;
-    const count = Object.values(DATA[brand].models).reduce((s,a)=>s+a.length,0);
-    node.querySelector('.brand-count').textContent=`${count} part${count!==1?'s':''}`;
-    node.querySelector('.brand-card').onclick=()=> openModels(brand);
-    brandsGrid.appendChild(node);
+// ✅ Brand card only shows logo image (no brand name text)
+function initBrands() {
+  const brandList = document.getElementById("brandList");
+  brandList.innerHTML = "";
+  brands.forEach(b => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<img src="${b.logo}" alt="${b.name}" title="${b.name}">`;
+    card.onclick = () => selectBrand(b.name);
+    brandList.appendChild(card);
   });
 }
+initBrands();
 
-function openModels(brand){
-  currentBrand=brand;
-  $('#brandsView').style.display='none';
-  $('#modelsView').style.display='block';
-  $('#brandTitle').textContent=brand;
-  renderModels(brand);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+function showBackBtn(show) { backBtn.style.display = show ? "block" : "none"; }
 
-function renderModels(brand){
-  modelsGrid.innerHTML=''; const tpl=$('#modelT');
-  const models = Object.keys(DATA[brand].models||{});
-  if(models.length===0){ modelsGrid.innerHTML='<div class="notice">No models available yet.</div>'; return; }
-  models.forEach(m=>{
-    const node=tpl.content.cloneNode(true);
-    node.querySelector('.mname').textContent=m;
-    node.querySelector('.model-card').onclick=()=> openProducts(brand,m);
-    modelsGrid.appendChild(node);
+function selectBrand(brand) {
+  selectedBrand = brand;
+  currentPage = "model";
+  document.getElementById("homePage").classList.add("hidden");
+  const modelList = document.getElementById("modelList");
+  document.getElementById("brandTitle").innerText = `Select Model for ${brand}`;
+  modelList.innerHTML = "";
+  modelsByBrand[brand].forEach(m => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<h3>${m}</h3>`;
+    card.onclick = () => selectModel(m);
+    modelList.appendChild(card);
   });
+  document.getElementById("modelPage").classList.remove("hidden");
+  showBackBtn(true);
 }
 
-function openProducts(brand,model){
-  currentModel=model;
-  $('#modelsView').style.display='none';
-  $('#productsView').style.display='block';
-  $('#modelTitle').textContent=`${brand} — ${model}`;
-  renderProducts(brand,model);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function renderProducts(brand,model){
-  productsList.innerHTML=''; const tpl=$('#productT');
-  const arr=(DATA[brand].models[model]||[]);
-  if(!arr.length){ productsList.innerHTML='<div class="notice">No parts found for this model.</div>'; $('#productCount').textContent='0 parts'; return; }
-  arr.forEach(p=>{
-    const node=tpl.content.cloneNode(true);
-    node.querySelector('.thumb').style.backgroundImage=`url(${p.imgs[0]})`;
-    node.querySelector('.sku').textContent=p.sku+' • '+brand;
-    node.querySelector('.pname').textContent=p.name;
-    node.querySelector('.price').textContent=money(p.price);
-    node.querySelector('.product-card').onclick=()=>openProductDetail(brand,model,p.sku);
-    productsList.appendChild(node);
+function selectModel(model) {
+  selectedModel = model;
+  currentPage = "category";
+  document.getElementById("modelPage").classList.add("hidden");
+  const categoryList = document.getElementById("categoryList");
+  document.getElementById("modelTitle").innerText = `Select Category for ${model}`;
+  categoryList.innerHTML = "";
+  categories.forEach(cat => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<h3>${cat}</h3>`;
+    card.onclick = () => showProduct(model, cat);
+    categoryList.appendChild(card);
   });
-  $('#productCount').textContent=`${arr.length} part${arr.length!==1?'s':''}`;
+  document.getElementById("categoryPage").classList.remove("hidden");
 }
 
-// ---------- Product Detail ----------
-function updateAdvNotice(price){
-  const advNotice=$('#advNotice');
-  if(price>1000) advNotice.textContent='Fixed advance: ৳500 (Pay via selected method)';
-  else advNotice.textContent='Full payment required (Pay via selected method)';
+function showProduct(model, category) {
+  currentPage = "product";
+  const key = `${model}_${category}`;
+  const product = products[key] || {name:`${model} ${category}`, description:`Product details coming soon.`, price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Product"};
+  const message = encodeURIComponent(`Hello, I want to buy: ${product.name}`);
+  document.getElementById("productDetail").innerHTML = `
+    <img src="${product.img}" alt="${product.name}" style="width:100%; max-width:300px; margin-bottom:1rem;">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <p style="font-weight:600; font-size:1.2rem;">Price: ${product.price}</p>
+    <a href="https://wa.me/${phone}?text=${message}" target="_blank" class="whatsapp-btn">Buy via WhatsApp</a>
+  `;
+  document.getElementById("categoryPage").classList.add("hidden");
+  document.getElementById("productPage").classList.remove("hidden");
 }
 
-function openProductDetail(brand,model,sku){
-  const arr = DATA[brand].models[model]||[];
-  const p = arr.find(x=>x.sku===sku); if(!p) return; currentProduct=p;
-  $('#productsView').style.display='none';
-  $('#productDetailView').style.display='block';
-  $('#productTitle').textContent=p.name;
-  $('#skuLabel').textContent=p.sku;
-  $('#prodBrand').textContent=brand;
-  $('#prodName').textContent=p.name;
-  $('#prodCompat').textContent='Compatible: '+model;
-  $('#prodPrice').textContent=money(p.price);
-  $('#prodDesc').textContent=p.desc||'';
-  $('#mainImg').style.backgroundImage=`url(${p.imgs[0]})`;
-  const thumbs=$('#thumbs'); thumbs.innerHTML=''; p.imgs.forEach(img=>{
-    const d=document.createElement('div'); d.className='thumb-s'; d.style.backgroundImage=`url(${img})`;
-    d.onclick=()=>$('#mainImg').style.backgroundImage=`url(${img})`; thumbs.appendChild(d);
-  });
-  $('#stockStatus').textContent = p.stock?'In stock':'Out of stock';
-  updateAdvNotice(p.price);
-  renderRelated(brand,model,sku);
+function goBack() {
+  if(currentPage === "product") {
+    currentPage = "category";
+    document.getElementById("productPage").classList.add("hidden");
+    document.getElementById("categoryPage").classList.remove("hidden");
+  } else if(currentPage === "category") {
+    currentPage = "model";
+    document.getElementById("categoryPage").classList.add("hidden");
+    document.getElementById("modelPage").classList.remove("hidden");
+  } else if(currentPage === "model") {
+    currentPage = "home";
+    document.getElementById("modelPage").classList.add("hidden");
+    document.getElementById("homePage").classList.remove("hidden");
+    selectedBrand = "";
+    showBackBtn(false);
+  }
 }
 
-// Related products
-function renderRelated(brand,model,sku){
-  const wrap=$('#relatedWrap'); wrap.innerHTML='';
-  const arr=(DATA[brand].models[model]||[]).filter(x=>x.sku!==sku).slice(0,4);
-  if(!arr.length) return;
-  const div=document.createElement('div'); div.innerHTML='<strong>Other parts for this model:</strong>'; div.style.marginTop='12px';
-  const grid=document.createElement('div'); grid.style.display='grid'; grid.style.gridTemplateColumns='repeat(auto-fit,minmax(160px,1fr))'; grid.style.gap='10px'; arr.forEach(p=>{
-    const c=document.createElement('div'); c.className='product-card'; c.style.cursor='pointer';
-    c.innerHTML=`<div class="thumb" style="background-image:url(${p.imgs[0]})"></div>
-    <div class="meta"><div class="sku">${p.sku}</div><h4 class="pname" style="margin:0">${p.name}</h4><div class="price">${money(p.price)}</div></div>`;
-    c.onclick=()=>openProductDetail(brand,model,p.sku); grid.appendChild(c);
-  });
-  wrap.appendChild(div); wrap.appendChild(grid);
+// Search function remains unchanged
+function searchItems() {
+  const query = document.getElementById("searchBar").value.toLowerCase();
+
+  if(currentPage === "home") {
+    const brandList = document.getElementById("brandList");
+    brandList.innerHTML = "";
+    brands.filter(b => b.name.toLowerCase().includes(query)).forEach(b => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<img src="${b.logo}" alt="${b.name}" title="${b.name}">`;
+      card.onclick = () => selectBrand(b.name);
+      brandList.appendChild(card);
+    });
+  } else if(currentPage === "model") {
+    const modelList = document.getElementById("modelList");
+    modelList.innerHTML = "";
+    modelsByBrand[selectedBrand].filter(m => 
+      m.toLowerCase().includes(query) || 
+      Object.keys(products).some(p => p.toLowerCase().includes(query) && p.startsWith(m))
+    ).forEach(m => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h3>${m}</h3>`;
+      card.onclick = () => selectModel(m);
+      modelList.appendChild(card);
+    });
+  } else if(currentPage === "category") {
+    const categoryList = document.getElementById("categoryList");
+    categoryList.innerHTML = "";
+    categories.filter(cat => 
+      cat.toLowerCase().includes(query) || 
+      Object.keys(products).some(p => p.toLowerCase().includes(query) && p.startsWith(selectedModel))
+    ).forEach(cat => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h3>${cat}</h3>`;
+      card.onclick = () => showProduct(selectedModel, cat);
+      categoryList.appendChild(card);
+    });
+
+    Object.entries(products).filter(([key, prod]) =>
+      key.startsWith(selectedModel) && prod.name.toLowerCase().includes(query)
+    ).forEach(([key, prod]) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h3>${prod.name}</h3>`;
+      card.onclick = () => {
+        const parts = key.split("_");
+        showProduct(parts[0], parts[1]);
+      };
+      categoryList.appendChild(card);
+    });
+  }
 }
-
-// ---------- Buy Now ----------
-$('#buyNowBtn').onclick=()=>{
-  if(!currentProduct) return;
-  const price=currentProduct.price;
-  const method=$('#payMethod').value;
-  let amt = price>1000?500:price;
-  let info=PAY_DEFAULTS[method]||'';
-  const msg=`Hello, I want to buy ${currentProduct.name} (${currentProduct.sku}) from Borhan Auto Parts Centre.\nPayment method: ${method}\nPay: ৳${amt}\nInfo: ${info}\nPlease confirm.`;
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`,'_blank');
-};
-
-// ---------- Navigation ----------
-$('#backToBrands').onclick=()=>{$('#modelsView').style.display='none'; $('#brandsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
-$('#backToModels').onclick=()=>{$('#productsView').style.display='none'; $('#modelsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
-$('#backToProducts').onclick=()=>{$('#productDetailView').style.display='none'; $('#productsView').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});}
-$('#homeBtn').onclick=()=>{$('#modelsView').style.display='none'; $('#productsView').style.display='none'; $('#productDetailView').style.display='none'; $('#brandsView').style.display='block';}
-
-// ---------- Init ----------
-renderBrands();
-$('#yr').textContent=new Date().getFullYear();
 </script>
+
+
 </body>
 </html>
