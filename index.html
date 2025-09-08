@@ -7,35 +7,121 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
-body { background: #f0f8ff; color:#111; min-height:100vh; transition:0.3s; }
+body { background:#f0f8ff; color:#111; min-height:100vh; }
 .container { max-width:1300px; margin:0 auto; padding:2rem; }
 h1,h2,h3 { margin-bottom:1rem; }
-h1 { font-size:3rem; text-align:center; color:#1e3a8a; margin-bottom:2rem; animation:fadeIn 1s ease; }
+h1 { font-size:2.5rem; text-align:center; color:#1e3a8a; margin-bottom:1.5rem; animation:fadeIn 1s ease; }
 #searchBar { width:100%; max-width:400px; padding:0.5rem 1rem; border-radius:10px; border:1px solid #ccc; margin:1rem auto 2rem; display:block; transition:0.3s; }
-.brands, .models, .categories, .products { display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; }
-.card { background:white; border-radius:16px; padding:1.5rem; flex:1 1 220px; max-width:250px; text-align:center; box-shadow:0 8px 25px rgba(0,0,0,0.1); transition:0.4s; cursor:pointer; position:relative; overflow:hidden; animation:fadeIn 0.5s ease; }
-.card::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(45deg,#2563eb,#4f46e5); opacity:0; transition:0.4s; border-radius:16px; }
-.card:hover::before { opacity:0.1; }
-.card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 15px 35px rgba(0,0,0,0.15); }
-.card img { width:100%; height:150px; object-fit:contain; margin-bottom:0.5rem; }
-.card p { font-weight:600; margin-top:0.5rem; color:#1f2937; }
-button, .whatsapp-btn { padding:0.75rem 1.5rem; border:none; border-radius:10px; cursor:pointer; font-weight:600; transition:0.3s; text-decoration:none; display:inline-block; font-size:1rem; }
+
+.brands, .models, .categories, .products { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; }
+
+/* ✅ Updated brand card size */
+.brands .card {
+  background:white;
+  border-radius:14px;
+  flex:0 0 228px;
+  width:228px;
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  overflow:hidden;
+  position:relative;
+}
+.brands .card:hover {
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+.brands .card img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.3s ease;
+}
+.brands .card:hover img { transform:scale(1.1); }
+
+/* Normal product & model cards */
+.card {
+  background:white;
+  border-radius:16px;
+  padding:1.5rem;
+  flex:1 1 220px;
+  max-width:250px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+  transition:0.3s;
+  cursor:pointer;
+  animation:fadeIn 0.5s ease;
+}
+.card:hover { transform:translateY(-6px); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
+.card h3 { font-size:1.1rem; color:#1e3a8a; }
+
+button, .whatsapp-btn { 
+  padding:0.75rem 1.5rem; 
+  border:none; 
+  border-radius:10px; 
+  cursor:pointer; 
+  font-weight:600; 
+  transition:0.3s; 
+  text-decoration:none; 
+  display:inline-block; 
+  font-size:1rem; 
+}
 button:hover, .whatsapp-btn:hover { opacity:0.9; }
 button { background:#2563eb; color:white; }
 .whatsapp-btn { background:#25D366; color:white; }
 .hidden { display:none; }
-.back-btn { position:fixed; top:20px; left:20px; z-index:9999; background:#f3f4f6; color:#111; padding:0.5rem 1rem; border-radius:10px; border:none; cursor:pointer; transition:0.3s; display:none; }
+
+.back-btn {
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:9999;
+  background:#f3f4f6;
+  color:#111;
+  padding:0.5rem 1rem;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+  display:none;
+}
 .back-btn:hover { background:#e5e7eb; }
-#productDetail { background:white; padding:2rem; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.1); text-align:center; animation:fadeIn 0.5s ease; }
+
+#productDetail {
+  background:white;
+  padding:2rem;
+  border-radius:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  text-align:center;
+  animation:fadeIn 0.5s ease;
+}
 #productDetail h2 { color:#2563eb; font-size:2rem; margin-bottom:1rem; }
 #productDetail p { margin-bottom:1rem; font-size:1rem; line-height:1.5; }
+
 .contact { text-align:center; margin-top:3rem; font-size:0.95rem; color:#333; }
 .contact a { color:#2563eb; text-decoration:none; margin:0 0.5rem; }
-.hero { text-align:center; margin-bottom:3rem; animation:fadeIn 1s ease; }
+
+.hero { text-align:center; margin-bottom:2rem; animation:fadeIn 1s ease; }
 .hero img { width:100%; max-width:600px; border-radius:16px; }
-@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-@media(max-width:768px){.card{flex:1 1 45%;}.hero img{max-width:100%;}}
-@media(max-width:480px){.card{flex:1 1 100%;}}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+@media(max-width:768px){
+  .card { flex:1 1 45%; }
+  .brands .card { flex:0 0 200px; width:200px; height:76px; }
+  .hero img { max-width:100%; }
+}
+@media(max-width:480px){
+  .card { flex:1 1 100%; }
+  .brands .card { flex:0 0 100%; width:100%; height:76px; }
+}
 </style>
 </head>
 <body>
@@ -50,7 +136,6 @@ button { background:#2563eb; color:white; }
   <input type="text" id="searchBar" placeholder="Search brands, models, categories, or products..." oninput="searchItems()">
   <button class="back-btn" id="backBtn" onclick="goBack()">Back</button>
 
-  <!-- Pages -->
   <div id="homePage">
     <h2 style="text-align:center; margin-bottom:1.5rem;">Select Your Brand</h2>
     <div class="brands" id="brandList"></div>
@@ -76,14 +161,12 @@ button { background:#2563eb; color:white; }
   </div>
 </div>
 
-<!-- Replace this part in your existing script -->
 <script>
 const phone = "8801983498274";
 let selectedBrand = "";
 let selectedModel = "";
 let currentPage = "home";
 
-// ✅ Updated brand logos with real image URLs
 const brands = [
   {name:"Bajaj", logo:"https://upload.wikimedia.org/wikipedia/en/9/9e/Bajaj_Auto_logo.png"},
   {name:"Yamaha", logo:"https://raw.githubusercontent.com/borhanauto/borhan-auto-jsr/main/yamaha.png"},
@@ -122,7 +205,6 @@ const products = {
 
 const backBtn = document.getElementById("backBtn");
 
-// ✅ Brand card only shows logo image (no brand name text)
 function initBrands() {
   const brandList = document.getElementById("brandList");
   brandList.innerHTML = "";
@@ -207,10 +289,8 @@ function goBack() {
   }
 }
 
-// Search function remains unchanged
 function searchItems() {
   const query = document.getElementById("searchBar").value.toLowerCase();
-
   if(currentPage === "home") {
     const brandList = document.getElementById("brandList");
     brandList.innerHTML = "";
@@ -263,7 +343,5 @@ function searchItems() {
   }
 }
 </script>
-
-
 </body>
 </html>
