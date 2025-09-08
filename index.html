@@ -6,35 +6,7 @@
 <title>Borhan Auto Parts Centre - Motorcycle Spare Parts Jessore</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* Updated brand card size */
-.brands .card {
-  background: white;
-  border-radius: 14px;
-  flex: 0 0 228px;
-  width: 228px;
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  position: relative;
-}
-.brands .card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-.brands .card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  min-width: 0; /* ⚡️ NEW: Allows the image to shrink */
-  max-width: 100%; /* ⚡️ NEW: Prevents it from expanding too much */
-  transition: transform 0.3s ease;
-}
-.brands .card:hover img { transform: scale(1.1); }
+/* General resets */
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
 body { background:#f0f8ff; color:#111; min-height:100vh; }
 .container { max-width:1300px; margin:0 auto; padding:2rem; }
@@ -44,7 +16,7 @@ h1 { font-size:2.5rem; text-align:center; color:#1e3a8a; margin-bottom:1.5rem; a
 
 .brands, .models, .categories, .products { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; }
 
-/* ✅ Updated brand card size */
+/* Brand cards */
 .brands .card {
   background:white;
   border-radius:14px;
@@ -67,16 +39,16 @@ h1 { font-size:2.5rem; text-align:center; color:#1e3a8a; margin-bottom:1.5rem; a
 .brands .card img {
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   transition:transform 0.3s ease;
 }
 .brands .card:hover img { transform:scale(1.1); }
 
-/* Normal product & model cards */
+/* Normal product/model cards */
 .card {
   background:white;
   border-radius:16px;
-  padding:1.5rem;
+  padding:1rem;
   flex:1 1 220px;
   max-width:250px;
   text-align:center;
@@ -86,7 +58,7 @@ h1 { font-size:2.5rem; text-align:center; color:#1e3a8a; margin-bottom:1.5rem; a
   animation:fadeIn 0.5s ease;
 }
 .card:hover { transform:translateY(-6px); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
-.card h3 { font-size:1.1rem; color:#1e3a8a; }
+.card h3 { font-size:1.1rem; color:#1e3a8a; margin-top:0.5rem; }
 
 button, .whatsapp-btn { 
   padding:0.75rem 1.5rem; 
@@ -196,6 +168,7 @@ let selectedBrand = "";
 let selectedModel = "";
 let currentPage = "home";
 
+// Brands
 const brands = [
   {name:"Bajaj", logo:"https://raw.githubusercontent.com/borhanauto/borhan-auto-jsr/main/bajaj.png"},
   {name:"Yamaha", logo:"https://raw.githubusercontent.com/borhanauto/borhan-auto-jsr/main/yamaha.png"},
@@ -210,28 +183,88 @@ const brands = [
   {name:"Karol", logo:"https://raw.githubusercontent.com/borhanauto/borhan-auto-jsr/main/karol.jpg"}
 ];
 
+// Models
 const modelsByBrand = {
-  Bajaj:["Pulsar 150","Dominar 400","CT100"],
-  Yamaha:["FZS","R15","MT15"],
-  Suzuki:["Gixxer","Hayate","Access 125"],
-  Honda:["CBR150R","CB Shine","Activa"],
-  TVS:["Apache","Jupiter","NTORQ"],
-  Hero:["Splendor","Xtreme","HF Deluxe"],
-  Pricol:["Model A","Model B"],
-  Varroc:["Model X","Model Y"],
-  Lumax:["Model L1","Model L2"],
-  Fiemme:["Model F1","Model F2"],
-  Karol:["Model K1","Model K2"]
+  Bajaj:[
+    {name:"Pulsar 150", img:"https://via.placeholder.com/250x150?text=Pulsar+150"},
+    {name:"Dominar 400", img:"https://via.placeholder.com/250x150?text=Dominar+400"},
+    {name:"CT100", img:"https://via.placeholder.com/250x150?text=CT100"}
+  ],
+  Yamaha:[
+    {name:"FZS", img:"https://via.placeholder.com/250x150?text=FZS"},
+    {name:"R15", img:"https://via.placeholder.com/250x150?text=R15"},
+    {name:"MT15", img:"https://via.placeholder.com/250x150?text=MT15"}
+  ],
+  Suzuki:[
+    {name:"Gixxer", img:"https://via.placeholder.com/250x150?text=Gixxer"},
+    {name:"Hayate", img:"https://via.placeholder.com/250x150?text=Hayate"},
+    {name:"Access 125", img:"https://via.placeholder.com/250x150?text=Access+125"}
+  ],
+  Honda:[
+    {name:"CBR150R", img:"https://via.placeholder.com/250x150?text=CBR150R"},
+    {name:"CB Shine", img:"https://via.placeholder.com/250x150?text=CB+Shine"},
+    {name:"Activa", img:"https://via.placeholder.com/250x150?text=Activa"}
+  ],
+  TVS:[
+    {name:"Apache", img:"https://via.placeholder.com/250x150?text=Apache"},
+    {name:"Jupiter", img:"https://via.placeholder.com/250x150?text=Jupiter"},
+    {name:"NTORQ", img:"https://via.placeholder.com/250x150?text=NTORQ"}
+  ],
+  Hero:[
+    {name:"Splendor", img:"https://via.placeholder.com/250x150?text=Splendor"},
+    {name:"Xtreme", img:"https://via.placeholder.com/250x150?text=Xtreme"},
+    {name:"HF Deluxe", img:"https://via.placeholder.com/250x150?text=HF+Deluxe"}
+  ],
+  Pricol:[
+    {name:"Model A", img:"https://via.placeholder.com/250x150?text=Pricol+Model+A"},
+    {name:"Model B", img:"https://via.placeholder.com/250x150?text=Pricol+Model+B"}
+  ],
+  Varroc:[
+    {name:"Model X", img:"https://via.placeholder.com/250x150?text=Varroc+Model+X"},
+    {name:"Model Y", img:"https://via.placeholder.com/250x150?text=Varroc+Model+Y"}
+  ],
+  Lumax:[
+    {name:"Model L1", img:"https://via.placeholder.com/250x150?text=Lumax+L1"},
+    {name:"Model L2", img:"https://via.placeholder.com/250x150?text=Lumax+L2"}
+  ],
+  Fiemme:[
+    {name:"Model F1", img:"https://via.placeholder.com/250x150?text=Fiemme+F1"},
+    {name:"Model F2", img:"https://via.placeholder.com/250x150?text=Fiemme+F2"}
+  ],
+  Karol:[
+    {name:"Model K1", img:"https://via.placeholder.com/250x150?text=Karol+K1"},
+    {name:"Model K2", img:"https://via.placeholder.com/250x150?text=Karol+K2"}
+  ]
 };
 
+// Categories
 const categories = ["Fuel","Clutch","Engine","Throttle","Chain Kits"];
 
+// Products
 const products = {
   "Pulsar 150_Fuel": {name:"Pulsar 150 Fuel Tank", description:"High-quality fuel tank.", price:"৳3,500", img:"https://via.placeholder.com/250x150?text=Fuel"},
   "Pulsar 150_Clutch": {name:"Pulsar 150 Clutch Cable", description:"Durable clutch cable.", price:"৳1,200", img:"https://via.placeholder.com/250x150?text=Clutch"},
-  "Dominar 400_Fuel": {name:"Dominar 400 Fuel Tank", description:"High-quality fuel tank.", price:"৳3,800", img:"https://via.placeholder.com/250x150?text=Fuel"}
+  "Dominar 400_Fuel": {name:"Dominar 400 Fuel Tank", description:"High-quality fuel tank.", price:"৳3,800", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "FZS_Fuel": {name:"FZS Fuel Tank", description:"Premium fuel tank.", price:"৳3,200", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "R15_Clutch": {name:"R15 Clutch Cable", description:"Durable clutch cable.", price:"৳1,500", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Gixxer_Fuel": {name:"Gixxer Fuel Tank", description:"High-quality fuel tank.", price:"৳3,300", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Hayate_Clutch": {name:"Hayate Clutch Cable", description:"Durable clutch cable.", price:"৳1,100", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "CBR150R_Fuel": {name:"CBR150R Fuel Tank", description:"High-quality fuel tank.", price:"৳3,600", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Apache_Fuel": {name:"Apache Fuel Tank", description:"High-quality fuel tank.", price:"৳3,400", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Splendor_Fuel": {name:"Splendor Fuel Tank", description:"High-quality fuel tank.", price:"৳3,000", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model A_Fuel": {name:"Pricol Model A Fuel Tank", description:"High-quality fuel tank.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model B_Clutch": {name:"Pricol Model B Clutch", description:"Durable clutch cable.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Model X_Fuel": {name:"Varroc Model X Fuel Tank", description:"High-quality fuel tank.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model Y_Clutch": {name:"Varroc Model Y Clutch", description:"Durable clutch cable.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Model L1_Fuel": {name:"Lumax Model L1 Fuel Tank", description:"High-quality fuel tank.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model L2_Clutch": {name:"Lumax Model L2 Clutch", description:"Durable clutch cable.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Model F1_Fuel": {name:"Fiemme Model F1 Fuel Tank", description:"High-quality fuel tank.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model F2_Clutch": {name:"Fiemme Model F2 Clutch", description:"Durable clutch cable.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Clutch"},
+  "Model K1_Fuel": {name:"Karol Model K1 Fuel Tank", description:"High-quality fuel tank.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Fuel"},
+  "Model K2_Clutch": {name:"Karol Model K2 Clutch", description:"Durable clutch cable.", price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Clutch"}
 };
 
+// Init brands
 const backBtn = document.getElementById("backBtn");
 
 function initBrands() {
@@ -256,11 +289,12 @@ function selectBrand(brand) {
   const modelList = document.getElementById("modelList");
   document.getElementById("brandTitle").innerText = `Select Model for ${brand}`;
   modelList.innerHTML = "";
+
   modelsByBrand[brand].forEach(m => {
     const card = document.createElement("div");
     card.className = "card";
-    card.innerHTML = `<h3>${m}</h3>`;
-    card.onclick = () => selectModel(m);
+    card.innerHTML = `<img src="${m.img}" alt="${m.name}"><h3>${m.name}</h3>`;
+    card.onclick = () => selectModel(m.name);
     modelList.appendChild(card);
   });
   document.getElementById("modelPage").classList.remove("hidden");
@@ -271,104 +305,77 @@ function selectModel(model) {
   selectedModel = model;
   currentPage = "category";
   document.getElementById("modelPage").classList.add("hidden");
-  const categoryList = document.getElementById("categoryList");
+  const catList = document.getElementById("categoryList");
   document.getElementById("modelTitle").innerText = `Select Category for ${model}`;
-  categoryList.innerHTML = "";
-  categories.forEach(cat => {
+  catList.innerHTML = "";
+  categories.forEach(c => {
     const card = document.createElement("div");
     card.className = "card";
-    card.innerHTML = `<h3>${cat}</h3>`;
-    card.onclick = () => showProduct(model, cat);
-    categoryList.appendChild(card);
+    card.innerHTML = `<h3>${c}</h3>`;
+    card.onclick = () => selectProduct(c);
+    catList.appendChild(card);
   });
   document.getElementById("categoryPage").classList.remove("hidden");
 }
 
-function showProduct(model, category) {
+function selectProduct(category) {
   currentPage = "product";
-  const key = `${model}_${category}`;
-  const product = products[key] || {name:`${model} ${category}`, description:`Product details coming soon.`, price:"Contact for Price", img:"https://via.placeholder.com/250x150?text=Product"};
-  const message = encodeURIComponent(`Hello, I want to buy: ${product.name}`);
-  document.getElementById("productDetail").innerHTML = `
-    <img src="${product.img}" alt="${product.name}" style="width:100%; max-width:300px; margin-bottom:1rem;">
-    <h2>${product.name}</h2>
-    <p>${product.description}</p>
-    <p style="font-weight:600; font-size:1.2rem;">Price: ${product.price}</p>
-    <a href="https://wa.me/${phone}?text=${message}" target="_blank" class="whatsapp-btn">Buy via WhatsApp</a>
-  `;
   document.getElementById("categoryPage").classList.add("hidden");
+  const prodDetail = document.getElementById("productDetail");
+  const key = `${selectedModel}_${category}`;
+  const product = products[key];
+  if(product) {
+    prodDetail.innerHTML = `
+      <h2>${product.name}</h2>
+      <img src="${product.img}" style="width:100%; max-width:300px; border-radius:12px;" alt="${product.name}">
+      <p>${product.description}</p>
+      <p style="font-weight:bold;">Price: ${product.price}</p>
+      <a class="whatsapp-btn" href="https://wa.me/${phone}?text=I%20want%20to%20buy%20${encodeURIComponent(product.name)}" target="_blank">Order via WhatsApp</a>
+    `;
+  } else {
+    prodDetail.innerHTML = `<h2>No product found</h2>`;
+  }
   document.getElementById("productPage").classList.remove("hidden");
 }
 
 function goBack() {
-  if(currentPage === "product") {
-    currentPage = "category";
-    document.getElementById("productPage").classList.add("hidden");
-    document.getElementById("categoryPage").classList.remove("hidden");
+  if(currentPage === "model") {
+    currentPage = "home";
+    document.getElementById("modelPage").classList.add("hidden");
+    document.getElementById("homePage").classList.remove("hidden");
+    showBackBtn(false);
   } else if(currentPage === "category") {
     currentPage = "model";
     document.getElementById("categoryPage").classList.add("hidden");
     document.getElementById("modelPage").classList.remove("hidden");
-  } else if(currentPage === "model") {
-    currentPage = "home";
-    document.getElementById("modelPage").classList.add("hidden");
-    document.getElementById("homePage").classList.remove("hidden");
-    selectedBrand = "";
-    showBackBtn(false);
+  } else if(currentPage === "product") {
+    currentPage = "category";
+    document.getElementById("productPage").classList.add("hidden");
+    document.getElementById("categoryPage").classList.remove("hidden");
   }
 }
 
+// Search
 function searchItems() {
   const query = document.getElementById("searchBar").value.toLowerCase();
-  if(currentPage === "home") {
-    const brandList = document.getElementById("brandList");
-    brandList.innerHTML = "";
-    brands.filter(b => b.name.toLowerCase().includes(query)).forEach(b => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<img src="${b.logo}" alt="${b.name}" title="${b.name}">`;
-      card.onclick = () => selectBrand(b.name);
-      brandList.appendChild(card);
-    });
-  } else if(currentPage === "model") {
-    const modelList = document.getElementById("modelList");
-    modelList.innerHTML = "";
-    modelsByBrand[selectedBrand].filter(m => 
-      m.toLowerCase().includes(query) || 
-      Object.keys(products).some(p => p.toLowerCase().includes(query) && p.startsWith(m))
-    ).forEach(m => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<h3>${m}</h3>`;
-      card.onclick = () => selectModel(m);
-      modelList.appendChild(card);
-    });
-  } else if(currentPage === "category") {
-    const categoryList = document.getElementById("categoryList");
-    categoryList.innerHTML = "";
-    categories.filter(cat => 
-      cat.toLowerCase().includes(query) || 
-      Object.keys(products).some(p => p.toLowerCase().includes(query) && p.startsWith(selectedModel))
-    ).forEach(cat => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<h3>${cat}</h3>`;
-      card.onclick = () => showProduct(selectedModel, cat);
-      categoryList.appendChild(card);
-    });
-
-    Object.entries(products).filter(([key, prod]) =>
-      key.startsWith(selectedModel) && prod.name.toLowerCase().includes(query)
-    ).forEach(([key, prod]) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<h3>${prod.name}</h3>`;
-      card.onclick = () => {
-        const parts = key.split("_");
-        showProduct(parts[0], parts[1]);
-      };
-      categoryList.appendChild(card);
-    });
+  if(!query) { 
+    document.getElementById("homePage").classList.remove("hidden");
+    document.getElementById("modelPage").classList.add("hidden");
+    document.getElementById("categoryPage").classList.add("hidden");
+    document.getElementById("productPage").classList.add("hidden");
+    showBackBtn(false);
+    return;
+  }
+  
+  // Search in products
+  for(let key in products) {
+    const product = products[key];
+    if(product.name.toLowerCase().includes(query)) {
+      selectedBrand = key.split("_")[0];
+      selectedModel = key.split("_")[0];
+      selectProduct(key.split("_")[1]);
+      return;
+    }
   }
 }
 </script>
