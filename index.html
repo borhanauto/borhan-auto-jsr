@@ -3,130 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borhan AUTO PARTS CENTRE</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f172a">
+<title>Borhan Auto Parts Centre</title>
+
 <style>
-:root{--navy:#0f172a;--gold:#facc15;--light:#f8fafc;}
-body{margin:0;font-family:Arial;background:var(--light);}
-header{background:var(--navy);color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;}
-.logo{font-weight:bold;color:var(--gold);}
-.search-box{padding:8px;width:60%;border-radius:6px;border:none;}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;padding:15px;}
-.card{background:white;padding:10px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.08);}
-.price{color:green;font-weight:bold;}
-button{background:var(--navy);color:white;border:none;padding:8px;border-radius:6px;width:100%;cursor:pointer;}
-.cart{position:fixed;right:-100%;top:0;width:90%;max-width:350px;height:100%;background:white;box-shadow:-4px 0 15px rgba(0,0,0,0.2);transition:0.4s;padding:15px;overflow:auto;z-index:999;}
-.cart.active{right:0;}
-.bottom-nav{position:fixed;bottom:0;width:100%;background:var(--navy);display:flex;justify-content:space-around;padding:10px 0;}
-.bottom-nav button{background:none;color:white;width:auto;}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:10px 20px;border-radius:30px;display:none;}
+/* ===== BRAND SYSTEM ===== */
+:root{
+  --brand-red:#c1121f;
+  --brand-dark:#1f2933;
+  --bg:#f9fafb;
+  --card:#ffffff;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:var(--bg);
+  color:var(--brand-dark);
+}
+h1,h2,h3{margin:10px 0}
+button{
+  background:var(--brand-red);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+
+/* ===== HEADER ===== */
+.top{
+  background:var(--brand-dark);
+  color:#fff;
+  padding:18px 28px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  font-size:22px;
+  font-weight:900;
+}
+.logo span{color:var(--brand-red)}
+
+/* ===== LAYOUT ===== */
+section{padding:30px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:20px;
+}
+
+/* ===== CARDS ===== */
+.card,.brand-card{
+  background:var(--card);
+  padding:16px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
+.card:hover,.brand-card:hover{
+  transform:translateY(-6px);
+}
+.card img{
+  width:100%;
+  border-radius:12px;
+}
+
+/* ===== CATEGORY ===== */
+.category-btn{
+  padding:10px 18px;
+  border-radius:20px;
+  background:#eee;
+  font-weight:700;
+  cursor:pointer;
+}
+.category-btn.active{
+  background:var(--brand-red);
+  color:#fff;
+}
+
+/* ===== STOCK ===== */
+.out{opacity:.45;pointer-events:none}
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:800;
+}
+.in{background:#d1fae5;color:#065f46}
+.outb{background:#fee2e2;color:#991b1b}
+
+/* ===== ADMIN ===== */
+#admin{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+#admin input{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
 </style>
 </head>
+
 <body>
 
-<header>
-<div class="logo">Borhan AUTO PARTS</div>
-<input type="text" class="search-box" placeholder="Search products..." onkeyup="searchProducts(this.value)">
+<header class="top">
+  <div class="logo">BORHAN <span>AUTO PARTS</span></div>
 </header>
 
-<div class="products" id="productList"></div>
+<!-- BRAND & MODEL SELECTOR -->
+<section id="selector">
+  <h2>Select Your Bike</h2>
+  <div class="grid" id="brandGrid"></div>
 
-<div class="cart" id="cart">
-<h3>Your Cart</h3>
-<div id="cartItems"></div>
-<div id="totalPrice"></div>
-<div id="advancePrice" style="color:red;font-weight:bold;"></div>
-<button onclick="checkout()">Order via WhatsApp</button>
-<button onclick="closeCart()">Close</button>
-</div>
+  <div id="modelBox" style="display:none">
+    <h3 id="modelTitle"></h3>
+    <div class="grid" id="modelGrid"></div>
+  </div>
+</section>
 
-<div class="bottom-nav">
-<button onclick="scrollToTop()">Home</button>
-<button onclick="openCart()">Cart (<span id="cartCount">0</span>)</button>
-<button onclick="openWhatsApp()">WhatsApp</button>
-</div>
+<!-- SHOP -->
+<section id="shop" style="display:none">
+  <div id="categoryBar" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px"></div>
+  <div class="grid" id="grid"></div>
+</section>
 
-<div class="toast" id="toast"></div>
+<!-- ADMIN -->
+<section id="admin">
+  <h2>Admin Panel</h2>
+  <input id="adminBrand" placeholder="Brand">
+  <input id="adminModel" placeholder="Model">
+  <input id="adminCategory" placeholder="Category">
+  <input id="adminName" placeholder="Product Name">
+  <input id="adminPrice" type="number" placeholder="Price">
+  <button onclick="addProduct()">Add / Update</button>
+  <div id="adminList"></div>
+</section>
 
 <script>
-const products=[
-{name:"Yamaha Fuel Tank",price:8500},
-{name:"Suzuki Brake Pad",price:1200},
-{name:"Honda Headlight",price:2500},
-{name:"TVS Clutch Plate",price:1800}
+/* ===== DATA ===== */
+const bikeData={
+  Bajaj:["Pulsar 150","NS160"],
+  Yamaha:["FZ-S","R15"],
+  Honda:["CB Shine","Hornet"],
+  Suzuki:["Gixxer"],
+  Hero:["Splendor"],
+  TVS:["Apache RTR 160"]
+};
+
+let products=[
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,stock:true,img:"https://via.placeholder.com/300"},
+  {id:2,brand:"Bajaj",model:"Pulsar 150",category:"Brake",name:"Brake Pad",price:950,stock:false,img:"https://via.placeholder.com/300"}
 ];
 
-let cart=[];
+let selectedBrand=null,selectedModel=null,selectedCategory="All";
 
-function renderProducts(list){
-const container=document.getElementById("productList");
-container.innerHTML="";
-list.forEach((p,i)=>{
-container.innerHTML+=`
-<div class="card">
-<h4>${p.name}</h4>
-<div class="price">৳ ${p.price}</div>
-<button onclick="addToCart(${i})">Add to Cart</button>
-</div>`;
-});
+/* ===== BRAND UI ===== */
+brandGrid.innerHTML=Object.keys(bikeData).map(b=>
+  `<div class="brand-card" onclick="selectBrand('${b}')">${b}</div>`
+).join("");
+
+function selectBrand(b){
+  selectedBrand=b;
+  modelBox.style.display="block";
+  modelTitle.innerText=b+" Models";
+  modelGrid.innerHTML=bikeData[b].map(m=>
+    `<div class="brand-card" onclick="selectModel('${m}')">${m}</div>`
+  ).join("");
 }
 
-function addToCart(index){
-cart.push(products[index]);
-updateCart();
-showToast("Added to cart");
+function selectModel(m){
+  selectedModel=m;
+  selector.style.display="none";
+  shop.style.display="block";
+  filterByBike();
 }
 
-function updateCart(){
-const items=document.getElementById("cartItems");
-const count=document.getElementById("cartCount");
-items.innerHTML="";
-let total=0;
-cart.forEach(item=>{
-total+=item.price;
-items.innerHTML+=`<div>${item.name} - ৳${item.price}</div>`;
-});
-count.innerText=cart.length;
-document.getElementById("totalPrice").innerText="Total: ৳ "+total;
-document.getElementById("advancePrice").innerText="30% Advance: ৳ "+(total*0.3);
+/* ===== FILTER ===== */
+function renderCategories(){
+  const cats=["All",...new Set(products.filter(p=>p.brand===selectedBrand&&p.model===selectedModel).map(p=>p.category))];
+  categoryBar.innerHTML=cats.map(c=>
+    `<div class="category-btn ${c===selectedCategory?'active':''}" onclick="selectCategory('${c}')">${c}</div>`
+  ).join("");
 }
 
-function openCart(){document.getElementById("cart").classList.add("active");}
-function closeCart(){document.getElementById("cart").classList.remove("active");}
-
-function checkout(){
-let total=0;
-let message="Borhan AUTO PARTS Order:%0A";
-cart.forEach(item=>{
-total+=item.price;
-message+=item.name+" - ৳"+item.price+"%0A";
-});
-message+="Total: ৳"+total+"%0AAdvance (30%): ৳"+(total*0.3);
-window.open("https://wa.me/8801707659954?text="+message,"_blank");
+function selectCategory(c){
+  selectedCategory=c;
+  filterByBike();
 }
 
-function openWhatsApp(){window.open("https://wa.me/8801707659954","_blank");}
-
-function searchProducts(value){
-const filtered=products.filter(p=>p.name.toLowerCase().includes(value.toLowerCase()));
-renderProducts(filtered);
+function filterByBike(){
+  let f=products.filter(p=>p.brand===selectedBrand&&p.model===selectedModel);
+  if(selectedCategory!=="All")f=f.filter(p=>p.category===selectedCategory);
+  renderCategories();
+  grid.innerHTML=f.map(p=>`
+    <div class="card ${!p.stock?'out':''}">
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <div>৳${p.price}</div>
+      <span class="badge ${p.stock?'in':'outb'}">${p.stock?'In Stock':'Out of Stock'}</span>
+    </div>
+  `).join("");
 }
 
-function showToast(msg){
-const t=document.getElementById("toast");
-t.innerText=msg;
-t.style.display="block";
-setTimeout(()=>{t.style.display="none";},2000);
+/* ===== ADMIN ===== */
+function addProduct(){
+  const b=adminBrand.value,m=adminModel.value,c=adminCategory.value,n=adminName.value,p=+adminPrice.value;
+  if(!b||!m||!c||!n||!p)return alert("Fill all fields");
+  const e=products.find(x=>x.brand===b&&x.model===m&&x.name===n);
+  if(e)e.price=p;
+  else products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,stock:true,img:"https://via.placeholder.com/300"});
+  renderAdmin();filterByBike();
 }
 
-function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"});}
-
-renderProducts(products);
-
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('service-worker.js');
+function toggleStock(id){
+  const p=products.find(x=>x.id===id);
+  p.stock=!p.stock;
+  renderAdmin();filterByBike();
 }
+
+function renderAdmin(){
+  adminList.innerHTML=products.map(p=>`
+    <div>
+      <b>${p.brand}</b> | ${p.model} | ${p.category}<br>
+      ${p.name} — ৳${p.price} (${p.stock?'In':'Out'})
+      <button onclick="toggleStock(${p.id})">Toggle</button>
+    </div>
+  `).join("");
+}
+renderAdmin();
 </script>
 
 </body>
