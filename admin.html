@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<script>
+let pass = prompt("Admin Password:");
+if(pass !== "BorhanAuto123"){
+    document.body.innerHTML = "<h2>Access Denied</h2>";
+    throw "";
+}
+</script>
+
+<h1>Admin Panel (Hidden)</h1>
+<!-- Your admin form here -->
+<form id="addProduct">
+    <input type="text" id="pname" placeholder="Product Name" required>
+    <input type="text" id="pprice" placeholder="Price" required>
+    <button>Add Product</button>
+</form>
+
+<ul id="list"></ul>
+
+<script>
+document.getElementById("addProduct").onsubmit = function(e){
+    e.preventDefault();
+    let name = document.getElementById("pname").value;
+    let price = document.getElementById("pprice").value;
+    let list = JSON.parse(localStorage.getItem("products")||"[]");
+
+    list.push({ name, price });
+    localStorage.setItem("products", JSON.stringify(list));
+    showProducts();
+};
+
+function showProducts(){
+    let list = JSON.parse(localStorage.getItem("products")||"[]");
+    document.getElementById("list").innerHTML = "";
+    list.forEach(p => {
+        document.getElementById("list").innerHTML += "<li>"+p.name+" - "+p.price+"</li>";
+    });
+}
+showProducts();
+</script>
+
+</body>
+</html>
