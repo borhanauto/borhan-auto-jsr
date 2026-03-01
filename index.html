@@ -67,11 +67,19 @@ section{padding:50px 40px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
 .card{
   background:var(--card);padding:15px;border-radius:var(--radius);
-  box-shadow:var(--shadow);text-align:center;color:#fff;transition:.3s;
+  box-shadow:var(--shadow);text-align:center;color:#fff;transition: transform 0.3s, box-shadow 0.3s;
+  position:relative;cursor:pointer;
 }
-.card:hover{transform:translateY(-6px)}
-.card img{width:100%;border-radius:8px;}
-.price{color:var(--primary);font-weight:700;margin:8px 0;}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 35px rgba(0,0,0,0.35);
+}
+.card img{width:100%;border-radius:10px;margin-bottom:10px;}
+.card h4{font-size:16px;font-weight:700;margin:6px 0;}
+.price{color:var(--primary);font-weight:800;margin-bottom:6px;}
+.badge{position:absolute;top:12px;left:12px;padding:5px 10px;font-size:12px;border-radius:20px;font-weight:700;}
+.badge.in{background:#065f46;color:#fff;}
+.badge.out{background:#991b1b;color:#fff;}
 .brands{display:flex;justify-content:space-around;flex-wrap:wrap;background:#111;padding:25px;}
 .brands div{margin:10px 15px;cursor:pointer;color:#fff;font-weight:700;}
 .brands div:hover{color:var(--primary);}
@@ -84,12 +92,12 @@ section{padding:50px 40px;}
 footer{background:#111;color:#ccc;padding:50px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px;}
 footer h4{color:#fff;margin-bottom:15px;}
 footer p{font-size:14px;line-height:1.5;}
-/* ADMIN */
+/* ADMIN hidden */
 #admin{display:none;background:#222;padding:30px;margin:30px;color:#fff;}
 #admin input{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:none;}
 /* RESPONSIVE */
 @media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
-@media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));.search-container{margin:15px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}}
+@media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}.search-container{margin:15px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}
 @media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.nav{flex-wrap:wrap}.hero h1{font-size:32px}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}.hero h1{font-size:24px}.search-container input{padding:10px;font-size:14px}.search-container button{padding:10px;font-size:14px;}}
 </style>
@@ -197,33 +205,41 @@ footer p{font-size:14px;line-height:1.5;}
 </footer>
 
 <script>
-const params=new URLSearchParams(window.location.search);
-if(params.get("admin")==="borhan123"){document.getElementById("admin").style.display="block";}
-
+// Bike data
 const bikeData={
-  Bajaj:["Pulsar 150","NS160"],
-  Yamaha:["FZ-S","R15"],
-  Honda:["CB Shine","Hornet"],
-  Suzuki:["Gixxer"],
-  Hero:["Splendor"],
-  TVS:["Apache RTR 160"]
+  Bajaj:["Pulsar 150","NS160","Avenger 220"],
+  Yamaha:["FZ-S","R15","MT-15"],
+  Honda:["CB Shine","Hornet","CBR250R"],
+  Suzuki:["Gixxer","Hayate"],
+  Hero:["Splendor","Xtreme"],
+  TVS:["Apache RTR 160","Phoenix"]
 };
 
+// Products
 let products=[
-  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,img:"https://via.placeholder.com/300"},
-  {id:2,brand:"Yamaha",model:"FZ-S",category:"Brake",name:"Brake Pad",price:950,img:"https://via.placeholder.com/300"},
-  {id:3,brand:"Honda",model:"CB Shine",category:"Electrical",name:"Spark Plug",price:450,img:"https://via.placeholder.com/300"}
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,stock:true,img:"https://via.placeholder.com/300"},
+  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"Brake Pad",price:950,stock:true,img:"https://via.placeholder.com/300"},
+  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"Spark Plug",price:450,stock:true,img:"https://via.placeholder.com/300"},
+  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"Oil Filter",price:550,stock:false,img:"https://via.placeholder.com/300"},
+  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Shock Absorber",price:3200,stock:true,img:"https://via.placeholder.com/300"},
+  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Brake Disc",price:2200,stock:true,img:"https://via.placeholder.com/300"},
+  {id:7,brand:"Hero",model:"Splendor",category:"Accessories",name:"Handle Grip Set",price:400,stock:true,img:"https://via.placeholder.com/300"},
+  {id:8,brand:"Yamaha",model:"R15",category:"Engine",name:"Cylinder Kit",price:7800,stock:true,img:"https://via.placeholder.com/300"}
 ];
 
-// Featured products
+// Render featured
 const featuredGrid=document.getElementById("featuredGrid");
-featuredGrid.innerHTML=products.map(p=>`
-  <div class="card">
-    <img src="${p.img}">
-    <h4>${p.name}</h4>
-    <div class="price">৳${p.price}</div>
-  </div>
-`).join("");
+function renderFeatured(){
+  featuredGrid.innerHTML=products.map(p=>`
+    <div class="card" onclick="showProduct('${p.id}')">
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <div class="price">৳${p.price}</div>
+      <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
+    </div>
+  `).join("");
+}
+renderFeatured();
 
 // Brand selector
 const brandGrid=document.getElementById("brandGrid");
@@ -239,30 +255,33 @@ function selectBrand(b){
 }
 
 function selectModel(b,m){
-  document.getElementById("shop").style.display="block";
   const grid=document.getElementById("grid");
+  document.getElementById("shop").style.display="block";
   grid.innerHTML=products.filter(p=>p.brand===b && p.model===m).map(p=>`
     <div class="card">
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <div class="price">৳${p.price}</div>
+      <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
     </div>
   `).join("");
 }
 
+// Admin add
 function addProduct(){
   const b=adminBrand.value,m=adminModel.value,c=adminCategory.value,n=adminName.value,p=+adminPrice.value;
   if(!b||!m||!c||!n||!p)return alert("Fill all fields");
-  products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,img:"https://via.placeholder.com/300"});
+  products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,stock:true,img:"https://via.placeholder.com/300"});
+  renderFeatured();
 }
 
-// Modern live search
+// Search
 const searchInput=document.getElementById("searchInput");
 const searchResults=document.getElementById("searchResults");
 
 function searchProducts(){
   const query=searchInput.value.toLowerCase().trim();
-  if(!query)return;
+  if(!query) return;
   const results=products.filter(p=>
     p.name.toLowerCase().includes(query) ||
     p.brand.toLowerCase().includes(query) ||
@@ -281,13 +300,14 @@ function showProduct(id){
     <img src="${p.img}">
     <h4>${p.name}</h4>
     <div class="price">৳${p.price}</div>
+    <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
   </div>`;
+  grid.scrollIntoView({behavior:'smooth'});
   searchResults.style.display="none";
 }
 
-searchInput.addEventListener("keyup",e=>{
-  if(e.key==="Enter") searchProducts();
-});
+searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
 </script>
+
 </body>
 </html>
