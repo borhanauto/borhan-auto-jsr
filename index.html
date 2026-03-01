@@ -3,8 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borhan Auto Parts Centre</title>
+<title>Borhan Auto Parts Centre – Original Motorcycle Parts in Jessore</title>
+<meta name="description" content="Borhan Auto Parts Centre offers genuine motorcycle spare parts for Bajaj, Yamaha, Honda, Suzuki, TVS, and Hero in Jessore. Shop online now!">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Borhan Auto Parts Centre",
+  "description": "Original motorcycle spare parts for Bajaj, Yamaha, Honda, Suzuki, TVS, and Hero in Jessore",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "RN Road",
+    "addressLocality": "Jessore",
+    "addressCountry": "Bangladesh"
+  },
+  "telephone": "01707659954",
+  "url": "https://yourdomain.com"
+}
+</script>
+
 <style>
 :root{
   --primary:#c1121f;
@@ -111,23 +132,25 @@ section{padding:60px 40px;}
 .badge.out{background:#991b1b;color:#fff;}
 .badge.new{background:#ff9800;color:#fff;}
 .badge.sale{background:#e91e63;color:#fff;}
+
+/* Improved Brands Box */
 .brands{
-  display:flex;justify-content:space-around;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  display:flex;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);
 }
-.brands::-webkit-scrollbar{height:6px;}
-.brands::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px;}
+.brands::-webkit-scrollbar{height:8px;}
+.brands::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px;}
 .brands div{
   flex:0 0 auto;
-  margin:0 10px;cursor:pointer;font-weight:800;
-  padding:16px 24px;background:var(--brand-gradient);
-  border-radius:20px;
+  margin:0 12px;cursor:pointer;font-weight:800;
+  padding:18px 28px;background:var(--brand-gradient);
+  border-radius:24px;
   color:#fff;
   transition:0.3s;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
 }
 .brands div:hover{
-  transform:scale(1.05);
-  box-shadow:0 8px 25px rgba(0,0,0,0.5);
+  transform:scale(1.1);
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
 }
 .promo{background:var(--primary);color:#fff;padding:70px 30px;text-align:center;border-radius:var(--radius);margin:50px 40px;font-size:22px;font-weight:800;box-shadow:0 8px 30px rgba(0,0,0,0.35);}
 
@@ -205,12 +228,6 @@ footer p{font-size:14px;line-height:1.6;}
 <!-- Brands -->
 <div class="brands" id="brandStrip"></div>
 
-<!-- Featured Products -->
-<section>
-  <div class="section-title">Featured Products</div>
-  <div class="grid" id="featuredGrid"></div>
-</section>
-
 <!-- Promo Banner -->
 <div class="promo">
   🔥 Special Offer – Up to 20% Discount on Engine Parts
@@ -230,6 +247,12 @@ footer p{font-size:14px;line-height:1.6;}
 <section id="shop" style="display:none">
   <div class="section-title">Products</div>
   <div class="grid" id="grid"></div>
+</section>
+
+<!-- Featured Products (SEO friendly and at bottom) -->
+<section>
+  <div class="section-title">Featured Products</div>
+  <div class="grid" id="featuredGrid"></div>
 </section>
 
 <!-- Footer -->
@@ -278,11 +301,11 @@ Object.keys(bikeData).forEach(b=>{
 
 // Products
 let products=[
-  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",img:"https://via.placeholder.com/300"},
-  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",img:"https://via.placeholder.com/300"},
-  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:"https://via.placeholder.com/300"},
-  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:"https://via.placeholder.com/300"},
-  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:"https://via.placeholder.com/300"}
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",img:"https://via.placeholder.com/300", alt:"Bajaj Pulsar 150 Chain Sprocket Set"},
+  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",img:"https://via.placeholder.com/300", alt:"Bajaj NS160 Brake Pad"},
+  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:"https://via.placeholder.com/300", alt:"Yamaha FZ-S Spark Plug"},
+  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:"https://via.placeholder.com/300", alt:"Honda CB Shine Oil Filter"},
+  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:"https://via.placeholder.com/300", alt:"Suzuki Gixxer Shock Absorber"}
 ];
 
 // Featured Products
@@ -290,7 +313,7 @@ const featuredGrid=document.getElementById("featuredGrid");
 function renderFeatured(){
   featuredGrid.innerHTML=products.map(p=>`
     <div class="card">
-      <img src="${p.img}">
+      <img src="${p.img}" alt="${p.alt}">
       <h4>${p.name}</h4>
       <div class="price">৳${p.price}</div>
       ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : `<span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>`}
@@ -316,7 +339,7 @@ function selectModel(b,m){
   const filtered = products.filter(p=>p.brand===b && p.model===m);
   grid.innerHTML= filtered.length ? filtered.map(p=>`
     <div class="card">
-      <img src="${p.img}">
+      <img src="${p.img}" alt="${p.alt}">
       <h4>${p.name}</h4>
       <div class="price">৳${p.price}</div>
       ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : `<span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>`}
