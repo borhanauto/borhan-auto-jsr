@@ -16,22 +16,27 @@
   --shadow:0 6px 20px rgba(0,0,0,0.15);
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',sans-serif;}
-body{background:var(--gray);color:var(--light);}
+body{background:var(--gray);color:#111;}
 a{text-decoration:none;color:inherit;}
-/* TOP BAR */
+
+/* ===== TOPBAR ===== */
 .topbar{
   background:#000;color:#fff;
   padding:8px 40px;
   display:flex;justify-content:space-between;
   font-size:14px;
 }
-/* HEADER */
+
+/* ===== HEADER ===== */
 .header{
   background:#111;color:#fff;
   padding:15px 40px;
   display:flex;align-items:center;
   justify-content:space-between;
   flex-wrap:wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .logo{font-weight:900;font-size:26px;color:var(--light);}
 .logo span{color:var(--primary);}
@@ -47,10 +52,12 @@ a{text-decoration:none;color:inherit;}
 .search-results div{padding:10px;cursor:pointer;}
 .search-results div:hover{background:#f4f4f4;}
 .icons span{margin-left:20px;font-weight:700;cursor:pointer;}
-/* NAV */
+
+/* ===== NAV ===== */
 .nav{background:#222;padding:12px 40px;display:flex;gap:25px;font-weight:700;flex-wrap:wrap;}
 .nav div:hover{color:var(--primary);cursor:pointer;}
-/* HERO */
+
+/* ===== HERO ===== */
 .hero{
   background:linear-gradient(120deg,#111,#222);color:#fff;
   padding:80px 40px;text-align:center;
@@ -61,7 +68,8 @@ a{text-decoration:none;color:inherit;}
   margin-top:20px;padding:14px 30px;background:var(--primary);
   border:none;color:#fff;font-weight:700;cursor:pointer;border-radius:50px;
 }
-/* SECTIONS */
+
+/* ===== SECTIONS ===== */
 section{padding:50px 40px;}
 .section-title{font-size:26px;font-weight:900;margin-bottom:25px;color:var(--dark);}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
@@ -80,6 +88,8 @@ section{padding:50px 40px;}
 .badge{position:absolute;top:12px;left:12px;padding:5px 10px;font-size:12px;border-radius:20px;font-weight:700;}
 .badge.in{background:#065f46;color:#fff;}
 .badge.out{background:#991b1b;color:#fff;}
+.badge.new{background:#ff9800;color:#fff;}
+.badge.sale{background:#e91e63;color:#fff;}
 .brands{display:flex;justify-content:space-around;flex-wrap:wrap;background:#111;padding:25px;}
 .brands div{margin:10px 15px;cursor:pointer;color:#fff;font-weight:700;}
 .brands div:hover{color:var(--primary);}
@@ -88,14 +98,17 @@ section{padding:50px 40px;}
   background:#1f1f1f;padding:20px;text-align:center;border-radius:10px;box-shadow:var(--shadow);cursor:pointer;
 }
 #modelBox{margin-top:30px;}
-/* FOOTER */
+
+/* ===== FOOTER ===== */
 footer{background:#111;color:#ccc;padding:50px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px;}
 footer h4{color:#fff;margin-bottom:15px;}
 footer p{font-size:14px;line-height:1.5;}
-/* ADMIN hidden */
+
+/* ===== ADMIN (hidden) ===== */
 #admin{display:none;background:#222;padding:30px;margin:30px;color:#fff;}
 #admin input{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:none;}
-/* RESPONSIVE */
+
+/* ===== RESPONSIVE ===== */
 @media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
 @media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}.search-container{margin:15px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}
 @media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.nav{flex-wrap:wrap}.hero h1{font-size:32px}}
@@ -104,11 +117,13 @@ footer p{font-size:14px;line-height:1.5;}
 </head>
 <body>
 
+<!-- Topbar -->
 <div class="topbar">
   <div>Call: 01707659954 | Jessore, Bangladesh</div>
   <div>Free Delivery Over ৳5000</div>
 </div>
 
+<!-- Header -->
 <div class="header">
   <div class="logo">BORHAN <span>AUTO PARTS</span></div>
   <div class="search-container">
@@ -122,6 +137,7 @@ footer p{font-size:14px;line-height:1.5;}
   </div>
 </div>
 
+<!-- Navigation -->
 <div class="nav">
   <div>Engine</div>
   <div>Brake</div>
@@ -131,14 +147,14 @@ footer p{font-size:14px;line-height:1.5;}
   <div>Brands</div>
 </div>
 
+<!-- Hero -->
 <div class="hero">
   <h1>Original Motorcycle Spare Parts</h1>
   <p>Bajaj • Yamaha • Honda • Suzuki • TVS • Hero</p>
-  <button onclick="document.getElementById('selector').scrollIntoView({behavior:'smooth'})">
-    Shop by Bike
-  </button>
+  <button onclick="document.getElementById('selector').scrollIntoView({behavior:'smooth'})">Shop by Bike</button>
 </div>
 
+<!-- Brand strip -->
 <div class="brands">
   <div>Bajaj</div>
   <div>Yamaha</div>
@@ -148,15 +164,7 @@ footer p{font-size:14px;line-height:1.5;}
   <div>Hero</div>
 </div>
 
-<section>
-  <div class="section-title">Featured Products</div>
-  <div class="grid" id="featuredGrid"></div>
-</section>
-
-<div class="promo">
-  <h2>🔥 Special Offer – Up to 20% Discount on Engine Parts</h2>
-</div>
-
+<!-- Bike Selector -->
 <section id="selector">
   <div class="section-title">Find Parts by Your Bike</div>
   <div class="grid" id="brandGrid"></div>
@@ -166,11 +174,24 @@ footer p{font-size:14px;line-height:1.5;}
   </div>
 </section>
 
+<!-- Shop Grid -->
 <section id="shop" style="display:none">
   <div class="section-title">Products</div>
   <div class="grid" id="grid"></div>
 </section>
 
+<!-- Featured Products (moved below main shop) -->
+<section>
+  <div class="section-title">Featured Products</div>
+  <div class="grid" id="featuredGrid"></div>
+</section>
+
+<!-- Promo Banner -->
+<div class="promo">
+  <h2>🔥 Special Offer – Up to 20% Discount on Engine Parts</h2>
+</div>
+
+<!-- Hidden Admin -->
 <section id="admin">
   <h2>Admin Panel</h2>
   <input id="adminBrand" placeholder="Brand">
@@ -181,6 +202,7 @@ footer p{font-size:14px;line-height:1.5;}
   <button onclick="addProduct()">Add</button>
 </section>
 
+<!-- Footer -->
 <footer>
   <div>
     <h4>About Us</h4>
@@ -207,35 +229,38 @@ footer p{font-size:14px;line-height:1.5;}
 <script>
 // Bike data
 const bikeData={
-  Bajaj:["Pulsar 150","NS160","Avenger 220"],
-  Yamaha:["FZ-S","R15","MT-15"],
-  Honda:["CB Shine","Hornet","CBR250R"],
-  Suzuki:["Gixxer","Hayate"],
-  Hero:["Splendor","Xtreme"],
-  TVS:["Apache RTR 160","Phoenix"]
+  Bajaj:["Pulsar 150","NS160","Avenger 220","Dominar 400"],
+  Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25"],
+  Honda:["CB Shine","Hornet","CBR250R","Dio","Livo"],
+  Suzuki:["Gixxer","Hayate","Access 125"],
+  Hero:["Splendor","Xtreme","HF Deluxe"],
+  TVS:["Apache RTR 160","Phoenix","Jupiter"]
 };
 
 // Products
 let products=[
-  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,stock:true,img:"https://via.placeholder.com/300"},
-  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"Brake Pad",price:950,stock:true,img:"https://via.placeholder.com/300"},
-  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"Spark Plug",price:450,stock:true,img:"https://via.placeholder.com/300"},
-  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"Oil Filter",price:550,stock:false,img:"https://via.placeholder.com/300"},
-  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Shock Absorber",price:3200,stock:true,img:"https://via.placeholder.com/300"},
-  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Brake Disc",price:2200,stock:true,img:"https://via.placeholder.com/300"},
-  {id:7,brand:"Hero",model:"Splendor",category:"Accessories",name:"Handle Grip Set",price:400,stock:true,img:"https://via.placeholder.com/300"},
-  {id:8,brand:"Yamaha",model:"R15",category:"Engine",name:"Cylinder Kit",price:7800,stock:true,img:"https://via.placeholder.com/300"}
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,img:"https://via.placeholder.com/300",badge:"new"},
+  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,img:"https://via.placeholder.com/300",badge:"sale"},
+  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,img:"https://via.placeholder.com/300",badge:"hot"},
+  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:"https://via.placeholder.com/300"},
+  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,img:"https://via.placeholder.com/300",badge:"new"},
+  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Apache RTR 160 Brake Disc",price:2200,stock:true,img:"https://via.placeholder.com/300"},
+  {id:7,brand:"Hero",model:"Splendor",category:"Accessories",name:"Splendor Handle Grip Set",price:400,stock:true,img:"https://via.placeholder.com/300"},
+  {id:8,brand:"Yamaha",model:"R15",category:"Engine",name:"R15 Cylinder Kit",price:7800,stock:true,img:"https://via.placeholder.com/300",badge:"sale"},
+  {id:9,brand:"Bajaj",model:"Avenger 220",category:"Engine",name:"Avenger 220 Clutch Plate",price:3000,stock:true,img:"https://via.placeholder.com/300",badge:"sale"},
+  {id:10,brand:"Honda",model:"CBR250R",category:"Brake",name:"CBR250R Brake Lever",price:1200,stock:true,img:"https://via.placeholder.com/300",badge:"hot"}
 ];
 
-// Render featured
+// Render Featured (fewer items, below shop)
 const featuredGrid=document.getElementById("featuredGrid");
 function renderFeatured(){
-  featuredGrid.innerHTML=products.map(p=>`
+  const featuredProducts = products.filter(p=>p.badge || p.stock).slice(0,6);
+  featuredGrid.innerHTML=featuredProducts.map(p=>`
     <div class="card" onclick="showProduct('${p.id}')">
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <div class="price">৳${p.price}</div>
-      <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
+      ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : `<span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>`}
     </div>
   `).join("");
 }
@@ -262,16 +287,16 @@ function selectModel(b,m){
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <div class="price">৳${p.price}</div>
-      <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
+      ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : `<span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>`}
     </div>
   `).join("");
 }
 
-// Admin add
+// Admin Add
 function addProduct(){
   const b=adminBrand.value,m=adminModel.value,c=adminCategory.value,n=adminName.value,p=+adminPrice.value;
   if(!b||!m||!c||!n||!p)return alert("Fill all fields");
-  products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,stock:true,img:"https://via.placeholder.com/300"});
+  products.push({id:Date.now(),brand:b,model:m,category:c,name:`${m} ${n}`,price:p,stock:true,img:"https://via.placeholder.com/300"});
   renderFeatured();
 }
 
@@ -300,7 +325,7 @@ function showProduct(id){
     <img src="${p.img}">
     <h4>${p.name}</h4>
     <div class="price">৳${p.price}</div>
-    <span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>
+    ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : `<span class="badge ${p.stock?'in':'out'}">${p.stock?'In Stock':'Out of Stock'}</span>`}
   </div>`;
   grid.scrollIntoView({behavior:'smooth'});
   searchResults.style.display="none";
@@ -308,6 +333,5 @@ function showProduct(id){
 
 searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
 </script>
-
 </body>
 </html>
