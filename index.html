@@ -4,141 +4,165 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Borhan Auto Parts Centre</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-/* ===== BRAND SYSTEM ===== */
 :root{
-  --brand-red:#c1121f;
-  --brand-dark:#1f2933;
-  --bg:#f9fafb;
-  --card:#ffffff;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --primary:#c1121f;
+  --dark:#111;
+  --gray:#f4f4f4;
+  --card:#1f1f1f;
+  --light:#fff;
+  --radius:12px;
+  --shadow:0 6px 20px rgba(0,0,0,0.15);
 }
-
-/* ===== GLOBAL ===== */
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:var(--bg);
-  color:var(--brand-dark);
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',sans-serif;}
+body{background:var(--gray);color:var(--light);}
+a{text-decoration:none;color:inherit;}
+/* TOP BAR */
+.topbar{
+  background:#000;color:#fff;
+  padding:8px 40px;
+  display:flex;justify-content:space-between;
+  font-size:14px;
 }
-h1,h2,h3{margin:10px 0}
-button{
-  background:var(--brand-red);
-  color:#fff;
-  border:none;
-  padding:12px 18px;
-  border-radius:12px;
-  font-weight:800;
-  cursor:pointer;
+/* HEADER */
+.header{
+  background:#111;color:#fff;
+  padding:15px 40px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
 }
-button:hover{opacity:.9}
-
-/* ===== HEADER ===== */
-.top{
-  background:var(--brand-dark);
-  color:#fff;
-  padding:18px 28px;
-  box-shadow:var(--shadow);
+.logo{font-weight:900;font-size:26px;color:var(--light);}
+.logo span{color:var(--primary);}
+.search-container{flex:1;margin:0 30px;display:flex;position:relative;}
+.search-container input{
+  flex:1;padding:12px 20px;border:none;border-radius:50px 0 0 50px;font-size:14px;
 }
-.logo{
-  font-size:22px;
-  font-weight:900;
+.search-container button{
+  padding:12px 20px;background:var(--primary);border:none;color:#fff;font-weight:700;border-radius:0 50px 50px 0;cursor:pointer;
 }
-.logo span{color:var(--brand-red)}
-
-/* ===== LAYOUT ===== */
-section{padding:30px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:20px;
+.search-results{
+  position:absolute;top:50px;left:0;width:100%;background:#fff;color:#111;border-radius:8px;max-height:300px;overflow-y:auto;box-shadow:var(--shadow);z-index:100;display:none;}
+.search-results div{padding:10px;cursor:pointer;}
+.search-results div:hover{background:#f4f4f4;}
+.icons span{margin-left:20px;font-weight:700;cursor:pointer;}
+/* NAV */
+.nav{background:#222;padding:12px 40px;display:flex;gap:25px;font-weight:700;flex-wrap:wrap;}
+.nav div:hover{color:var(--primary);cursor:pointer;}
+/* HERO */
+.hero{
+  background:linear-gradient(120deg,#111,#222);color:#fff;
+  padding:80px 40px;text-align:center;
 }
-
-/* ===== CARDS ===== */
-.card,.brand-card{
-  background:var(--card);
-  padding:16px;
-  border-radius:18px;
-  box-shadow:var(--shadow);
-  text-align:center;
-  cursor:pointer;
-  transition:.25s;
+.hero h1{font-size:42px;margin-bottom:15px;}
+.hero p{opacity:.8;margin-bottom:20px;font-size:18px;}
+.hero button{
+  margin-top:20px;padding:14px 30px;background:var(--primary);
+  border:none;color:#fff;font-weight:700;cursor:pointer;border-radius:50px;
 }
-.card:hover,.brand-card:hover{
-  transform:translateY(-6px);
+/* SECTIONS */
+section{padding:50px 40px;}
+.section-title{font-size:26px;font-weight:900;margin-bottom:25px;color:var(--dark);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:25px;}
+.card{
+  background:var(--card);padding:15px;border-radius:var(--radius);
+  box-shadow:var(--shadow);text-align:center;color:#fff;transition:.3s;
 }
-.card img{
-  width:100%;
-  border-radius:12px;
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;border-radius:8px;}
+.price{color:var(--primary);font-weight:700;margin:8px 0;}
+.brands{display:flex;justify-content:space-around;flex-wrap:wrap;background:#111;padding:25px;}
+.brands div{margin:10px 15px;cursor:pointer;color:#fff;font-weight:700;}
+.brands div:hover{color:var(--primary);}
+.promo{background:var(--primary);color:#fff;padding:60px 20px;text-align:center;border-radius:var(--radius);margin:50px 40px;}
+#selector .grid div{
+  background:#1f1f1f;padding:20px;text-align:center;border-radius:10px;box-shadow:var(--shadow);cursor:pointer;
 }
-
-/* ===== CATEGORY ===== */
-.category-btn{
-  padding:10px 18px;
-  border-radius:20px;
-  background:#eee;
-  font-weight:700;
-  cursor:pointer;
-}
-.category-btn.active{
-  background:var(--brand-red);
-  color:#fff;
-}
-
-/* ===== STOCK ===== */
-.out{opacity:.45;pointer-events:none}
-.badge{
-  display:inline-block;
-  padding:4px 10px;
-  border-radius:14px;
-  font-size:12px;
-  font-weight:800;
-}
-.in{background:#d1fae5;color:#065f46}
-.outb{background:#fee2e2;color:#991b1b}
-
-/* ===== ADMIN ===== */
-#admin{
-  background:#fff;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:var(--shadow);
-}
-#admin input{
-  width:100%;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  border:1px solid #ddd;
-}
+#modelBox{margin-top:30px;}
+/* FOOTER */
+footer{background:#111;color:#ccc;padding:50px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px;}
+footer h4{color:#fff;margin-bottom:15px;}
+footer p{font-size:14px;line-height:1.5;}
+/* ADMIN */
+#admin{display:none;background:#222;padding:30px;margin:30px;color:#fff;}
+#admin input{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:none;}
+/* RESPONSIVE */
+@media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
+@media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));.search-container{margin:15px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}}
+@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.nav{flex-wrap:wrap}.hero h1{font-size:32px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.hero h1{font-size:24px}.search-container input{padding:10px;font-size:14px}.search-container button{padding:10px;font-size:14px;}}
 </style>
 </head>
-
 <body>
 
-<header class="top">
+<div class="topbar">
+  <div>Call: 01707659954 | Jessore, Bangladesh</div>
+  <div>Free Delivery Over ৳5000</div>
+</div>
+
+<div class="header">
   <div class="logo">BORHAN <span>AUTO PARTS</span></div>
-</header>
+  <div class="search-container">
+    <input id="searchInput" type="text" placeholder="Search motorcycle parts...">
+    <button onclick="searchProducts()">Search</button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <div class="icons">
+    <span>Account</span>
+    <span>Cart</span>
+  </div>
+</div>
 
-<!-- BRAND & MODEL SELECTOR -->
+<div class="nav">
+  <div>Engine</div>
+  <div>Brake</div>
+  <div>Electrical</div>
+  <div>Suspension</div>
+  <div>Accessories</div>
+  <div>Brands</div>
+</div>
+
+<div class="hero">
+  <h1>Original Motorcycle Spare Parts</h1>
+  <p>Bajaj • Yamaha • Honda • Suzuki • TVS • Hero</p>
+  <button onclick="document.getElementById('selector').scrollIntoView({behavior:'smooth'})">
+    Shop by Bike
+  </button>
+</div>
+
+<div class="brands">
+  <div>Bajaj</div>
+  <div>Yamaha</div>
+  <div>Honda</div>
+  <div>Suzuki</div>
+  <div>TVS</div>
+  <div>Hero</div>
+</div>
+
+<section>
+  <div class="section-title">Featured Products</div>
+  <div class="grid" id="featuredGrid"></div>
+</section>
+
+<div class="promo">
+  <h2>🔥 Special Offer – Up to 20% Discount on Engine Parts</h2>
+</div>
+
 <section id="selector">
-  <h2>Select Your Bike</h2>
+  <div class="section-title">Find Parts by Your Bike</div>
   <div class="grid" id="brandGrid"></div>
-
-  <div id="modelBox" style="display:none">
+  <div id="modelBox">
     <h3 id="modelTitle"></h3>
     <div class="grid" id="modelGrid"></div>
   </div>
 </section>
 
-<!-- SHOP -->
 <section id="shop" style="display:none">
-  <div id="categoryBar" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px"></div>
+  <div class="section-title">Products</div>
   <div class="grid" id="grid"></div>
 </section>
 
-<!-- ADMIN -->
 <section id="admin">
   <h2>Admin Panel</h2>
   <input id="adminBrand" placeholder="Brand">
@@ -146,12 +170,36 @@ section{padding:30px}
   <input id="adminCategory" placeholder="Category">
   <input id="adminName" placeholder="Product Name">
   <input id="adminPrice" type="number" placeholder="Price">
-  <button onclick="addProduct()">Add / Update</button>
-  <div id="adminList"></div>
+  <button onclick="addProduct()">Add</button>
 </section>
 
+<footer>
+  <div>
+    <h4>About Us</h4>
+    <p>Borhan Auto Parts Centre – Original motorcycle parts supplier in Jessore.</p>
+  </div>
+  <div>
+    <h4>Customer Service</h4>
+    <p>Contact Us</p>
+    <p>Return Policy</p>
+    <p>Warranty</p>
+  </div>
+  <div>
+    <h4>Information</h4>
+    <p>Privacy Policy</p>
+    <p>Terms & Conditions</p>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <p>RN Road, Jessore</p>
+    <p>01707659954</p>
+  </div>
+</footer>
+
 <script>
-/* ===== DATA ===== */
+const params=new URLSearchParams(window.location.search);
+if(params.get("admin")==="borhan123"){document.getElementById("admin").style.display="block";}
+
 const bikeData={
   Bajaj:["Pulsar 150","NS160"],
   Yamaha:["FZ-S","R15"],
@@ -162,87 +210,84 @@ const bikeData={
 };
 
 let products=[
-  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,stock:true,img:"https://via.placeholder.com/300"},
-  {id:2,brand:"Bajaj",model:"Pulsar 150",category:"Brake",name:"Brake Pad",price:950,stock:false,img:"https://via.placeholder.com/300"}
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Chain Sprocket Set",price:3500,img:"https://via.placeholder.com/300"},
+  {id:2,brand:"Yamaha",model:"FZ-S",category:"Brake",name:"Brake Pad",price:950,img:"https://via.placeholder.com/300"},
+  {id:3,brand:"Honda",model:"CB Shine",category:"Electrical",name:"Spark Plug",price:450,img:"https://via.placeholder.com/300"}
 ];
 
-let selectedBrand=null,selectedModel=null,selectedCategory="All";
+// Featured products
+const featuredGrid=document.getElementById("featuredGrid");
+featuredGrid.innerHTML=products.map(p=>`
+  <div class="card">
+    <img src="${p.img}">
+    <h4>${p.name}</h4>
+    <div class="price">৳${p.price}</div>
+  </div>
+`).join("");
 
-/* ===== BRAND UI ===== */
-brandGrid.innerHTML=Object.keys(bikeData).map(b=>
-  `<div class="brand-card" onclick="selectBrand('${b}')">${b}</div>`
-).join("");
+// Brand selector
+const brandGrid=document.getElementById("brandGrid");
+brandGrid.innerHTML=Object.keys(bikeData).map(b=>`<div onclick="selectBrand('${b}')">${b}</div>`).join("");
 
 function selectBrand(b){
-  selectedBrand=b;
+  const modelBox=document.getElementById("modelBox");
+  const modelTitle=document.getElementById("modelTitle");
+  const modelGrid=document.getElementById("modelGrid");
   modelBox.style.display="block";
   modelTitle.innerText=b+" Models";
-  modelGrid.innerHTML=bikeData[b].map(m=>
-    `<div class="brand-card" onclick="selectModel('${m}')">${m}</div>`
-  ).join("");
+  modelGrid.innerHTML=bikeData[b].map(m=>`<div onclick="selectModel('${b}','${m}')">${m}</div>`).join("");
 }
 
-function selectModel(m){
-  selectedModel=m;
-  selector.style.display="none";
-  shop.style.display="block";
-  filterByBike();
-}
-
-/* ===== FILTER ===== */
-function renderCategories(){
-  const cats=["All",...new Set(products.filter(p=>p.brand===selectedBrand&&p.model===selectedModel).map(p=>p.category))];
-  categoryBar.innerHTML=cats.map(c=>
-    `<div class="category-btn ${c===selectedCategory?'active':''}" onclick="selectCategory('${c}')">${c}</div>`
-  ).join("");
-}
-
-function selectCategory(c){
-  selectedCategory=c;
-  filterByBike();
-}
-
-function filterByBike(){
-  let f=products.filter(p=>p.brand===selectedBrand&&p.model===selectedModel);
-  if(selectedCategory!=="All")f=f.filter(p=>p.category===selectedCategory);
-  renderCategories();
-  grid.innerHTML=f.map(p=>`
-    <div class="card ${!p.stock?'out':''}">
+function selectModel(b,m){
+  document.getElementById("shop").style.display="block";
+  const grid=document.getElementById("grid");
+  grid.innerHTML=products.filter(p=>p.brand===b && p.model===m).map(p=>`
+    <div class="card">
       <img src="${p.img}">
       <h4>${p.name}</h4>
-      <div>৳${p.price}</div>
-      <span class="badge ${p.stock?'in':'outb'}">${p.stock?'In Stock':'Out of Stock'}</span>
+      <div class="price">৳${p.price}</div>
     </div>
   `).join("");
 }
 
-/* ===== ADMIN ===== */
 function addProduct(){
   const b=adminBrand.value,m=adminModel.value,c=adminCategory.value,n=adminName.value,p=+adminPrice.value;
   if(!b||!m||!c||!n||!p)return alert("Fill all fields");
-  const e=products.find(x=>x.brand===b&&x.model===m&&x.name===n);
-  if(e)e.price=p;
-  else products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,stock:true,img:"https://via.placeholder.com/300"});
-  renderAdmin();filterByBike();
+  products.push({id:Date.now(),brand:b,model:m,category:c,name:n,price:p,img:"https://via.placeholder.com/300"});
 }
 
-function toggleStock(id){
-  const p=products.find(x=>x.id===id);
-  p.stock=!p.stock;
-  renderAdmin();filterByBike();
+// Modern live search
+const searchInput=document.getElementById("searchInput");
+const searchResults=document.getElementById("searchResults");
+
+function searchProducts(){
+  const query=searchInput.value.toLowerCase().trim();
+  if(!query)return;
+  const results=products.filter(p=>
+    p.name.toLowerCase().includes(query) ||
+    p.brand.toLowerCase().includes(query) ||
+    p.model.toLowerCase().includes(query) ||
+    p.category.toLowerCase().includes(query)
+  );
+  searchResults.style.display="block";
+  searchResults.innerHTML=results.length ? results.map(p=>`<div onclick="showProduct('${p.id}')">${p.brand} ${p.model} - ${p.name}</div>`).join("") : "<div>No products found</div>";
 }
 
-function renderAdmin(){
-  adminList.innerHTML=products.map(p=>`
-    <div>
-      <b>${p.brand}</b> | ${p.model} | ${p.category}<br>
-      ${p.name} — ৳${p.price} (${p.stock?'In':'Out'})
-      <button onclick="toggleStock(${p.id})">Toggle</button>
-    </div>
-  `).join("");
+function showProduct(id){
+  const p=products.find(x=>x.id==id);
+  const grid=document.getElementById("grid");
+  document.getElementById("shop").style.display="block";
+  grid.innerHTML=`<div class="card">
+    <img src="${p.img}">
+    <h4>${p.name}</h4>
+    <div class="price">৳${p.price}</div>
+  </div>`;
+  searchResults.style.display="none";
 }
-renderAdmin();
+
+searchInput.addEventListener("keyup",e=>{
+  if(e.key==="Enter") searchProducts();
+});
 </script>
-
 </body>
 </html>
