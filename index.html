@@ -261,11 +261,7 @@ function updateModelOptions(){
   }
   productGrid.innerHTML="";
 }
-modal.addEventListener("click", function(e){
-  if(e.target === modal){
-    closeModal();
-  }
-});
+document.querySelector(".modal-close").addEventListener("click", closeModal);
 function updateCategoryOptions(){
   const brand = filterBrand.value;
   const model = filterModel.value;
