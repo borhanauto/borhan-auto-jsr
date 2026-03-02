@@ -140,7 +140,7 @@ footer p{font-size:14px;line-height:1.6;}
 /* ===== RESPONSIVE ===== */
 @media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
 @media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}.search-container{margin:20px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}
-@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.nav{flex-wrap:wrap}.hero h1{font-size:36px}}
+@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:36px}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}.hero h1{font-size:28px}.search-container input{padding:12px;font-size:14px}.search-container button{padding:12px;font-size:14px;}}
 </style>
 </head>
@@ -232,7 +232,6 @@ const bikeData={
   Hero:["Splendor","Xtreme","HF Deluxe"],
   TVS:["Apache RTR 160","Phoenix","Jupiter"]
 };
-
 const products=[
   {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"High quality chain sprocket for Pulsar 150."},
   {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Premium brake pad for NS160."},
@@ -246,7 +245,11 @@ const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
   const div=document.createElement("div");
   div.textContent=b;
-  div.onclick=()=>{filterBrand.value=b;updateModelOptions();updateCategoryOptions();};
+  div.onclick=()=>{
+    filterBrand.value=b;
+    updateModelOptions();
+    updateCategoryOptions();
+  };
   brandStrip.appendChild(div);
 });
 
@@ -265,6 +268,15 @@ function populateBrandFilter(){
 }
 populateBrandFilter();
 
+// Add onchange events
+filterBrand.addEventListener('change',()=>{
+  updateModelOptions();
+  updateCategoryOptions();
+});
+filterModel.addEventListener('change',()=>{
+  updateCategoryOptions();
+});
+
 function updateModelOptions(){
   const brand=filterBrand.value;
   filterModel.innerHTML="<option value=''>Select Model</option>";
@@ -277,21 +289,28 @@ function updateModelOptions(){
   }
   productGrid.innerHTML="";
 }
+
 function updateCategoryOptions(){
-  const brand=filterBrand.value; const model=filterModel.value;
+  const brand=filterBrand.value;
+  const model=filterModel.value;
   filterCategory.innerHTML="<option value=''>Select Category</option>";
   if(!brand||!model) return;
   const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
-  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c; filterCategory.appendChild(opt);});
+  categories.forEach(c=>{
+    let opt=document.createElement("option"); opt.value=c; opt.textContent=c;
+    filterCategory.appendChild(opt);
+  });
   productGrid.innerHTML="";
 }
+
 function applyFilters(){
-  const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
-  const filtered=products.filter(p=>
-    (!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category)
-  );
+  const brand=filterBrand.value;
+  const model=filterModel.value;
+  const category=filterCategory.value;
+  const filtered=products.filter(p=>(!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category));
   renderProducts(filtered);
 }
+
 function renderProducts(arr){
   productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
 }
@@ -328,5 +347,6 @@ function animateCarousel(){
 }
 animateCarousel();
 </script>
+
 </body>
 </html>
