@@ -178,8 +178,8 @@ footer p{font-size:14px;line-height:1.6;}
 
 <!-- Filters Section -->
 <div class="filters" id="filtersSection">
-  <select id="filterBrand"></select>
-  <select id="filterModel"></select>
+  <select id="filterBrand" onchange="updateModelOptions()"></select>
+  <select id="filterModel" onchange="updateCategoryOptions()"></select>
   <select id="filterCategory"></select>
   <button onclick="applyFilters()">Apply Filters</button>
 </div>
@@ -225,19 +225,23 @@ footer p{font-size:14px;line-height:1.6;}
 <script>
 // ===== DATA =====
 const bikeData={
-  Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400"],
-  Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25"],
-  Honda:["CB Shine","Hornet","CBR250R","Dio","Livo"],
-  Suzuki:["Gixxer","Hayate","Access 125"],
-  Hero:["Splendor","Xtreme","HF Deluxe"],
-  TVS:["Apache RTR 160","Phoenix","Jupiter"]
+  Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400","CT100"],
+  Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25","R3"],
+  Honda:["CB Shine","Hornet","CBR250R","Dio","Livo","CB Twister"],
+  Suzuki:["Gixxer","Hayate","Access 125","Burgman Street"],
+  Hero:["Splendor","Xtreme","HF Deluxe","Maestro Edge"],
+  TVS:["Apache RTR 160","Phoenix","Jupiter","NTorq"]
 };
+
 const products=[
   {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"High quality chain sprocket for Pulsar 150."},
   {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Premium brake pad for NS160."},
   {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Long lasting spark plug for FZ-S."},
   {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:["https://via.placeholder.com/300"],desc:"Original oil filter for CB Shine."},
-  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Smooth suspension for Gixxer."}
+  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Smooth suspension for Gixxer."},
+  {id:6,brand:"Hero",model:"Splendor",category:"Body Parts",name:"Splendor Footrest",price:400,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Sturdy footrest for Hero Splendor."},
+  {id:7,brand:"TVS",model:"Apache RTR 160",category:"Engine",name:"Apache RTR 160 Carburetor",price:2800,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"High performance carburetor for Apache RTR."},
+  {id:8,brand:"Bajaj",model:"Discover 125",category:"Body Parts",name:"Discover 125 Rear View Mirror",price:650,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Original mirror for Discover 125."}
 ];
 
 // ===== BRAND STRIP =====
@@ -245,11 +249,7 @@ const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
   const div=document.createElement("div");
   div.textContent=b;
-  div.onclick=()=>{
-    filterBrand.value=b;
-    updateModelOptions();
-    updateCategoryOptions();
-  };
+  div.onclick=()=>{filterBrand.value=b;updateModelOptions();filterModel.value="";filterCategory.value="";productGrid.innerHTML="";};
   brandStrip.appendChild(div);
 });
 
@@ -268,15 +268,6 @@ function populateBrandFilter(){
 }
 populateBrandFilter();
 
-// Add onchange events
-filterBrand.addEventListener('change',()=>{
-  updateModelOptions();
-  updateCategoryOptions();
-});
-filterModel.addEventListener('change',()=>{
-  updateCategoryOptions();
-});
-
 function updateModelOptions(){
   const brand=filterBrand.value;
   filterModel.innerHTML="<option value=''>Select Model</option>";
@@ -289,28 +280,20 @@ function updateModelOptions(){
   }
   productGrid.innerHTML="";
 }
-
 function updateCategoryOptions(){
-  const brand=filterBrand.value;
-  const model=filterModel.value;
+  const brand=filterBrand.value; const model=filterModel.value;
   filterCategory.innerHTML="<option value=''>Select Category</option>";
   if(!brand||!model) return;
   const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
-  categories.forEach(c=>{
-    let opt=document.createElement("option"); opt.value=c; opt.textContent=c;
-    filterCategory.appendChild(opt);
-  });
+  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
   productGrid.innerHTML="";
 }
-
 function applyFilters(){
-  const brand=filterBrand.value;
-  const model=filterModel.value;
-  const category=filterCategory.value;
-  const filtered=products.filter(p=>(!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category));
+  const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
+  if(!brand || !model || !category){ alert("Please select Brand, Model, and Category."); return; }
+  const filtered=products.filter(p=>p.brand===brand && p.model===model && p.category===category);
   renderProducts(filtered);
 }
-
 function renderProducts(arr){
   productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
 }
@@ -325,19 +308,23 @@ function searchProducts(){
   searchResults.style.display="block";
   searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';updateCategoryOptions();filterCategory.value='${p.category}';applyFilters();searchResults.style.display='none'">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
-searchInput.addEventListener("keyup",e=>{if(e.key==="Enter")searchProducts();});
+// SEARCH KEYUP ENTER
+searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
 document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput){searchResults.style.display="none";}});
 
-// ===== STICKY HEADER =====
+// STICKY HEADER
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
 
-// ===== FEATURED PRODUCTS INFINITE CAROUSEL =====
+// FEATURED PRODUCTS INFINITE CAROUSEL
 const featuredTrack=document.getElementById("featuredTrack");
 products.forEach(p=>{
-  const div=document.createElement("div"); div.className="card"; div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`; featuredTrack.appendChild(div);
+  const div=document.createElement("div"); div.className="card";
+  div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
+  featuredTrack.appendChild(div);
 });
-// duplicate for seamless infinite scroll
+// Duplicate for seamless scroll
 featuredTrack.innerHTML += featuredTrack.innerHTML;
+
 let offset=0;
 function animateCarousel(){
   offset -= 1; // speed
@@ -346,7 +333,9 @@ function animateCarousel(){
   requestAnimationFrame(animateCarousel);
 }
 animateCarousel();
-</script>
 
+// INITIAL PRODUCT RENDER (optional: all products or empty)
+renderProducts([]);
+</script>
 </body>
 </html>
