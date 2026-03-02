@@ -263,12 +263,30 @@ function updateModelOptions(){
 }
 
 function updateCategoryOptions(){
-  const brand=filterBrand.value; const model=filterModel.value;
-  filterCategory.innerHTML="<option value=''>Select Category</option>";
-  if(!brand||!model) return;
-  const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
-  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
-  productGrid.innerHTML="";
+  const brand = filterBrand.value;
+  const model = filterModel.value;
+
+  filterCategory.innerHTML = "<option value=''>Select Category</option>";
+
+  if(!brand || !model){
+    productGrid.innerHTML = "";
+    return;
+  }
+
+  const categories = [...new Set(
+    products
+      .filter(p => p.brand === brand && p.model === model)
+      .map(p => p.category)
+  )];
+
+  categories.forEach(c=>{
+    let opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    filterCategory.appendChild(opt); // ✅ FIXED (was missing)
+  });
+
+  productGrid.innerHTML = "";
 }
 
 function applyFilters(){
