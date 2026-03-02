@@ -341,8 +341,7 @@ document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.ta
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
-document.querySelector(".modal-close")
-  .addEventListener("click", closeModal);
+
 // ===== FEATURED INFINITE CAROUSEL =====
 const featuredTrack=document.getElementById("featuredTrack");
 const featuredCards=[];
