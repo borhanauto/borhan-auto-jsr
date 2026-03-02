@@ -160,7 +160,7 @@ footer p{font-size:14px;line-height:1.6;}
 <!-- PRODUCT MODAL -->
 <div class="modal" id="productModal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeModal()">×</span>
+    <span class="modal-close">×</span>
     <img id="modalImage" src="" alt="">
     <h3 id="modalName"></h3>
     <p id="modalDesc"></p>
@@ -341,7 +341,8 @@ document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.ta
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
-
+document.querySelector(".modal-close")
+  .addEventListener("click", closeModal);
 // ===== FEATURED INFINITE CAROUSEL =====
 const featuredTrack=document.getElementById("featuredTrack");
 const featuredCards=[];
