@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Borhan Auto Parts Centre – Original Motorcycle Parts in Jessore</title>
-<meta name="description" content="Borhan Auto Parts Centre offers genuine motorcycle spare parts for Bajaj, Yamaha, Honda, Suzuki, TVS, and Hero in Jessore. Shop online now!">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
@@ -70,19 +69,6 @@ a{text-decoration:none;color:inherit;}
 .icons span{margin-left:25px;font-weight:700;cursor:pointer;transition:0.3s;}
 .icons span:hover{color:var(--primary);}
 
-/* ===== NAV ===== */
-.nav {
-    background: #f5f5f5;
-    padding: 15px 40px;
-    display: flex;
-    gap: 30px;
-    font-weight: 700;
-    flex-wrap: wrap;
-    letter-spacing: 0.5px;
-    color: #222;
-}
-.nav div:hover{color:var(--primary);cursor:pointer;transition:0.3s;}
-
 /* ===== HERO ===== */
 .hero{
   background:linear-gradient(135deg,#111,#222);color:#fff;
@@ -100,9 +86,9 @@ a{text-decoration:none;color:inherit;}
 }
 .hero button:hover{opacity:.9;transform:translateY(-2px);}
 
-/* ===== BRANDS ===== */
+/* ===== BRANDS STRIP ===== */
 .brands{
-  display:flex;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  display:flex;justify-content:center;flex-wrap:wrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);
   margin:30px 40px;
 }
 .brands::-webkit-scrollbar{height:8px;}
@@ -131,6 +117,7 @@ a{text-decoration:none;color:inherit;}
   display:flex;
   gap:20px;
   flex-wrap:wrap;
+  justify-content:center;
   align-items:center;
 }
 #filtersSection label{
@@ -185,37 +172,27 @@ a{text-decoration:none;color:inherit;}
   background:var(--primary);color:#fff;padding:70px 30px;text-align:center;border-radius:var(--radius);margin:50px 40px;font-size:22px;font-weight:800;box-shadow:0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* ===== PRODUCT MODAL ===== */
-#productModal{
-  display:none;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.75);
-  justify-content:center;align-items:center;
-  z-index:10000;
-}
-.modal-content{
-  background:#fff;color:#111;
-  display:flex;flex-wrap:wrap;
-  gap:20px;
-  border-radius:16px;
-  padding:20px;
-  max-width:900px;width:90%;
+/* ===== FEATURED CAROUSEL ===== */
+#featuredSection{
+  margin:50px 0;
+  overflow:hidden;
   position:relative;
+  padding:20px 0;
+  background:#f5f5f5;
 }
-.close-modal{
-  position:absolute;top:10px;right:10px;font-size:28px;cursor:pointer;font-weight:700;
+.featured-track{
+  display:flex;
+  gap:20px;
+  width:max-content;
+  animation:scroll 20s linear infinite;
 }
-.modal-content img{
-  width:100%;border-radius:12px;
+.featured-track:hover{
+  animation-play-state:paused;
 }
-.modal-info{
-  flex:1;
+@keyframes scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
 }
-.modal-info h4{margin-bottom:12px;}
-.modal-info p{margin-bottom:10px;line-height:1.4;}
-.modal-info .price{margin-bottom:14px;font-weight:800;color:var(--primary);}
-.modal-info button{background:var(--primary);color:#fff;padding:12px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:0.3s;}
-.modal-info button:hover{opacity:.9;transform:translateY(-1px);}
 
 /* ===== FOOTER ===== */
 footer{
@@ -257,9 +234,7 @@ footer p{font-size:14px;line-height:1.6;}
 <div class="hero">
   <h1>Original Motorcycle Spare Parts</h1>
   <p>Bajaj • Yamaha • Honda • Suzuki • TVS • Hero</p>
-  <button onclick="document.getElementById('filtersSection').scrollIntoView({behavior:'smooth'})">
-    Shop by Bike
-  </button>
+  <button onclick="document.getElementById('filtersSection').scrollIntoView({behavior:'smooth'})">Shop by Bike</button>
 </div>
 
 <!-- Brands Strip -->
@@ -269,15 +244,15 @@ footer p{font-size:14px;line-height:1.6;}
 <section id="filtersSection">
   <div>
     <label>Brand</label>
-    <select id="filterBrand" onchange="applyFilters()"><option value="">All Brands</option></select>
+    <select id="filterBrand"><option value="">All Brands</option></select>
   </div>
   <div>
     <label>Model</label>
-    <select id="filterModel" onchange="applyFilters()"><option value="">All Models</option></select>
+    <select id="filterModel"><option value="">All Models</option></select>
   </div>
   <div>
     <label>Category</label>
-    <select id="filterCategory" onchange="applyFilters()"><option value="">All Categories</option></select>
+    <select id="filterCategory"><option value="">All Categories</option></select>
   </div>
   <div>
     <button onclick="applyFilters()">Apply Filters</button>
@@ -291,9 +266,12 @@ footer p{font-size:14px;line-height:1.6;}
 </section>
 
 <!-- Promo -->
-<div class="promo">
-  🔥 Special Offer – Up to 20% Discount on Engine Parts
-</div>
+<div class="promo">🔥 Special Offer – Up to 20% Discount on Engine Parts</div>
+
+<!-- Featured Products Carousel -->
+<section id="featuredSection">
+  <div class="featured-track" id="featuredTrack"></div>
+</section>
 
 <!-- Footer -->
 <footer>
@@ -319,24 +297,6 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
 </footer>
 
-<!-- Product Modal -->
-<div id="productModal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal()">×</span>
-    <div style="flex:1;position:relative;">
-      <img id="modalImage" src="" alt="">
-      <button id="prevImg">‹</button>
-      <button id="nextImg">›</button>
-    </div>
-    <div class="modal-info">
-      <h4 id="modalTitle"></h4>
-      <p id="modalDesc"></p>
-      <div class="price" id="modalPrice"></div>
-      <button id="modalAddBtn">Add to Cart</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ===== DATA =====
 const bikeData={
@@ -349,13 +309,12 @@ const bikeData={
 };
 
 let products=[
-  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",desc:"High quality chain sprocket for Pulsar 150.",img:["https://via.placeholder.com/400x300","https://via.placeholder.com/400x300/ff0000","https://via.placeholder.com/400x300/00ff00"]},
-  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",desc:"Durable brake pad for NS160.",img:["https://via.placeholder.com/400x300"]},
-  {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",desc:"Premium spark plug for Yamaha FZ-S.",img:["https://via.placeholder.com/400x300"]},
-  {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,desc:"Oil filter for CB Shine engine.",img:["https://via.placeholder.com/400x300"]},
-  {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",desc:"High-performance shock absorber.",img:["https://via.placeholder.com/400x300","https://via.placeholder.com/400x300/ff0"]},
-  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Apache RTR Brake Disc",price:2800,stock:true,desc:"Brake disc for Apache RTR 160.",img:["https://via.placeholder.com/400x300"]},
-  {id:7,brand:"Hero",model:"Splendor",category:"Engine",name:"Splendor Engine Oil Filter",price:450,stock:true,desc:"Reliable oil filter.",img:["https://via.placeholder.com/400x300"]}
+  {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",desc:"High quality chain sprocket for Pulsar 150.",img:["https://via.placeholder.com/400x300","https://via.placeholder.com/400x300/ff0000"]},
+  {id:2,brand:"Yamaha",model:"R15",category:"Electrical",name:"R15 Spark Plug",price:450,stock:true,badge:"hot",desc:"Premium spark plug for Yamaha R15.",img:["https://via.placeholder.com/400x300"]},
+  {id:3,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,desc:"Oil filter for CB Shine engine.",img:["https://via.placeholder.com/400x300"]},
+  {id:4,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",desc:"High-performance shock absorber.",img:["https://via.placeholder.com/400x300"]},
+  {id:5,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Apache RTR Brake Disc",price:2800,stock:true,desc:"Brake disc for Apache RTR 160.",img:["https://via.placeholder.com/400x300"]},
+  {id:6,brand:"Hero",model:"Splendor",category:"Engine",name:"Splendor Engine Oil Filter",price:450,stock:true,desc:"Reliable oil filter.",img:["https://via.placeholder.com/400x300"]}
 ];
 
 // ===== BRAND STRIP =====
@@ -363,7 +322,7 @@ const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
   const div=document.createElement("div");
   div.textContent=b;
-  div.onclick=()=>{document.getElementById("filtersSection").scrollIntoView({behavior:'smooth'});document.getElementById("filterBrand").value=b;updateModelOptions();applyFilters();}
+  div.onclick=()=>{filterBrand.value=b; updateModelOptions();}
   brandStrip.appendChild(div);
 });
 
@@ -371,6 +330,7 @@ Object.keys(bikeData).forEach(b=>{
 const filterBrand=document.getElementById("filterBrand");
 const filterModel=document.getElementById("filterModel");
 const filterCategory=document.getElementById("filterCategory");
+
 function populateFilters(){
   Object.keys(bikeData).forEach(b=>{let opt=document.createElement("option");opt.value=b;opt.textContent=b;filterBrand.appendChild(opt);});
   let cats=[...new Set(products.map(p=>p.category))];
@@ -380,13 +340,8 @@ populateFilters();
 
 function updateModelOptions(){
   filterModel.innerHTML="<option value=''>All Models</option>";
-  let selectedBrand=filterBrand.value;
-  if(selectedBrand && bikeData[selectedBrand]){
-    bikeData[selectedBrand].forEach(m=>{
-      let opt=document.createElement("option");opt.value=m;opt.textContent=m;
-      filterModel.appendChild(opt);
-    });
-  }
+  let b=filterBrand.value;
+  if(b && bikeData[b]){bikeData[b].forEach(m=>{let opt=document.createElement("option");opt.value=m;opt.textContent=m;filterModel.appendChild(opt);});}
 }
 
 // ===== APPLY FILTERS =====
@@ -397,6 +352,7 @@ function applyFilters(){
   let filtered=products.filter(p=>(!b||p.brand===b)&&(!m||p.model===m)&&(!c||p.category===c));
   renderProducts(filtered);
 }
+
 function renderProducts(list){
   productGrid.innerHTML="";
   if(!list.length){productGrid.innerHTML="<p style='grid-column:1/-1;text-align:center;color:#111;font-weight:700;'>No products found.</p>";return;}
@@ -410,26 +366,47 @@ function renderProducts(list){
 }
 renderProducts(products);
 
+// ===== FEATURED PRODUCTS =====
+const featuredTrack=document.getElementById("featuredTrack");
+products.forEach(p=>{
+  const div=document.createElement("div");
+  div.style.minWidth="220px";
+  div.className="card";
+  div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
+  featuredTrack.appendChild(div);
+});
+
 // ===== SEARCH =====
 const searchInput=document.getElementById("searchInput");
 const searchResults=document.getElementById("searchResults");
 function searchProducts(){
-  const query=searchInput.value.toLowerCase().trim();
-  if(!query) return;
-  const results=products.filter(p=>p.name.toLowerCase().includes(query)||p.brand.toLowerCase().includes(query)||p.model.toLowerCase().includes(query)||p.category.toLowerCase().includes(query));
+  const q=searchInput.value.toLowerCase().trim();
+  if(!q) return;
+  const results=products.filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
   searchResults.style.display="block";
-  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';applyFilters()">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
+  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';applyFilters();searchResults.style.display='none'">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
 searchInput.addEventListener("keyup",e=>{if(e.key==="Enter")searchProducts();});
 document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput)searchResults.style.display="none";});
 
 // ===== PRODUCT MODAL =====
-const modal=document.getElementById("productModal");
+const modal=document.createElement("div");
+modal.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;justify-content:center;align-items:center;z-index:999;";
+modal.innerHTML=`<div style="background:#fff;color:#111;padding:20px;border-radius:12px;max-width:500px;width:90%;position:relative;">
+<img id="modalImage" src="" style="width:100%;border-radius:8px;margin-bottom:10px;">
+<h3 id="modalTitle"></h3>
+<p id="modalDesc"></p>
+<div id="modalPrice" style="font-weight:700;margin:10px 0;color:${"#c1121f"};"></div>
+<button onclick="closeModal()" style="padding:10px 20px;border:none;background:var(--primary);color:#fff;border-radius:8px;cursor:pointer;">Close</button>
+</div>`;
+document.body.appendChild(modal);
+
+let modalImgs=[],modalIndex=0;
 const modalImage=document.getElementById("modalImage");
 const modalTitle=document.getElementById("modalTitle");
 const modalDesc=document.getElementById("modalDesc");
 const modalPrice=document.getElementById("modalPrice");
-let modalImgs=[],modalIndex=0;
+
 function openModal(p){
   modalImgs=p.img;modalIndex=0;
   modalImage.src=modalImgs[modalIndex];
@@ -439,8 +416,6 @@ function openModal(p){
   modal.style.display="flex";
 }
 function closeModal(){modal.style.display="none";}
-document.getElementById("prevImg").onclick=()=>{modalIndex=(modalIndex-1+modalImgs.length)%modalImgs.length;modalImage.src=modalImgs[modalIndex];};
-document.getElementById("nextImg").onclick=()=>{modalIndex=(modalIndex+1)%modalImgs.length;modalImage.src=modalImgs[modalIndex];};
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
