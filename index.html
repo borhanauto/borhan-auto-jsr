@@ -20,101 +20,49 @@
 body{background:var(--gray);color:var(--dark);}
 a{text-decoration:none;color:inherit;}
 
-/* ===== TOPBAR ===== */
-.topbar{
-  background:#000;color:#fff;
-  padding:10px 40px;
-  display:flex;justify-content:space-between;flex-wrap:wrap;
-  font-size:14px;
-  letter-spacing:0.5px;
-}
+/* TOPBAR */
+.topbar{background:#000;color:#fff;padding:10px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;font-size:14px;letter-spacing:0.5px;}
 
-/* ===== HEADER ===== */
-.header{
-  background:#111;color:#fff;
-  padding:20px 40px;
-  display:flex;align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow:0 4px 15px rgba(0,0,0,0.4);
-  border-bottom: 2px solid var(--primary);
-  transition: box-shadow 0.3s;
-}
+/* HEADER */
+.header{background:#111;color:#fff;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;position: sticky;top: 0; z-index: 1000; box-shadow:0 4px 15px rgba(0,0,0,0.4);border-bottom: 2px solid var(--primary); transition: box-shadow 0.3s;}
 .header.scrolled{box-shadow:0 8px 25px rgba(0,0,0,0.45);}
 .logo{font-weight:900;font-size:28px;color:var(--light);}
 .logo span{color:var(--primary);}
 .search-container{flex:1;margin:0 30px;display:flex;position:relative;}
-.search-container input{
-  flex:1;padding:14px 24px;border:none;border-radius:50px 0 0 50px;font-size:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-.search-container button{
-  padding:14px 24px;background:var(--primary);border:none;color:#fff;font-weight:700;border-radius:0 50px 50px 0;cursor:pointer;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-  transition:0.3s;
-}
+.search-container input{flex:1;padding:14px 24px;border:none;border-radius:50px 0 0 50px;font-size:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+.search-container button{padding:14px 24px;background:var(--primary);border:none;color:#fff;font-weight:700;border-radius:0 50px 50px 0;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.2);transition:0.3s;}
 .search-container button:hover{opacity:.9;}
-.search-results{
-  position:absolute;top:50px;left:0;width:100%;background:#fff;color:#111;border-radius:12px;max-height:300px;overflow-y:auto;box-shadow:0 10px 25px rgba(0,0,0,0.2);z-index:100;display:none;
-}
+.search-results{position:absolute;top:50px;left:0;width:100%;background:#fff;color:#111;border-radius:12px;max-height:300px;overflow-y:auto;box-shadow:0 10px 25px rgba(0,0,0,0.2);z-index:100;display:none;}
 .search-results div{padding:12px;cursor:pointer;transition:0.2s;}
 .search-results div:hover{background:#f4f4f4;font-weight:700;}
 .icons span{margin-left:25px;font-weight:700;cursor:pointer;transition:0.3s;}
 .icons span:hover{color:var(--primary);}
 
-/* ===== HERO ===== */
-.hero{
-  background:linear-gradient(135deg,#111,#222);color:#fff;
-  padding:100px 40px;text-align:center;
-  border-bottom: 6px solid var(--primary);
-}
+/* HERO */
+.hero{background:linear-gradient(135deg,#111,#222);color:#fff;padding:100px 40px;text-align:center;border-bottom: 6px solid var(--primary);}
 .hero h1{font-size:clamp(28px,5vw,46px);margin-bottom:20px;letter-spacing:1px;}
 .hero p{opacity:.85;margin-bottom:25px;font-size:clamp(14px,2vw,18px);}
-.hero button{
-  margin-top:20px;padding:16px 36px;background:var(--primary);
-  border:none;color:#fff;font-weight:800;cursor:pointer;border-radius:50px;
-  font-size:16px;letter-spacing:0.5px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.3);
-  transition:0.3s;
-}
+.hero button{margin-top:20px;padding:16px 36px;background:var(--primary);border:none;color:#fff;font-weight:800;cursor:pointer;border-radius:50px;font-size:16px;letter-spacing:0.5px;box-shadow:0 6px 20px rgba(0,0,0,0.3);transition:0.3s;}
 .hero button:hover{opacity:.9;transform:translateY(-2px);}
 
-/* ===== BRANDS STRIP ===== */
-.brands{
-  display:flex;justify-content:center;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);margin:20px 0;
-}
+/* BRANDS STRIP */
+.brands{display:flex;justify-content:center;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);margin:20px 0;}
 .brands::-webkit-scrollbar{height:8px;}
 .brands::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px;}
-.brands div{
-  flex:0 0 auto;
-  margin:0 12px;cursor:pointer;font-weight:800;
-  padding:18px 28px;background:var(--brand-gradient);
-  border-radius:24px;
-  color:#fff;
-  transition:0.3s;
-  box-shadow:0 4px 20px rgba(0,0,0,0.35);
-  text-align:center;
-}
+.brands div{flex:0 0 auto;margin:0 12px;cursor:pointer;font-weight:800;padding:18px 28px;background:var(--brand-gradient);border-radius:24px;color:#fff;transition:0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.35);text-align:center;}
 .brands div:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(0,0,0,0.5);}
 
-/* ===== FILTERS ===== */
+/* FILTERS */
 .filters{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:20px 0;}
 .filters select, .filters button{padding:10px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
 .filters button{background:var(--primary);color:#fff;transition:0.3s;}
 .filters button:hover{opacity:.9;transform:translateY(-2px);}
 
-/* ===== PRODUCTS GRID ===== */
+/* SECTIONS & CARDS */
 section{padding:60px 40px;}
 .section-title{font-size:28px;font-weight:900;margin-bottom:35px;color:var(--dark);letter-spacing:0.5px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px;}
-.card{
-  background:var(--card);padding:20px;border-radius:var(--radius);
-  box-shadow:var(--shadow);text-align:center;color:#fff;transition: transform 0.35s, box-shadow 0.35s;
-  position:relative;cursor:pointer;
-}
+.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;color:#fff;transition: transform 0.35s, box-shadow 0.35s;position:relative;cursor:pointer;}
 .card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 18px 45px rgba(0,0,0,0.5);}
 .card img{width:100%;border-radius:12px;margin-bottom:12px;transition:0.3s;}
 .card img:hover{transform:scale(1.08);}
@@ -127,27 +75,28 @@ section{padding:60px 40px;}
 .badge.sale{background:#e91e63;color:#fff;}
 .badge.hot{background:#ff5722;color:#fff;}
 
-/* ===== PRODUCT MODAL ===== */
-#productModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:2000;justify-content:center;align-items:center;padding:20px;}
-#productModal .modal-content{background:var(--card);padding:30px;border-radius:16px;max-width:800px;width:100%;position:relative;overflow-y:auto;max-height:90vh;}
-#productModal img{width:100%;border-radius:12px;margin-bottom:12px;}
-#productModal h2{color:#fff;margin-bottom:10px;}
-#productModal p{color:#ddd;margin-bottom:12px;}
-#productModal .modal-price{color:var(--primary);font-weight:800;font-size:20px;margin-bottom:12px;}
-#productModal .whatsapp-btn{background:#25D366;color:#fff;padding:12px 20px;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;display:inline-block;transition:0.3s;}
-#productModal .whatsapp-btn:hover{opacity:.9;transform:translateY(-2px);}
-#productModal .close-btn{position:absolute;top:12px;right:12px;background:#ff003c;color:#fff;border:none;padding:6px 12px;font-size:16px;border-radius:8px;cursor:pointer;}
-
-/* ===== FEATURED INFINITE CAROUSEL ===== */
+/* FEATURED INFINITE CAROUSEL */
 .featured-container{overflow:hidden;margin:40px 0;}
-.featured-track{display:flex;gap:20px;}
+.featured-track{display:flex;gap:20px;transition:transform 0.3s;}
+.featured-track .card{flex:0 0 auto;min-width:220px;}
 
-/* ===== FOOTER ===== */
+/* MODAL */
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:2000;}
+.modal-content{background:#1f1f1f;padding:20px;border-radius:16px;max-width:600px;width:90%;color:#fff;position:relative;}
+.modal-content img{width:100%;border-radius:12px;margin-bottom:15px;}
+.modal-content h3{margin-bottom:10px;}
+.modal-content p{margin-bottom:15px;}
+.modal-content .price{font-size:20px;margin-bottom:15px;}
+.modal-content button{padding:12px 24px;background:var(--primary);color:#fff;border:none;border-radius:50px;font-weight:700;cursor:pointer;transition:0.3s;}
+.modal-content button:hover{opacity:.9;}
+.modal-close{position:absolute;top:12px;right:12px;font-size:20px;cursor:pointer;color:#fff;}
+
+/* FOOTER */
 footer{background:#111;color:#ccc;padding:60px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:30px;}
 footer h4{color:#fff;margin-bottom:18px;font-weight:700;}
 footer p{font-size:14px;line-height:1.6;}
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
 @media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}.search-container{margin:20px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}
 @media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:36px}}
@@ -156,13 +105,13 @@ footer p{font-size:14px;line-height:1.6;}
 </head>
 <body>
 
-<!-- Topbar -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div>Call: 01707659954 | Jessore, Bangladesh</div>
   <div>Free Delivery Over ৳5000</div>
 </div>
 
-<!-- Header -->
+<!-- HEADER -->
 <div class="header">
   <div class="logo">BORHAN <span>AUTO PARTS</span></div>
   <div class="search-container">
@@ -176,31 +125,31 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
 </div>
 
-<!-- Hero -->
+<!-- HERO -->
 <div class="hero">
   <h1>Original Motorcycle Spare Parts</h1>
   <p>Bajaj • Yamaha • Honda • Suzuki • TVS • Hero</p>
   <button onclick="document.getElementById('filtersSection').scrollIntoView({behavior:'smooth'})">Shop by Bike</button>
 </div>
 
-<!-- Brand Strip -->
+<!-- BRAND STRIP -->
 <div class="brands" id="brandStrip"></div>
 
-<!-- Filters -->
+<!-- FILTERS -->
 <div class="filters" id="filtersSection">
-  <select id="filterBrand" onchange="updateModelOptions()"></select>
-  <select id="filterModel" onchange="updateCategoryOptions()"></select>
+  <select id="filterBrand"></select>
+  <select id="filterModel"></select>
   <select id="filterCategory"></select>
   <button onclick="applyFilters()">Apply Filters</button>
 </div>
 
-<!-- Products Grid -->
+<!-- PRODUCTS GRID -->
 <section>
   <div class="section-title">Products</div>
   <div class="grid" id="productGrid"></div>
 </section>
 
-<!-- Featured Products -->
+<!-- FEATURED PRODUCTS -->
 <section>
   <div class="section-title">Featured Products</div>
   <div class="featured-container">
@@ -208,20 +157,19 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
 </section>
 
-<!-- Product Modal -->
-<div id="productModal">
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal">
   <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">✖</button>
-    <img id="modalImg" src="" alt="">
-    <h2 id="modalName"></h2>
-    <div class="modal-price" id="modalPrice"></div>
-    <div class="modal-stock" id="modalStock"></div>
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img id="modalImage" src="" alt="">
+    <h3 id="modalName"></h3>
     <p id="modalDesc"></p>
-    <a href="#" target="_blank" id="modalWhatsapp" class="whatsapp-btn">🛵💰 Buy on WhatsApp</a>
+    <div class="price" id="modalPrice"></div>
+    <button onclick="buyWhatsApp()">Buy via WhatsApp</button>
   </div>
 </div>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
   <div>
     <h4>About Us</h4>
@@ -251,19 +199,22 @@ const bikeData={
   Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400"],
   Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25"],
   Honda:["CB Shine","Hornet","CBR250R","Dio","Livo"],
-  Suzuki:["Gixxer","Hayate","Access 125"],
-  Hero:["Splendor","Xtreme","HF Deluxe"],
-  TVS:["Apache RTR 160","Phoenix","Jupiter"]
+  Suzuki:["Gixxer","Hayate","Access 125","Burgman Street"],
+  Hero:["Splendor","Xtreme","HF Deluxe","Achiever"],
+  TVS:["Apache RTR 160","Phoenix","Jupiter","Star City"]
 };
 
 const products=[
   {id:1,brand:"Bajaj",model:"Pulsar 150",category:"Engine",name:"Pulsar 150 Chain Sprocket Set",price:3500,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"High quality chain sprocket for Pulsar 150."},
-  {id:2,brand:"Bajaj",model:"Discover 125",category:"Body",name:"Discover 125 Fuel Tank",price:4500,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Durable fuel tank for Discover 125."},
+  {id:2,brand:"Bajaj",model:"NS160",category:"Brake",name:"NS160 Brake Pad",price:950,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Premium brake pad for NS160."},
   {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Long lasting spark plug for FZ-S."},
   {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:["https://via.placeholder.com/300"],desc:"Original oil filter for CB Shine."},
   {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Smooth suspension for Gixxer."},
-  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Brake",name:"Apache Brake Pad",price:850,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"High performance brake pad for Apache."},
-  {id:7,brand:"Hero",model:"Splendor",category:"Engine",name:"Splendor Air Filter",price:400,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Efficient air filter for Splendor."}
+  {id:6,brand:"Hero",model:"Splendor",category:"Body",name:"Splendor Headlight",price:800,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Bright headlight for Splendor."},
+  {id:7,brand:"TVS",model:"Apache RTR 160",category:"Engine",name:"Apache RTR Engine Oil Filter",price:600,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"High performance oil filter for Apache RTR 160."},
+  {id:8,brand:"Yamaha",model:"R15",category:"Brake",name:"R15 Disc Brake Set",price:2200,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Durable brake set for R15."},
+  {id:9,brand:"Honda",model:"Hornet",category:"Electrical",name:"Hornet Spark Plug",price:450,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Reliable spark plug for Hornet."},
+  {id:10,brand:"Suzuki",model:"Burgman Street",category:"Engine",name:"Burgman Engine Oil",price:1500,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Premium engine oil for Burgman Street."}
 ];
 
 // ===== BRAND STRIP =====
@@ -271,7 +222,9 @@ const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
   const div=document.createElement("div");
   div.textContent=b;
-  div.onclick=()=>{filterBrand.value=b;updateModelOptions();};
+  div.onclick=()=>{
+    filterBrand.value=b; updateModelOptions(); updateCategoryOptions();
+  };
   brandStrip.appendChild(div);
 });
 
@@ -290,6 +243,12 @@ function populateBrandFilter(){
 }
 populateBrandFilter();
 
+filterBrand.addEventListener("change",()=>{
+  updateModelOptions();
+  updateCategoryOptions();
+});
+filterModel.addEventListener("change",updateCategoryOptions);
+
 function updateModelOptions(){
   const brand=filterBrand.value;
   filterModel.innerHTML="<option value=''>Select Model</option>";
@@ -302,6 +261,7 @@ function updateModelOptions(){
   }
   productGrid.innerHTML="";
 }
+
 function updateCategoryOptions(){
   const brand=filterBrand.value; const model=filterModel.value;
   filterCategory.innerHTML="<option value=''>Select Category</option>";
@@ -310,34 +270,42 @@ function updateCategoryOptions(){
   categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
   productGrid.innerHTML="";
 }
+
 function applyFilters(){
   const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
   const filtered=products.filter(p=>(!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category));
   renderProducts(filtered);
 }
+
 function renderProducts(arr){
-  productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card" onclick="openModal(${p.id})"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>${p.badge?`<div class="badge ${p.badge}">${p.badge.toUpperCase()}</div>`:""}</div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
+  productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card" onclick="openModal(${p.id})"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
 }
 
 // ===== PRODUCT MODAL =====
 const modal=document.getElementById("productModal");
-const modalImg=document.getElementById("modalImg");
+const modalImage=document.getElementById("modalImage");
 const modalName=document.getElementById("modalName");
-const modalPrice=document.getElementById("modalPrice");
-const modalStock=document.getElementById("modalStock");
 const modalDesc=document.getElementById("modalDesc");
-const modalWhatsapp=document.getElementById("modalWhatsapp");
+const modalPrice=document.getElementById("modalPrice");
+let currentProduct=null;
+
 function openModal(id){
   const p=products.find(x=>x.id===id);
-  modal.style.display="flex";
-  modalImg.src=p.img[0];
+  if(!p) return;
+  currentProduct=p;
+  modalImage.src=p.img[0];
   modalName.textContent=p.name;
-  modalPrice.textContent="৳"+p.price;
-  modalStock.textContent=p.stock?"In Stock ✅":"Out of Stock ❌";
   modalDesc.textContent=p.desc;
-  modalWhatsapp.href=`https://wa.me/8801707659954?text=Hi%20I%20want%20to%20buy%20${encodeURIComponent(p.name)}%20for%20৳${p.price}`;
+  modalPrice.textContent="৳"+p.price;
+  modal.style.display="flex";
 }
+
 function closeModal(){modal.style.display="none";}
+function buyWhatsApp(){
+  if(!currentProduct) return;
+  const msg=`Hello, I want to buy ${currentProduct.name} (Brand: ${currentProduct.brand}, Model: ${currentProduct.model}, Category: ${currentProduct.category})`;
+  window.open(`https://wa.me/01707659954?text=${encodeURIComponent(msg)}`,"_blank");
+}
 
 // ===== SEARCH =====
 const searchInput=document.getElementById("searchInput");
@@ -347,24 +315,28 @@ function searchProducts(){
   if(!q) return;
   const results=products.filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
   searchResults.style.display="block";
-  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';updateCategoryOptions();filterCategory.value='${p.category}';applyFilters();searchResults.style.display='none';openModal(${p.id})">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
+  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}'; updateModelOptions(); filterModel.value='${p.model}'; updateCategoryOptions(); filterCategory.value='${p.category}'; applyFilters(); searchResults.style.display='none';">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
-searchInput.addEventListener("keyup",e=>{if(e.key==="Enter")searchProducts();});
+searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
 document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput){searchResults.style.display="none";}});
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
 
-// ===== FEATURED PRODUCTS INFINITE CAROUSEL =====
+// ===== FEATURED INFINITE CAROUSEL =====
 const featuredTrack=document.getElementById("featuredTrack");
+const featuredCards=[];
 products.forEach(p=>{
-  const div=document.createElement("div"); div.className="card"; div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`; featuredTrack.appendChild(div);
+  const div=document.createElement("div");
+  div.className="card";
+  div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
+  featuredTrack.appendChild(div);
+  featuredCards.push(div.cloneNode(true));
 });
-const clone=featuredTrack.innerHTML;
-featuredTrack.innerHTML += clone; // duplicate for smooth infinite
-let offset=0;
+featuredCards.forEach(clone=>featuredTrack.appendChild(clone));
+let offset=0; const speed=0.5;
 function animateCarousel(){
-  offset -= 1;
+  offset-=speed;
   if(Math.abs(offset)>=featuredTrack.scrollWidth/2) offset=0;
   featuredTrack.style.transform=`translateX(${offset}px)`;
   requestAnimationFrame(animateCarousel);
