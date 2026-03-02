@@ -137,10 +137,17 @@ footer{background:#111;color:#ccc;padding:60px 40px;display:grid;grid-template-c
 footer h4{color:#fff;margin-bottom:18px;font-weight:700;}
 footer p{font-size:14px;line-height:1.6;}
 
+/* ===== PRODUCT MODAL ===== */
+#productModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:2000;}
+#productModal .modal-content{background:#fff;border-radius:16px;max-width:800px;width:90%;padding:20px;position:relative;}
+#productModal img{width:100%;border-radius:12px;}
+#productModal h2{margin-bottom:10px;}
+#productModal input{width:60px;padding:5px;margin-left:10px;}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:1200px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
 @media(max-width:992px){.grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}.search-container{margin:20px 0;flex-basis:100%}.header{flex-direction:column;align-items:flex-start}}
-@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:36px}}
+@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}.nav{flex-wrap:wrap}.hero h1{font-size:36px}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}.hero h1{font-size:28px}.search-container input{padding:12px;font-size:14px}.search-container button{padding:12px;font-size:14px;}}
 </style>
 </head>
@@ -222,15 +229,38 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
 </footer>
 
+<!-- Product Modal -->
+<div id="productModal">
+  <div class="modal-content">
+    <span id="closeModal" style="position:absolute;top:12px;right:16px;cursor:pointer;font-size:24px;font-weight:700;">&times;</span>
+    <div style="display:flex;flex-wrap:wrap;gap:20px;">
+      <div style="flex:1;min-width:250px;">
+        <img id="modalImage" src="">
+      </div>
+      <div style="flex:1;min-width:250px;color:#111;">
+        <h2 id="modalName"></h2>
+        <div id="modalPrice" style="font-weight:800;color:#c1121f;font-size:20px;margin:10px 0;"></div>
+        <div id="modalStock" style="margin-bottom:10px;font-weight:700;"></div>
+        <p id="modalDesc" style="line-height:1.5;margin-bottom:20px;"></p>
+        <label>Quantity: <input type="number" id="modalQty" value="1" min="1"></label>
+        <div style="margin-top:20px;">
+          <button id="addToCartBtn" style="padding:10px 20px;margin-right:10px;background:#c1121f;color:#fff;border:none;font-weight:700;border-radius:8px;cursor:pointer;">Add to Cart</button>
+          <button id="buyWhatsAppBtn" style="padding:10px 20px;background:#25D366;color:#fff;border:none;font-weight:700;border-radius:8px;cursor:pointer;">Buy via WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ===== DATA =====
 const bikeData={
-  Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400","CT100"],
-  Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25","R3"],
-  Honda:["CB Shine","Hornet","CBR250R","Dio","Livo","CB Twister"],
-  Suzuki:["Gixxer","Hayate","Access 125","Burgman Street"],
-  Hero:["Splendor","Xtreme","HF Deluxe","Maestro Edge"],
-  TVS:["Apache RTR 160","Phoenix","Jupiter","NTorq"]
+  Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400"],
+  Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25"],
+  Honda:["CB Shine","Hornet","CBR250R","Dio","Livo"],
+  Suzuki:["Gixxer","Hayate","Access 125"],
+  Hero:["Splendor","Xtreme","HF Deluxe"],
+  TVS:["Apache RTR 160","Phoenix","Jupiter"]
 };
 
 const products=[
@@ -239,9 +269,9 @@ const products=[
   {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Long lasting spark plug for FZ-S."},
   {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:["https://via.placeholder.com/300"],desc:"Original oil filter for CB Shine."},
   {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Smooth suspension for Gixxer."},
-  {id:6,brand:"Hero",model:"Splendor",category:"Body Parts",name:"Splendor Footrest",price:400,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Sturdy footrest for Hero Splendor."},
-  {id:7,brand:"TVS",model:"Apache RTR 160",category:"Engine",name:"Apache RTR 160 Carburetor",price:2800,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"High performance carburetor for Apache RTR."},
-  {id:8,brand:"Bajaj",model:"Discover 125",category:"Body Parts",name:"Discover 125 Rear View Mirror",price:650,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Original mirror for Discover 125."}
+  {id:6,brand:"TVS",model:"Apache RTR 160",category:"Body Parts",name:"Apache RTR Fairing Kit",price:4200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Complete body fairing kit for Apache RTR 160."},
+  {id:7,brand:"Hero",model:"Splendor",category:"Engine",name:"Splendor Clutch Plate",price:800,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Durable clutch plate for Hero Splendor."},
+  {id:8,brand:"Bajaj",model:"Dominar 400",category:"Exhaust",name:"Dominar 400 Exhaust Pipe",price:7200,stock:true,img:["https://via.placeholder.com/300"],desc:"High performance exhaust pipe for Dominar 400."}
 ];
 
 // ===== BRAND STRIP =====
@@ -249,88 +279,63 @@ const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
   const div=document.createElement("div");
   div.textContent=b;
-  div.onclick=()=>{filterBrand.value=b;updateModelOptions();filterModel.value="";filterCategory.value="";productGrid.innerHTML="";};
+  div.onclick=()=>{
+    filterBrand.value=b;
+    updateModelOptions();
+    productGrid.innerHTML="";
+  };
   brandStrip.appendChild(div);
 });
 
 // ===== FILTERS =====
-// ===== FILTERS =====
-const filterBrand = document.getElementById("filterBrand");
-const filterModel = document.getElementById("filterModel");
-const filterCategory = document.getElementById("filterCategory");
-const productGrid = document.getElementById("productGrid");
+const filterBrand=document.getElementById("filterBrand");
+const filterModel=document.getElementById("filterModel");
+const filterCategory=document.getElementById("filterCategory");
+const productGrid=document.getElementById("productGrid");
 
 function populateBrandFilter(){
-  filterBrand.innerHTML = "<option value=''>Select Brand</option>";
-  Object.keys(bikeData).forEach(b => {
-    let opt = document.createElement("option");
-    opt.value = b;
-    opt.textContent = b;
+  filterBrand.innerHTML="<option value=''>Select Brand</option>";
+  Object.keys(bikeData).forEach(b=>{
+    let opt=document.createElement("option"); opt.value=b; opt.textContent=b;
     filterBrand.appendChild(opt);
   });
 }
 populateBrandFilter();
 
-filterBrand.addEventListener("change", () => {
-  updateModelOptions();
-  productGrid.innerHTML = ""; // clear products until apply
-});
-
-filterModel.addEventListener("change", () => {
-  updateCategoryOptions();
-  productGrid.innerHTML = ""; // clear products until apply
-});
-
-function updateModelOptions() {
-  const brand = filterBrand.value;
-  filterModel.innerHTML = "<option value=''>Select Model</option>";
-  filterCategory.innerHTML = "<option value=''>Select Category</option>";
-  if (brand && bikeData[brand]) {
-    bikeData[brand].forEach(m => {
-      let opt = document.createElement("option");
-      opt.value = m;
-      opt.textContent = m;
+function updateModelOptions(){
+  const brand=filterBrand.value;
+  filterModel.innerHTML="<option value=''>Select Model</option>";
+  filterCategory.innerHTML="<option value=''>Select Category</option>";
+  if(brand && bikeData[brand]){
+    bikeData[brand].forEach(m=>{
+      let opt=document.createElement("option"); opt.value=m; opt.textContent=m;
       filterModel.appendChild(opt);
     });
   }
+  productGrid.innerHTML="";
 }
 
-function updateCategoryOptions() {
-  const brand = filterBrand.value;
-  const model = filterModel.value;
-  filterCategory.innerHTML = "<option value=''>Select Category</option>";
-  if (!brand || !model) return;
-
-  // get unique categories for selected brand + model
-  const categories = [...new Set(
-    products.filter(p => p.brand === brand && p.model === model).map(p => p.category)
-  )];
-  categories.forEach(c => {
-    let opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    filterCategory.appendChild(opt);
-  });
+function updateCategoryOptions(){
+  const brand=filterBrand.value; const model=filterModel.value;
+  filterCategory.innerHTML="<option value=''>Select Category</option>";
+  if(!brand||!model) return;
+  const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
+  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
+  productGrid.innerHTML="";
 }
 
-function applyFilters() {
-  const brand = filterBrand.value;
-  const model = filterModel.value;
-  const category = filterCategory.value;
-
-  const filtered = products.filter(p =>
-    (!brand || p.brand === brand) &&
-    (!model || p.model === model) &&
-    (!category || p.category === category)
+function applyFilters(){
+  const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
+  const filtered=products.filter(p=>
+    (!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category)
   );
-
   renderProducts(filtered);
 }
 
-function renderProducts(arr) {
+function renderProducts(arr){
   productGrid.innerHTML = arr.length
     ? arr.map(p => `
-      <div class="card">
+      <div class="card" onclick="openProductModal(${p.id})">
         <img src="${p.img[0]}" alt="${p.name}">
         <h4>${p.name}</h4>
         <div class="price">৳${p.price}</div>
@@ -350,34 +355,68 @@ function searchProducts(){
   searchResults.style.display="block";
   searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';updateCategoryOptions();filterCategory.value='${p.category}';applyFilters();searchResults.style.display='none'">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
-// SEARCH KEYUP ENTER
-searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
+searchInput.addEventListener("keyup",e=>{if(e.key==="Enter")searchProducts();});
 document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput){searchResults.style.display="none";}});
 
-// STICKY HEADER
+// ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
 
-// FEATURED PRODUCTS INFINITE CAROUSEL
+// ===== FEATURED PRODUCTS INFINITE CAROUSEL =====
 const featuredTrack=document.getElementById("featuredTrack");
 products.forEach(p=>{
-  const div=document.createElement("div"); div.className="card";
-  div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
+  const div=document.createElement("div"); div.className="card"; div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
   featuredTrack.appendChild(div);
 });
-// Duplicate for seamless scroll
+// duplicate for seamless infinite scroll
 featuredTrack.innerHTML += featuredTrack.innerHTML;
-
 let offset=0;
 function animateCarousel(){
-  offset -= 1; // speed
+  offset -= 1; 
   if(Math.abs(offset) >= featuredTrack.scrollWidth/2) offset=0;
   featuredTrack.style.transform=`translateX(${offset}px)`;
   requestAnimationFrame(animateCarousel);
 }
 animateCarousel();
 
-// INITIAL PRODUCT RENDER (optional: all products or empty)
-renderProducts([]);
+// ===== PRODUCT MODAL =====
+const productModal = document.getElementById("productModal");
+const modalImage = document.getElementById("modalImage");
+const modalName = document.getElementById("modalName");
+const modalPrice = document.getElementById("modalPrice");
+const modalStock = document.getElementById("modalStock");
+const modalDesc = document.getElementById("modalDesc");
+const modalQty = document.getElementById("modalQty");
+const addToCartBtn = document.getElementById("addToCartBtn");
+const buyWhatsAppBtn = document.getElementById("buyWhatsAppBtn");
+const closeModal = document.getElementById("closeModal");
+
+function openProductModal(id){
+  const p = products.find(item => item.id === id);
+  if(!p) return;
+
+  modalImage.src = p.img[0];
+  modalName.textContent = p.name;
+  modalPrice.textContent = "৳" + p.price;
+  modalStock.textContent = p.stock ? "In Stock" : "Out of Stock";
+  modalDesc.textContent = p.desc;
+  modalQty.value = 1;
+
+  productModal.style.display = "flex";
+
+  buyWhatsAppBtn.onclick = () => {
+    const qty = modalQty.value;
+    const msg = encodeURIComponent(`Hello, I want to buy ${qty}x ${p.name} (৳${p.price} each).`);
+    window.open(`https://wa.me/01707659954?text=${msg}`, "_blank");
+  }
+
+  addToCartBtn.onclick = () => {
+    const qty = parseInt(modalQty.value);
+    alert(`${qty} x ${p.name} added to cart (demo).`);
+  }
+}
+
+closeModal.onclick = () => productModal.style.display = "none";
+window.onclick = e => {if(e.target === productModal) productModal.style.display = "none";}
 </script>
 </body>
 </html>
