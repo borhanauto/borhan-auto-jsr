@@ -254,48 +254,90 @@ Object.keys(bikeData).forEach(b=>{
 });
 
 // ===== FILTERS =====
-const filterBrand=document.getElementById("filterBrand");
-const filterModel=document.getElementById("filterModel");
-const filterCategory=document.getElementById("filterCategory");
-const productGrid=document.getElementById("productGrid");
+// ===== FILTERS =====
+const filterBrand = document.getElementById("filterBrand");
+const filterModel = document.getElementById("filterModel");
+const filterCategory = document.getElementById("filterCategory");
+const productGrid = document.getElementById("productGrid");
 
 function populateBrandFilter(){
-  filterBrand.innerHTML="<option value=''>Select Brand</option>";
-  Object.keys(bikeData).forEach(b=>{
-    let opt=document.createElement("option"); opt.value=b; opt.textContent=b;
+  filterBrand.innerHTML = "<option value=''>Select Brand</option>";
+  Object.keys(bikeData).forEach(b => {
+    let opt = document.createElement("option");
+    opt.value = b;
+    opt.textContent = b;
     filterBrand.appendChild(opt);
   });
 }
 populateBrandFilter();
 
-function updateModelOptions(){
-  const brand=filterBrand.value;
-  filterModel.innerHTML="<option value=''>Select Model</option>";
-  filterCategory.innerHTML="<option value=''>Select Category</option>";
-  if(brand && bikeData[brand]){
-    bikeData[brand].forEach(m=>{
-      let opt=document.createElement("option"); opt.value=m; opt.textContent=m;
+filterBrand.addEventListener("change", () => {
+  updateModelOptions();
+  productGrid.innerHTML = ""; // clear products until apply
+});
+
+filterModel.addEventListener("change", () => {
+  updateCategoryOptions();
+  productGrid.innerHTML = ""; // clear products until apply
+});
+
+function updateModelOptions() {
+  const brand = filterBrand.value;
+  filterModel.innerHTML = "<option value=''>Select Model</option>";
+  filterCategory.innerHTML = "<option value=''>Select Category</option>";
+  if (brand && bikeData[brand]) {
+    bikeData[brand].forEach(m => {
+      let opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
       filterModel.appendChild(opt);
     });
   }
-  productGrid.innerHTML="";
 }
-function updateCategoryOptions(){
-  const brand=filterBrand.value; const model=filterModel.value;
-  filterCategory.innerHTML="<option value=''>Select Category</option>";
-  if(!brand||!model) return;
-  const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
-  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
-  productGrid.innerHTML="";
+
+function updateCategoryOptions() {
+  const brand = filterBrand.value;
+  const model = filterModel.value;
+  filterCategory.innerHTML = "<option value=''>Select Category</option>";
+  if (!brand || !model) return;
+
+  // get unique categories for selected brand + model
+  const categories = [...new Set(
+    products.filter(p => p.brand === brand && p.model === model).map(p => p.category)
+  )];
+  categories.forEach(c => {
+    let opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    filterCategory.appendChild(opt);
+  });
 }
-function applyFilters(){
-  const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
-  if(!brand || !model || !category){ alert("Please select Brand, Model, and Category."); return; }
-  const filtered=products.filter(p=>p.brand===brand && p.model===model && p.category===category);
+
+function applyFilters() {
+  const brand = filterBrand.value;
+  const model = filterModel.value;
+  const category = filterCategory.value;
+
+  const filtered = products.filter(p =>
+    (!brand || p.brand === brand) &&
+    (!model || p.model === model) &&
+    (!category || p.category === category)
+  );
+
   renderProducts(filtered);
 }
-function renderProducts(arr){
-  productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
+
+function renderProducts(arr) {
+  productGrid.innerHTML = arr.length
+    ? arr.map(p => `
+      <div class="card">
+        <img src="${p.img[0]}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <div class="price">৳${p.price}</div>
+        ${p.badge ? `<span class="badge ${p.badge}">${p.badge.toUpperCase()}</span>` : ""}
+      </div>
+    `).join("")
+    : "<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
 }
 
 // ===== SEARCH =====
