@@ -337,7 +337,26 @@ function searchProducts(){
   searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}'; updateModelOptions(); filterModel.value='${p.model}'; updateCategoryOptions(); filterCategory.value='${p.category}'; applyFilters(); searchResults.style.display='none';">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
 searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
-document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput){searchResults.style.display="none";}});
+document.addEventListener("DOMContentLoaded", function(){
+
+  const modal = document.getElementById("productModal");
+  const closeBtn = document.querySelector(".modal-close");
+
+  if(closeBtn){
+    closeBtn.addEventListener("click", function(){
+      modal.style.display = "none";
+    });
+  }
+
+  if(modal){
+    modal.addEventListener("click", function(e){
+      if(e.target === modal){
+        modal.style.display = "none";
+      }
+    });
+  }
+
+});
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
