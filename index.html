@@ -24,7 +24,7 @@ a{text-decoration:none;color:inherit;}
 .topbar{background:#000;color:#fff;padding:10px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;font-size:14px;letter-spacing:0.5px;}
 
 /* HEADER */
-.header{background:#111;color:#fff;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;position: sticky;top: 0; z-index: 1000; box-shadow:0 4px 15px rgba(0,0,0,0.4);border-bottom: 2px solid var(--primary); transition: box-shadow 0.3s;}
+.header{background:#111;color:#fff;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;position: sticky;top: 0; z-index: 1000; box-shadow:0 4px 15px rgba(0,0,0,0.4); border-bottom: 2px solid var(--primary); transition: box-shadow 0.3s;}
 .header.scrolled{box-shadow:0 8px 25px rgba(0,0,0,0.45);}
 .logo{font-weight:900;font-size:28px;color:var(--light);}
 .logo span{color:var(--primary);}
@@ -45,7 +45,7 @@ a{text-decoration:none;color:inherit;}
 .hero button{margin-top:20px;padding:16px 36px;background:var(--primary);border:none;color:#fff;font-weight:800;cursor:pointer;border-radius:50px;font-size:16px;letter-spacing:0.5px;box-shadow:0 6px 20px rgba(0,0,0,0.3);transition:0.3s;}
 .hero button:hover{opacity:.9;transform:translateY(-2px);}
 
-/* BRANDS STRIP */
+/* BRANDS */
 .brands{display:flex;justify-content:center;flex-wrap:nowrap;overflow-x:auto;background:#111;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2);margin:20px 0;}
 .brands::-webkit-scrollbar{height:8px;}
 .brands::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px;}
@@ -58,7 +58,7 @@ a{text-decoration:none;color:inherit;}
 .filters button{background:var(--primary);color:#fff;transition:0.3s;}
 .filters button:hover{opacity:.9;transform:translateY(-2px);}
 
-/* SECTIONS & CARDS */
+/* PRODUCTS GRID */
 section{padding:60px 40px;}
 .section-title{font-size:28px;font-weight:900;margin-bottom:35px;color:var(--dark);letter-spacing:0.5px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px;}
@@ -81,15 +81,12 @@ section{padding:60px 40px;}
 .featured-track .card{flex:0 0 auto;min-width:220px;}
 
 /* MODAL */
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:2000;}
-.modal-content{background:#1f1f1f;padding:20px;border-radius:16px;max-width:600px;width:90%;color:#fff;position:relative;}
-.modal-content img{width:100%;border-radius:12px;margin-bottom:15px;}
-.modal-content h3{margin-bottom:10px;}
-.modal-content p{margin-bottom:15px;}
-.modal-content .price{font-size:20px;margin-bottom:15px;}
-.modal-content button{padding:12px 24px;background:var(--primary);color:#fff;border:none;border-radius:50px;font-weight:700;cursor:pointer;transition:0.3s;}
-.modal-content button:hover{opacity:.9;}
-.modal-close{position:absolute;top:12px;right:12px;font-size:20px;cursor:pointer;color:#fff;}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:9999;}
+.modal-content{background:#222;padding:20px;border-radius:16px;width:90%;max-width:600px;position:relative;}
+.modal-content img{width:100%;border-radius:12px;margin-bottom:12px;}
+.modal-content h3{color:#fff;margin-bottom:10px;}
+.modal-content p{color:#ddd;margin-bottom:10px;}
+.close-modal{position:absolute;top:12px;right:12px;color:#fff;font-size:22px;font-weight:900;cursor:pointer;}
 
 /* FOOTER */
 footer{background:#111;color:#ccc;padding:60px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:30px;}
@@ -105,13 +102,10 @@ footer p{font-size:14px;line-height:1.6;}
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div>Call: 01707659954 | Jessore, Bangladesh</div>
-  <div>Free Delivery Over ৳5000</div>
-</div>
+<!-- Topbar -->
+<div class="topbar"><div>Call: 01707659954 | Jessore, Bangladesh</div><div>Free Delivery Over ৳5000</div></div>
 
-<!-- HEADER -->
+<!-- Header -->
 <div class="header">
   <div class="logo">BORHAN <span>AUTO PARTS</span></div>
   <div class="search-container">
@@ -119,23 +113,20 @@ footer p{font-size:14px;line-height:1.6;}
     <button onclick="searchProducts()">Search</button>
     <div class="search-results" id="searchResults"></div>
   </div>
-  <div class="icons">
-    <span>Account</span>
-    <span>Cart</span>
-  </div>
+  <div class="icons"><span>Account</span><span>Cart</span></div>
 </div>
 
-<!-- HERO -->
+<!-- Hero -->
 <div class="hero">
   <h1>Original Motorcycle Spare Parts</h1>
   <p>Bajaj • Yamaha • Honda • Suzuki • TVS • Hero</p>
   <button onclick="document.getElementById('filtersSection').scrollIntoView({behavior:'smooth'})">Shop by Bike</button>
 </div>
 
-<!-- BRAND STRIP -->
+<!-- Brand Strip -->
 <div class="brands" id="brandStrip"></div>
 
-<!-- FILTERS -->
+<!-- Filters -->
 <div class="filters" id="filtersSection">
   <select id="filterBrand"></select>
   <select id="filterModel"></select>
@@ -143,13 +134,13 @@ footer p{font-size:14px;line-height:1.6;}
   <button onclick="applyFilters()">Apply Filters</button>
 </div>
 
-<!-- PRODUCTS GRID -->
+<!-- Products Grid -->
 <section>
   <div class="section-title">Products</div>
   <div class="grid" id="productGrid"></div>
 </section>
 
-<!-- FEATURED PRODUCTS -->
+<!-- Featured Products -->
 <section>
   <div class="section-title">Featured Products</div>
   <div class="featured-container">
@@ -157,19 +148,19 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
 </section>
 
-<!-- PRODUCT MODAL -->
+<!-- Product Modal -->
 <div class="modal" id="productModal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeModal()">×</span>
-    <img id="modalImage" src="" alt="">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
     <h3 id="modalName"></h3>
+    <img id="modalImage" src="" alt="">
     <p id="modalDesc"></p>
     <div class="price" id="modalPrice"></div>
-    <button onclick="buyWhatsApp()">Buy via WhatsApp</button>
+    <button onclick="checkoutWhatsApp()">Buy via WhatsApp</button>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer>
   <div>
     <h4>About Us</h4>
@@ -177,19 +168,15 @@ footer p{font-size:14px;line-height:1.6;}
   </div>
   <div>
     <h4>Customer Service</h4>
-    <p>Contact Us</p>
-    <p>Return Policy</p>
-    <p>Warranty</p>
+    <p>Contact Us</p><p>Return Policy</p><p>Warranty</p>
   </div>
   <div>
     <h4>Information</h4>
-    <p>Privacy Policy</p>
-    <p>Terms & Conditions</p>
+    <p>Privacy Policy</p><p>Terms & Conditions</p>
   </div>
   <div>
     <h4>Contact</h4>
-    <p>RN Road, Jessore</p>
-    <p>01707659954</p>
+    <p>RN Road, Jessore</p><p>01707659954</p>
   </div>
 </footer>
 
@@ -199,9 +186,9 @@ const bikeData={
   Bajaj:["Pulsar 150","Discover 125","NS160","Avenger 220","Dominar 400"],
   Yamaha:["FZ-S","R15","MT-15","Fazer","FZ25"],
   Honda:["CB Shine","Hornet","CBR250R","Dio","Livo"],
-  Suzuki:["Gixxer","Hayate","Access 125","Burgman Street"],
-  Hero:["Splendor","Xtreme","HF Deluxe","Achiever"],
-  TVS:["Apache RTR 160","Phoenix","Jupiter","Star City"]
+  Suzuki:["Gixxer","Hayate","Access 125"],
+  Hero:["Splendor","Xtreme","HF Deluxe"],
+  TVS:["Apache RTR 160","Phoenix","Jupiter"]
 };
 
 const products=[
@@ -210,21 +197,15 @@ const products=[
   {id:3,brand:"Yamaha",model:"FZ-S",category:"Electrical",name:"FZ-S Spark Plug",price:450,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Long lasting spark plug for FZ-S."},
   {id:4,brand:"Honda",model:"CB Shine",category:"Engine",name:"CB Shine Oil Filter",price:550,stock:false,img:["https://via.placeholder.com/300"],desc:"Original oil filter for CB Shine."},
   {id:5,brand:"Suzuki",model:"Gixxer",category:"Suspension",name:"Gixxer Shock Absorber",price:3200,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Smooth suspension for Gixxer."},
-  {id:6,brand:"Hero",model:"Splendor",category:"Body",name:"Splendor Headlight",price:800,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Bright headlight for Splendor."},
-  {id:7,brand:"TVS",model:"Apache RTR 160",category:"Engine",name:"Apache RTR Engine Oil Filter",price:600,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"High performance oil filter for Apache RTR 160."},
-  {id:8,brand:"Yamaha",model:"R15",category:"Brake",name:"R15 Disc Brake Set",price:2200,stock:true,badge:"sale",img:["https://via.placeholder.com/300"],desc:"Durable brake set for R15."},
-  {id:9,brand:"Honda",model:"Hornet",category:"Electrical",name:"Hornet Spark Plug",price:450,stock:true,badge:"new",img:["https://via.placeholder.com/300"],desc:"Reliable spark plug for Hornet."},
-  {id:10,brand:"Suzuki",model:"Burgman Street",category:"Engine",name:"Burgman Engine Oil",price:1500,stock:true,badge:"hot",img:["https://via.placeholder.com/300"],desc:"Premium engine oil for Burgman Street."}
+  {id:6,brand:"Hero",model:"Splendor",category:"Body Parts",name:"Splendor Seat Cover",price:1200,stock:true,img:["https://via.placeholder.com/300"],desc:"Comfortable seat cover for Splendor."},
+  {id:7,brand:"TVS",model:"Apache RTR 160",category:"Electrical",name:"Apache RTR Headlight",price:2500,stock:true,img:["https://via.placeholder.com/300"],desc:"LED headlight for Apache RTR 160."}
 ];
 
 // ===== BRAND STRIP =====
 const brandStrip=document.getElementById("brandStrip");
 Object.keys(bikeData).forEach(b=>{
-  const div=document.createElement("div");
-  div.textContent=b;
-  div.onclick=()=>{
-    filterBrand.value=b; updateModelOptions(); updateCategoryOptions();
-  };
+  const div=document.createElement("div"); div.textContent=b;
+  div.onclick=()=>{filterBrand.value=b;updateModelOptions();};
   brandStrip.appendChild(div);
 });
 
@@ -237,7 +218,7 @@ const productGrid=document.getElementById("productGrid");
 function populateBrandFilter(){
   filterBrand.innerHTML="<option value=''>Select Brand</option>";
   Object.keys(bikeData).forEach(b=>{
-    let opt=document.createElement("option"); opt.value=b; opt.textContent=b;
+    const opt=document.createElement("option"); opt.value=b; opt.textContent=b;
     filterBrand.appendChild(opt);
   });
 }
@@ -245,9 +226,12 @@ populateBrandFilter();
 
 filterBrand.addEventListener("change",()=>{
   updateModelOptions();
-  updateCategoryOptions();
+  productGrid.innerHTML="";
 });
-filterModel.addEventListener("change",updateCategoryOptions);
+filterModel.addEventListener("change",()=>{
+  updateCategoryOptions();
+  productGrid.innerHTML="";
+});
 
 function updateModelOptions(){
   const brand=filterBrand.value;
@@ -255,11 +239,10 @@ function updateModelOptions(){
   filterCategory.innerHTML="<option value=''>Select Category</option>";
   if(brand && bikeData[brand]){
     bikeData[brand].forEach(m=>{
-      let opt=document.createElement("option"); opt.value=m; opt.textContent=m;
+      const opt=document.createElement("option"); opt.value=m; opt.textContent=m;
       filterModel.appendChild(opt);
     });
   }
-  productGrid.innerHTML="";
 }
 
 function updateCategoryOptions(){
@@ -267,44 +250,18 @@ function updateCategoryOptions(){
   filterCategory.innerHTML="<option value=''>Select Category</option>";
   if(!brand||!model) return;
   const categories=[...new Set(products.filter(p=>p.brand===brand && p.model===model).map(p=>p.category))];
-  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c;});
-  productGrid.innerHTML="";
+  categories.forEach(c=>{let opt=document.createElement("option"); opt.value=c; opt.textContent=c; filterCategory.appendChild(opt);});
 }
 
 function applyFilters(){
   const brand=filterBrand.value; const model=filterModel.value; const category=filterCategory.value;
-  const filtered=products.filter(p=>(!brand||p.brand===brand)&&(!model||p.model===model)&&(!category||p.category===category));
+  if(!brand||!model||!category){productGrid.innerHTML="<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>Please select Brand, Model & Category</p>"; return;}
+  const filtered=products.filter(p=>p.brand===brand && p.model===model && p.category===category);
   renderProducts(filtered);
 }
 
 function renderProducts(arr){
   productGrid.innerHTML=arr.length?arr.map(p=>`<div class="card" onclick="openModal(${p.id})"><img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div>`).join(""):"<p style='grid-column:1/-1;text-align:center;color:#fff;font-weight:700;'>No products found.</p>";
-}
-
-// ===== PRODUCT MODAL =====
-const modal=document.getElementById("productModal");
-const modalImage=document.getElementById("modalImage");
-const modalName=document.getElementById("modalName");
-const modalDesc=document.getElementById("modalDesc");
-const modalPrice=document.getElementById("modalPrice");
-let currentProduct=null;
-
-function openModal(id){
-  const p=products.find(x=>x.id===id);
-  if(!p) return;
-  currentProduct=p;
-  modalImage.src=p.img[0];
-  modalName.textContent=p.name;
-  modalDesc.textContent=p.desc;
-  modalPrice.textContent="৳"+p.price;
-  modal.style.display="flex";
-}
-
-function closeModal(){modal.style.display="none";}
-function buyWhatsApp(){
-  if(!currentProduct) return;
-  const msg=`Hello, I want to buy ${currentProduct.name} (Brand: ${currentProduct.brand}, Model: ${currentProduct.model}, Category: ${currentProduct.category})`;
-  window.open(`https://wa.me/01707659954?text=${encodeURIComponent(msg)}`,"_blank");
 }
 
 // ===== SEARCH =====
@@ -315,33 +272,54 @@ function searchProducts(){
   if(!q) return;
   const results=products.filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
   searchResults.style.display="block";
-  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}'; updateModelOptions(); filterModel.value='${p.model}'; updateCategoryOptions(); filterCategory.value='${p.category}'; applyFilters(); searchResults.style.display='none';">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
+  searchResults.innerHTML=results.length?results.map(p=>`<div onclick="filterBrand.value='${p.brand}';updateModelOptions();filterModel.value='${p.model}';updateCategoryOptions();filterCategory.value='${p.category}';applyFilters();searchResults.style.display='none'">${p.brand} ${p.model} - ${p.name}</div>`).join(""):"<div>No products found</div>";
 }
-searchInput.addEventListener("keyup",e=>{if(e.key==="Enter") searchProducts();});
+searchInput.addEventListener("keyup",e=>{if(e.key==="Enter")searchProducts();});
 document.addEventListener("click",e=>{if(!searchResults.contains(e.target)&&e.target!==searchInput){searchResults.style.display="none";}});
 
 // ===== STICKY HEADER =====
 window.addEventListener('scroll',()=>{document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);});
 
-// ===== FEATURED INFINITE CAROUSEL =====
+// ===== FEATURED CAROUSEL =====
 const featuredTrack=document.getElementById("featuredTrack");
-const featuredCards=[];
 products.forEach(p=>{
-  const div=document.createElement("div");
-  div.className="card";
-  div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
+  const div=document.createElement("div"); div.className="card"; div.innerHTML=`<img src="${p.img[0]}" alt="${p.name}"><h4>${p.name}</h4><div class="price">৳${p.price}</div>`;
   featuredTrack.appendChild(div);
-  featuredCards.push(div.cloneNode(true));
 });
-featuredCards.forEach(clone=>featuredTrack.appendChild(clone));
-let offset=0; const speed=0.5;
+// Duplicate for seamless scroll
+featuredTrack.innerHTML += featuredTrack.innerHTML;
+
+let scrollOffset=0;
 function animateCarousel(){
-  offset-=speed;
-  if(Math.abs(offset)>=featuredTrack.scrollWidth/2) offset=0;
-  featuredTrack.style.transform=`translateX(${offset}px)`;
+  scrollOffset+=0.5; // speed
+  if(scrollOffset >= featuredTrack.scrollWidth/2) scrollOffset=0;
+  featuredTrack.style.transform=`translateX(-${scrollOffset}px)`;
   requestAnimationFrame(animateCarousel);
 }
 animateCarousel();
+
+// ===== PRODUCT MODAL =====
+const modal=document.getElementById("productModal");
+const modalName=document.getElementById("modalName");
+const modalImage=document.getElementById("modalImage");
+const modalDesc=document.getElementById("modalDesc");
+const modalPrice=document.getElementById("modalPrice");
+let currentProduct=null;
+function openModal(id){
+  currentProduct=products.find(p=>p.id===id);
+  if(!currentProduct) return;
+  modalName.textContent=currentProduct.name;
+  modalImage.src=currentProduct.img[0];
+  modalDesc.textContent=currentProduct.desc;
+  modalPrice.textContent="৳"+currentProduct.price;
+  modal.style.display="flex";
+}
+function closeModal(){modal.style.display="none";}
+function checkoutWhatsApp(){
+  if(!currentProduct) return;
+  const url=`https://wa.me/01707659954?text=Hello,%20I%20want%20to%20buy%20${currentProduct.name}%20for%20৳${currentProduct.price}`;
+  window.open(url,"_blank");
+}
 </script>
 </body>
 </html>
